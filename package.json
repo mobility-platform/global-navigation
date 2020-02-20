@@ -30,6 +30,8 @@
     "sass-loader": "^6.0.6"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
     "preact": "^8.5.2",
     "preact-compat": "^3.17.0",
     "preact-habitat": "^3.1.0",
