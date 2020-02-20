@@ -1,13 +1,15 @@
-let poly = require("preact-cli/lib/lib/webpack/polyfills");
+import { setPragma, styled } from "goober";
+import { h, render } from "preact";
 
-import { h } from "preact";
-import habitat from "preact-habitat";
+setPragma(h);
 
-import Widget from "./components/hello-world";
+const Heading = styled("h1")(({ color }) => ({
+  textAlign: "center",
+  color
+}));
 
-let _habitat = habitat(Widget);
+function App() {
+  return <Heading color="red">Hello World</Heading>;
+}
 
-_habitat.render({
-  selector: '[data-widget-host="habitat"]',
-  clean: true
-});
+render(h(App), document.body);
