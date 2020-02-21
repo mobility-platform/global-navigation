@@ -1,15 +1,19 @@
 import { setPragma, styled } from "goober";
 import { h, render } from "preact";
+import VerticalNavigation from "./components/VerticalNavigation";
 
 setPragma(h);
 
-const Heading = styled("h1")(({ color }) => ({
-  textAlign: "center",
-  color
-}));
+const Container = styled("div")({
+  height: "100vh"
+});
 
 function App() {
-  return <Heading color="red">Hello World</Heading>;
+  return (
+    <Container>
+      <VerticalNavigation />
+    </Container>
+  );
 }
 
 render(h(App), document.body);
