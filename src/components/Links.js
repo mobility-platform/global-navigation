@@ -12,7 +12,7 @@ const Link = styled("a")(({ isCollapsed }) => ({
   position: "relative",
   display: "flex",
   alignItems: "center",
-  justifyContent: isCollapsed ? "center" : "start",
+  justifyContent: isCollapsed ? "center" : "flex-start",
   width: "100%",
   margin: "12px 0",
   padding: "6px 0",

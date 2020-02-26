@@ -5,7 +5,7 @@ setPragma(h);
 
 const Wrapper = styled("div")(({ isCollapsed }) => ({
   display: "flex",
-  alignItems: isCollapsed ? "end" : "center",
+  alignItems: isCollapsed ? "flex-end" : "center",
   justifyContent: "center",
   width: '100%',
   height: '80px',

@@ -167,14 +167,15 @@ const Layout = styled("div")(({ width }) => ({
   background: "#f5f5f5",
   height: "100%",
   width,
-  transition: "200ms"
+  transition: "200ms",
+  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
 }));
 
 const AvatarWrapper = styled("div")(
   ({ foreground, background, isCollapsed }) => ({
     position: "relative",
     display: "flex",
-    alignItems: "end",
+    alignItems: "flex-end",
     justifyContent: "center",
     width: "100%",
     height: isCollapsed ? "100px" : "200px",
