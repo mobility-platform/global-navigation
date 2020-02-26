@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "license": "MIT",
+  "repository": "mobility-platform/global-navigation",
   "scripts": {
     "build": "webpack -p",
     "start": "webpack-dev-server",
