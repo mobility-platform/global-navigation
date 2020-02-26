@@ -1,6 +1,6 @@
 {
   "name": "@mobility-platform/global-navigation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/main.js",
   "license": "MIT",
   "repository": "mobility-platform/global-navigation",
