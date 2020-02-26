@@ -5,7 +5,8 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "[name].[hash].js"
+    filename: "[name].js",
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
@@ -18,5 +19,9 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.ejs"
+    })
+  ]
 };

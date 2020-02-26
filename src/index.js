@@ -1,38 +1,16 @@
-import { setPragma, styled } from "goober";
-import { h, render } from "preact";
+import { h } from "preact";
+import { setPragma } from "goober";
+import habitat from 'preact-habitat';
 import VerticalNavigation from "./components/VerticalNavigation";
 
 setPragma(h);
 
-const Container = styled("div")({
-  height: "100vh",
-  fontFamily: "sans-serif"
-});
+let _habitat = habitat(VerticalNavigation);
 
-document.querySelector("body").style.margin = 0;
-
-function App() {
-  return (
-    <Container>
-      <VerticalNavigation />
-    </Container>
-      /* <Burger />
-    <BrandSection>
-      <Logo />
-    </BrandSection>
-    <ProfileSection>
-      <AvatarItem />
-    </ProfileSection>
-    <UserLinks>
-
-    </UserLinks>
-    <AppsList>
-      <Links />
-    </AppsList>
-    <NavigationFooter>
-      <Links />
-    </NavigationFooter> */
-  );
+if(process.env.NODE_ENV === 'development') {
+  _habitat.render({
+    selector: '[data-widget-host="habitat"]',
+    clean: true
+  });
 }
-
-render(h(App), document.body);
+export default _habitat;
