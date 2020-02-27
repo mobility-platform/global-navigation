@@ -8,7 +8,7 @@
     "build": "webpack -p",
     "start": "webpack-dev-server",
     "prepublish": "yarn build",
-    "postversion": "git push --all --tags"
+    "postversion": "git push --all"
   },
   "dependencies": {
     "goober": "^1.7.1",
