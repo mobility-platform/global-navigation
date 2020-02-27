@@ -15,7 +15,7 @@ const Link = styled("a")(({ isCollapsed }) => ({
   alignItems: "center",
   justifyContent: isCollapsed ? "center" : "flex-start",
   width: "100%",
-  padding: "8px 12px 8px",
+  padding: "8px 8px",
   textDecoration: "none",
   color: "currentColor",
   boxSizing: "border-box",
@@ -24,7 +24,7 @@ const Link = styled("a")(({ isCollapsed }) => ({
     position: "absolute",
     left: 0,
     top: 0,
-    width: "3px",
+    width: "4px",
     height: "100%",
     borderTopRightRadius: "2px",
     borderBottomRightRadius: "2px",
@@ -57,9 +57,23 @@ const Text = styled("span")(({ hideIcons }) => ({
   lineHeight: "24px"
 }));
 
-const Links = ({ links, isCollapsed, hideIcons }) => {
+const Title = styled("div")({
+  margin: "12px 16px 0 16px",
+  padding: "8px 8px",
+  overflowX: "hidden",
+  fontSize: "10px",
+  fontWeight: "600",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  textTransform: "uppercase",
+  opacity: "0.7",
+  boxSizing: "border-box",
+});
+
+const Links = ({ links, isCollapsed, hideIcons, title }) => {
   return (
     <Wrapper>
+      {title && !isCollapsed && <Title>{title}</Title>}
       {links &&
         links.map((link, index) => {
           return (

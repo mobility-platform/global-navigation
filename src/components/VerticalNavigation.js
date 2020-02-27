@@ -263,6 +263,7 @@ const VerticalNavigation = () => {
           links={footerLinksData}
           isCollapsed={isCollapsed}
           hideIcons={true}
+          title={"Administration"}
         />
       </FooterLinks>
     </Layout>
