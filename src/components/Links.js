@@ -5,7 +5,8 @@ setPragma(h);
 
 const Wrapper = styled("div")({
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
+  boxSizing: "border-box"
 });
 
 const Link = styled("a")(({ isCollapsed }) => ({
@@ -14,21 +15,21 @@ const Link = styled("a")(({ isCollapsed }) => ({
   alignItems: "center",
   justifyContent: isCollapsed ? "center" : "flex-start",
   width: "100%",
-  margin: "12px 0",
-  padding: "6px 0",
+  padding: "8px 12px 8px",
   textDecoration: "none",
   color: "currentColor",
+  boxSizing: "border-box",
   "&::before": {
     content: "''",
     position: "absolute",
     left: 0,
     top: 0,
-    backgroundColor: "#FCE500",
     width: "3px",
     height: "100%",
     borderTopRightRadius: "2px",
     borderBottomRightRadius: "2px",
     transition: "100ms",
+    backgroundColor: "#FCE500",
     opacity: 0
   },
   "&:hover": {
@@ -39,16 +40,21 @@ const Link = styled("a")(({ isCollapsed }) => ({
 }));
 
 const Icon = styled("div")({
-  width: "16px",
-  height: "16px",
-  margin: "0 20px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "24px",
+  height: "24px",
+  margin: "0 8px",
   fill: "currentColor",
   stroke: "currentColor",
+  boxSizing: "border-box"
 });
 
 const Text = styled("span")(({ hideIcons }) => ({
+  margin: hideIcons ? "0 16px" : "0 8px",
   color: "currentColor",
-  margin: hideIcons ? "0 20px" : "0",
+  lineHeight: "24px"
 }));
 
 const Links = ({ links, isCollapsed, hideIcons }) => {
@@ -57,9 +63,16 @@ const Links = ({ links, isCollapsed, hideIcons }) => {
       {links &&
         links.map((link, index) => {
           return (
-            <Link href={link.href} key={index} isCollapsed={isCollapsed} hideIcons={hideIcons}>
+            <Link
+              href={link.href}
+              key={index}
+              isCollapsed={isCollapsed}
+              hideIcons={hideIcons}
+            >
               {hideIcons && !isCollapsed ? null : <Icon>{link.icon}</Icon>}
-              {isCollapsed ? null : <Text hideIcons={hideIcons}>{link.text}</Text>}
+              {isCollapsed ? null : (
+                <Text hideIcons={hideIcons}>{link.text}</Text>
+              )}
             </Link>
           );
         })}
