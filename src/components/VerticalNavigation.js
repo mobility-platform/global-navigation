@@ -24,7 +24,6 @@ const userLinksData = [
       >
         <defs />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -47,7 +46,6 @@ const userLinksData = [
       >
         <defs />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -55,7 +53,6 @@ const userLinksData = [
           clip-rule="evenodd"
         />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -80,7 +77,6 @@ const footerLinksData = [
       >
         <defs />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -102,14 +98,12 @@ const footerLinksData = [
       >
         <defs />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
           d="M17 8.3V9a8 8 0 11-4.7-7.3"
         />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -131,7 +125,6 @@ const footerLinksData = [
       >
         <defs />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -139,14 +132,12 @@ const footerLinksData = [
           clip-rule="evenodd"
         />
         <path
-          stroke="#00205B"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
           d="M7 6.7A2.6 2.6 0 019.9 5C11 5.2 12 6.3 12 7.5 12 9.2 9.4 10 9.4 10"
         />
         <path
-          fill="#00205B"
           fill-rule="evenodd"
           d="M9 14a1 1 0 100-2 1 1 0 000 2z"
           clip-rule="evenodd"
@@ -164,7 +155,8 @@ const base64LogoCollapsed =
 const Layout = styled("div")(({ width }) => ({
   display: "flex",
   flexDirection: "column",
-  background: "#f5f5f5",
+  background: "#27509B",
+  color: "#ffffff",
   height: "100%",
   width,
   transition: "200ms",
@@ -185,7 +177,7 @@ const AvatarWrapper = styled("div")(
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center center",
-    color: "#ffffff",
+    color: "currentColor",
     "&::before": {
       content: "''",
       position: "absolute",

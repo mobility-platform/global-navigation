@@ -17,6 +17,7 @@ const Link = styled("a")(({ isCollapsed }) => ({
   margin: "12px 0",
   padding: "6px 0",
   textDecoration: "none",
+  color: "currentColor",
   "&::before": {
     content: "''",
     position: "absolute",
@@ -40,11 +41,13 @@ const Link = styled("a")(({ isCollapsed }) => ({
 const Icon = styled("div")({
   width: "16px",
   height: "16px",
-  margin: "0 20px"
+  margin: "0 20px",
+  fill: "currentColor",
+  stroke: "currentColor",
 });
 
 const Text = styled("span")(({ hideIcons }) => ({
-  color: "#00205B",
+  color: "currentColor",
   margin: hideIcons ? "0 20px" : "0",
 }));
 
