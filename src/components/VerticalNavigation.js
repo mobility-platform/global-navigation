@@ -230,7 +230,7 @@ const VerticalNavigation = () => {
         <AvatarWrapperContent>
           {isCollapsed ? (
             <div style={{ marginBottom: "-22px" }}>
-              <Avatar size="45px" src="https://picsum.photos/45" />
+              <Avatar size="45px" src="https://i.pravatar.cc/45" />
             </div>
           ) : (
             <Fragment>
@@ -238,7 +238,7 @@ const VerticalNavigation = () => {
                 primaryText={`John Doe`}
                 secondaryText={`john.doe@gmail.com`}
               >
-                <Avatar size="45px" src="https://picsum.photos/45" />
+                <Avatar size="45px" src="https://i.pravatar.cc/45" />
               </AvatarItem>
               <Button
                 background="#27509B"
