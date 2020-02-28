@@ -3,18 +3,24 @@ import { h } from "preact";
 
 setPragma(h);
 
-const Wrapper = styled("div")({
+const Wrapper = styled("div")(({ isCollapsed }) => ({
   display: "flex",
   alignItems: "center",
-  width: "100%",
-  height: "40px",
-  padding: "10px 20px",
+  justifyContent: "center",
   boxSizing: "border-box",
-  borderRadius: "50%"
-});
+  width: isCollapsed ? "32px" : "20px",
+  height: isCollapsed ? "32px" : "auto",
+  borderRadius: "50%",
+  backgroundColor: "transparent",
+  "&:hover": {
+    backgroundColor: isCollapsed ? "rbga(255, 255, 255, .1)" : "",
+  }
+}));
 
 const BurgerIcon = styled("a")({
   display: "block",
+  width: "20px",
+  height: "20px",
   cursor: "pointer",
   textDecoration: "none",
   color: "currentColor",
@@ -32,14 +38,12 @@ const Burger = ({ handler, isCollapsed }) => {
         <BurgerIcon onClick={() => handler()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="80"
-            height="51"
-            viewBox="0 0 80 51"
-            fill="none"
+            aria-hidden="true"
+            viewBox="0 0 448 512"
           >
             <defs />
             <path
-              d="M76 8H4a4 4 0 01-4-4 4 4 0 014-4h72a4 4 0 014 4 4 4 0 01-4 4zm4 17.4a4 4 0 00-4-4H4a4 4 0 00-4 4 4 4 0 004 4h72a4 4 0 004-4zM44 46.7a4 4 0 00-4-4H4a4 4 0 00-4 4 4 4 0 004 4h36a4 4 0 004-4z"
+              d="M16 132h416a16 16 0 0016-16V76a16 16 0 00-16-16H16A16 16 0 000 76v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16z"
             />
           </svg>
         </BurgerIcon>
@@ -53,9 +57,7 @@ const Burger = ({ handler, isCollapsed }) => {
             fill="none"
           >
             <defs />
-            <path
-              d="M76 29a4 4 0 01-4 4H13.6l18.1 18.2a4 4 0 010 5.7 4 4 0 01-2.8 1.1c-1 0-2.1-.4-2.8-1.2l-24.9-25a3.9 3.9 0 010-5.6l24.9-25a4 4 0 015.7 0 4 4 0 010 5.7L13.6 25H72a4 4 0 014 4z"
-            />
+            <path d="M76 29a4 4 0 01-4 4H13.6l18.1 18.2a4 4 0 010 5.7 4 4 0 01-2.8 1.1c-1 0-2.1-.4-2.8-1.2l-24.9-25a3.9 3.9 0 010-5.6l24.9-25a4 4 0 015.7 0 4 4 0 010 5.7L13.6 25H72a4 4 0 014 4z" />
           </svg>
         </BurgerIcon>
       )}

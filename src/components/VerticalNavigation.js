@@ -1,19 +1,19 @@
 import { setPragma, styled } from "goober";
-import { h, Fragment } from "preact";
+import { h } from "preact";
 import { useState } from "preact/hooks";
 import Burger from "./Burger";
 import Brand from "./Brand";
 import AvatarItem from "./AvatarItem";
 import Avatar from "./Avatar";
-import Button from "./Button";
 import Links from "./Links";
+import CollapsedLinks from "./CollapsedLinks";
 
 setPragma(h);
 
 const userLinksData = [
   {
     href: "#",
-    text: "My Home",
+    label: "My Home",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -35,29 +35,15 @@ const userLinksData = [
   },
   {
     href: "#",
-    text: "My Organization",
+    label: "My Organization",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="17"
-        fill="none"
-        viewBox="0 0 16 17"
+        aria-hidden="true"
+        viewBox="0 0 448 512"
       >
         <defs />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12.3 5.5a2.3 2.3 0 100-4.5 2.3 2.3 0 000 4.5zM3.3 10.8a2.3 2.3 0 100-4.6 2.3 2.3 0 000 4.5zM12.3 16a2.3 2.3 0 100-4.5 2.3 2.3 0 000 4.5z"
-          clip-rule="evenodd"
-        />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M5.2 9.6l5.1 3M10.3 4.4l-5.1 3"
-        />
+        <path d="M352 320a95.6 95.6 0 00-59.8 20.9l-102.5-64a96.6 96.6 0 000-41.7L292.2 171a96 96 0 10-34-54.3l-102.4 64a96 96 0 100 150.2l102.5 64.2A96.3 96.3 0 00256 416a96 96 0 1096-96z" />
       </svg>
     )
   }
@@ -66,206 +52,181 @@ const userLinksData = [
 const footerLinksData = [
   {
     link: "#",
-    text: "Developers",
+    label: "Developers",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="19"
-        height="12"
-        fill="none"
-        viewBox="0 0 19 12"
+        aria-hidden="true"
+        viewBox="0 0 640 512"
       >
         <defs />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M13 11l5-5-5-5M6 1L1 6l5 5"
-        />
+        <path d="M278.9 511.5l-61-17.7a12 12 0 01-8.2-14.9L346.2 8.7A12 12 0 01361.1.5l61 17.7a12 12 0 018.2 14.9L293.8 503.3a12 12 0 01-14.9 8.2zm-114-112.2l43.5-46.4a12 12 0 00-.8-17.2L117 256l90.6-79.7a12 12 0 00.8-17.2l-43.5-46.4a12 12 0 00-17-.5L3.8 247.2a12 12 0 000 17.5l144.1 135.1a12 12 0 0017-.5zm327.2.6l144.1-135.1a12 12 0 000-17.5L492.1 112.1a12.1 12.1 0 00-17 .5L431.6 159a12 12 0 00.8 17.2L523 256l-90.6 79.7a12 12 0 00-.8 17.2l43.5 46.4a12 12 0 0017 .6z" />
       </svg>
     )
   },
   {
     link: "#",
-    text: "Terms of use",
+    label: "Terms of use",
     icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        fill="none"
-        viewBox="0 0 18 18"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <defs />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M17 8.3V9a8 8 0 11-4.7-7.3"
-        />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M17 2l-7.7 8L7 7.6"
-        />
+        <path d="M256 8a248 248 0 100 496 248 248 0 000-496zm0 48a199.9 199.9 0 110 400 199.9 199.9 0 110-400m140.2 130.3l-22.5-22.8a12 12 0 00-17 0L215.3 303.7l-59.7-60.3a12 12 0 00-17 0l-22.7 22.5a12 12 0 00-.1 17l90.8 91.5a12 12 0 0017 0L396 203.2a12 12 0 00.1-17z" />
       </svg>
     )
   },
   {
     link: "#",
-    text: "Help",
+    label: "Help",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="19"
-        height="19"
-        fill="none"
-        viewBox="0 0 19 19"
+        aria-hidden="true"
+        viewBox="0 0 512 512"
       >
         <defs />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M9.5 18a8.5 8.5 0 100-17 8.5 8.5 0 000 17z"
-          clip-rule="evenodd"
-        />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M7 6.7A2.6 2.6 0 019.9 5C11 5.2 12 6.3 12 7.5 12 9.2 9.4 10 9.4 10"
-        />
-        <path
-          fill-rule="evenodd"
-          d="M9 14a1 1 0 100-2 1 1 0 000 2z"
-          clip-rule="evenodd"
-        />
+        <path d="M256 8a248 248 0 100 496 248 248 0 000-496zm0 448a200 200 0 11-.1-400.1A200 200 0 01256 456zm107.2-255.2c0 67-72.4 68-72.4 92.9v6.3a12 12 0 01-12 12h-45.6a12 12 0 01-12-12v-8.7c0-35.7 27-50 47.6-61.5 17.5-9.8 28.3-16.5 28.3-29.6 0-17.2-22-28.6-39.8-28.6-23.2 0-33.9 11-49 30a12 12 0 01-16.6 2l-27.8-21a12 12 0 01-2.7-16.4C184.8 131.5 215 112 261.8 112c49 0 101.4 38.3 101.4 88.8zM298 368a42 42 0 11-84 0 42 42 0 0184 0z" />
       </svg>
     )
   }
 ];
 
-const Layout = styled("div")(({ width }) => ({
+const Layout = styled("div")({
+  position: "relative",
+  background: "#0747a6",
+  color: "#eef5ff",
+  height: "100%",
+  width: "80px",
+  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
+});
+
+const Collapsed = styled("div")({
+  position: "absolute",
+  top: "0",
+  left: "0",
   display: "flex",
   flexDirection: "column",
-  background: "#27509B",
-  color: "#ffffff",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  width: "80px",
   height: "100%",
-  width,
-  transition: "200ms",
-  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
+  paddingBottom: "20px",
+  boxSizing: "border-box",
+  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
+});
+
+const Extended = styled("div")(({ isCollapsed }) => ({
+  position: "absolute",
+  top: "0",
+  left: "0",
+  transform: isCollapsed ? "translateX(-210px)" : "translateX(0)",
+  display: "flex",
+  width: "200px",
+  height: "100%",
+  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
+  transition: "transform 200ms"
 }));
 
-const AvatarWrapper = styled("div")(
-  ({ foreground, background, isCollapsed }) => ({
-    position: "relative",
-    display: "flex",
-    alignItems: "flex-end",
-    justifyContent: "center",
-    width: "100%",
-    height: isCollapsed ? "100px" : "200px",
-    padding: "0 20px",
-    boxSizing: "border-box",
-    backgroundImage: `url(${background})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center center",
-    color: "currentColor",
-    "&::before": {
-      content: "''",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: foreground ? foreground : "transparent",
-      opacity: 0.7,
-      zIndex: 0
-    }
-  })
-);
-
-const AvatarWrapperContent = styled("div")({
+const Content = styled("div")({
   position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  width: "200px",
+  height: "100%",
+  backgroundColor: "#ffffff",
+  color: "#3e4757"
+});
+
+const Shadow = styled("div")(({ isCollapsed }) => ({
+  position: "absolute",
+  top: "0",
+  left: "0",
+  width: "100vw",
+  height: "100%",
+  opacity: isCollapsed ? 0 : 1,
+  backgroundColor: "rgba(0, 0, 0, .1)",
+  transition: "opacity 200ms",
+  pointerEvents: "none",
+}));
+
+const Footer = styled("div")({
+  marginTop: "auto"
+});
+
+const AvatarWrapper = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  flexDirection: "column"
+  width: "32px",
+  height: "32px",
+  padding: "4px",
+  cursor: "pointer",
+  backgroundColor: "transparent",
+  borderRadius: "50%",
+  boxSizing: "border-box",
+  "&:hover": {
+    backgroundColor: "#1c5ace"
+  }
 });
 
-const UserLinks = styled("div")({
-  marginTop: "40px"
-});
-
-const FooterLinks = styled("div")({
-  marginTop: "auto",
-  marginBottom: "20px"
+const AvatarItemWrapper = styled("div")({
+  padding: "8px 16px 8px 16px",
+  marginTop: "8px",
+  borderTop: "1px solid rgba(0, 0, 0, .1)"
 });
 
 const VerticalNavigation = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const navigationWidth = isCollapsed ? "80px" : "200px";
   return (
-    <Layout width={navigationWidth}>
-      <div style={{ position: "absolute" }}>
-        <Burger
-          isCollapsed={isCollapsed}
-          handler={() => {
-            setIsCollapsed(isCollapsed ? false : true);
-          }}
-        />
-      </div>
-      <Brand
-        isCollapsed={isCollapsed}
-      />
-      <AvatarWrapper
-        isCollapsed={isCollapsed}
-        foreground="#2196F3"
-        background={
-          "https://images.pexels.com/photos/1149056/pexels-photo-1149056.jpeg?crop=entropy&cs=srgb&dl=4k-wallpaper-automobile-automotive-branding-1149056.jpg&fit=crop&fm=jpg&h=426&w=640"
-        }
-      >
-        <AvatarWrapperContent>
-          {isCollapsed ? (
-            <div style={{ marginBottom: "-22px" }}>
-              <Avatar size="45px" src="https://i.pravatar.cc/45" />
-            </div>
-          ) : (
-            <Fragment>
+    <Layout>
+      <Shadow isCollapsed={isCollapsed}/>
+      <Collapsed isCollapsed={true}>
+        <Brand isCollapsed={true} />
+        <div style={{ marginTop: "8px" }}>
+          <Burger
+            isCollapsed={true}
+            handler={() => setIsCollapsed(false)}
+          />
+        </div>
+        <CollapsedLinks data={userLinksData} />
+        <Footer>
+          <CollapsedLinks data={footerLinksData} />
+          <AvatarWrapper onClick={() => setIsCollapsed(false)}>
+            <Avatar src={"https://i.pravatar.cc/40"} size={"24px"} />
+          </AvatarWrapper>
+        </Footer>
+      </Collapsed>
+
+      <Extended isCollapsed={isCollapsed}>
+        <Content>
+          <Brand isCollapsed={false} />
+          <div
+            style={{
+              padding: "10px 16px",
+              borderTop: "1px solid rgba(0, 0, 0, .1)",
+              borderBottom: "1px solid rgba(0, 0, 0, .1)",
+              marginBottom: "16px"
+            }}
+          >
+            <Burger
+              isCollapsed={false}
+              handler={() => setIsCollapsed(true)}
+            />
+          </div>
+          <Links title={"Global"} data={userLinksData} />
+          <Footer>
+            <Links title={"Others"} data={footerLinksData} />
+            <AvatarItemWrapper>
               <AvatarItem
-                primaryText={`John Doe`}
-                secondaryText={`john.doe@gmail.com`}
+                primaryText={"Johanes Does"}
+                secondaryText={"Voir le profil"}
               >
-                <Avatar size="45px" src="https://i.pravatar.cc/45" />
+                <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
               </AvatarItem>
-              <Button
-                background="#27509B"
-                color="#ffffff"
-                style={{
-                  fontSize: "12px",
-                  marginTop: "20px",
-                  marginBottom: "-18px"
-                }}
-              >
-                Mon Profil
-              </Button>
-            </Fragment>
-          )}
-        </AvatarWrapperContent>
-      </AvatarWrapper>
-      <UserLinks>
-        <Links links={userLinksData} isCollapsed={isCollapsed} />
-      </UserLinks>
-      <FooterLinks>
-        <Links
-          links={footerLinksData}
-          isCollapsed={isCollapsed}
-          hideIcons={true}
-          title={"Administration"}
-        />
-      </FooterLinks>
+            </AvatarItemWrapper>
+          </Footer>
+        </Content>
+      </Extended>
     </Layout>
   );
 };

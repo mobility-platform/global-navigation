@@ -4,10 +4,7 @@ import { h } from "preact";
 setPragma(h);
 
 const Wrapper = styled("div")({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: '100%',
+  display: "flex"
 });
 
 const TextWrapper = styled("div")({
@@ -19,14 +16,16 @@ const TextWrapper = styled("div")({
 
 const PrimaryText = styled("span")({
   textOverflow: "ellipsis",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
+  fontWeight: "600",
+  color: "#3e4757"
 });
 
 const SecondaryText = styled("span")({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontSize: "12px",
-  opacity: 0.8,
+  opacity: 0.8
 });
 
 const AvatarItem = ({ children, primaryText, secondaryText }) => {
