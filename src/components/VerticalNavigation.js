@@ -7,6 +7,7 @@ import AvatarItem from "./AvatarItem";
 import Avatar from "./Avatar";
 import Links from "./Links";
 import CollapsedLinks from "./CollapsedLinks";
+import { ThemeProvider } from "./Theme";
 
 setPragma(h);
 
@@ -14,7 +15,7 @@ const userLinksData = [
   {
     href: "#",
     label: "My Home",
-    icon: (
+    icon: `
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -31,12 +32,12 @@ const userLinksData = [
           clip-rule="evenodd"
         />
       </svg>
-    )
+      `
   },
   {
     href: "#",
     label: "My Organization",
-    icon: (
+    icon: `
       <svg
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -45,7 +46,7 @@ const userLinksData = [
         <defs />
         <path d="M352 320a95.6 95.6 0 00-59.8 20.9l-102.5-64a96.6 96.6 0 000-41.7L292.2 171a96 96 0 10-34-54.3l-102.4 64a96 96 0 100 150.2l102.5 64.2A96.3 96.3 0 00256 416a96 96 0 1096-96z" />
       </svg>
-    )
+      `
   }
 ];
 
@@ -53,7 +54,7 @@ const footerLinksData = [
   {
     link: "#",
     label: "Developers",
-    icon: (
+    icon: `
       <svg
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -62,22 +63,22 @@ const footerLinksData = [
         <defs />
         <path d="M278.9 511.5l-61-17.7a12 12 0 01-8.2-14.9L346.2 8.7A12 12 0 01361.1.5l61 17.7a12 12 0 018.2 14.9L293.8 503.3a12 12 0 01-14.9 8.2zm-114-112.2l43.5-46.4a12 12 0 00-.8-17.2L117 256l90.6-79.7a12 12 0 00.8-17.2l-43.5-46.4a12 12 0 00-17-.5L3.8 247.2a12 12 0 000 17.5l144.1 135.1a12 12 0 0017-.5zm327.2.6l144.1-135.1a12 12 0 000-17.5L492.1 112.1a12.1 12.1 0 00-17 .5L431.6 159a12 12 0 00.8 17.2L523 256l-90.6 79.7a12 12 0 00-.8 17.2l43.5 46.4a12 12 0 0017 .6z" />
       </svg>
-    )
+      `
   },
   {
     link: "#",
     label: "Terms of use",
-    icon: (
+    icon: `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <defs />
         <path d="M256 8a248 248 0 100 496 248 248 0 000-496zm0 48a199.9 199.9 0 110 400 199.9 199.9 0 110-400m140.2 130.3l-22.5-22.8a12 12 0 00-17 0L215.3 303.7l-59.7-60.3a12 12 0 00-17 0l-22.7 22.5a12 12 0 00-.1 17l90.8 91.5a12 12 0 0017 0L396 203.2a12 12 0 00.1-17z" />
       </svg>
-    )
+      `
   },
   {
     link: "#",
     label: "Help",
-    icon: (
+    icon: `
       <svg
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -86,7 +87,7 @@ const footerLinksData = [
         <defs />
         <path d="M256 8a248 248 0 100 496 248 248 0 000-496zm0 448a200 200 0 11-.1-400.1A200 200 0 01256 456zm107.2-255.2c0 67-72.4 68-72.4 92.9v6.3a12 12 0 01-12 12h-45.6a12 12 0 01-12-12v-8.7c0-35.7 27-50 47.6-61.5 17.5-9.8 28.3-16.5 28.3-29.6 0-17.2-22-28.6-39.8-28.6-23.2 0-33.9 11-49 30a12 12 0 01-16.6 2l-27.8-21a12 12 0 01-2.7-16.4C184.8 131.5 215 112 261.8 112c49 0 101.4 38.3 101.4 88.8zM298 368a42 42 0 11-84 0 42 42 0 0184 0z" />
       </svg>
-    )
+      `
   }
 ];
 
@@ -111,7 +112,7 @@ const Collapsed = styled("div")({
   height: "100%",
   paddingBottom: "20px",
   boxSizing: "border-box",
-  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
+  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)"
 });
 
 const Extended = styled("div")(({ isCollapsed }) => ({
@@ -146,7 +147,7 @@ const Shadow = styled("div")(({ isCollapsed }) => ({
   opacity: isCollapsed ? 0 : 1,
   backgroundColor: "rgba(0, 0, 0, .1)",
   transition: "opacity 200ms",
-  pointerEvents: "none",
+  pointerEvents: "none"
 }));
 
 const Footer = styled("div")({
@@ -178,56 +179,55 @@ const AvatarItemWrapper = styled("div")({
 const VerticalNavigation = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
-    <Layout>
-      <Shadow isCollapsed={isCollapsed}/>
-      <Collapsed isCollapsed={true}>
-        <Brand isCollapsed={true} />
-        <div style={{ marginTop: "8px" }}>
-          <Burger
-            isCollapsed={true}
-            handler={() => setIsCollapsed(false)}
-          />
-        </div>
-        <CollapsedLinks data={userLinksData} />
-        <Footer>
-          <CollapsedLinks data={footerLinksData} />
-          <AvatarWrapper onClick={() => setIsCollapsed(false)}>
-            <Avatar src={"https://i.pravatar.cc/40"} size={"24px"} />
-          </AvatarWrapper>
-        </Footer>
-      </Collapsed>
-
-      <Extended isCollapsed={isCollapsed}>
-        <Content>
-          <Brand isCollapsed={false} />
-          <div
-            style={{
-              padding: "10px 16px",
-              borderTop: "1px solid rgba(0, 0, 0, .1)",
-              borderBottom: "1px solid rgba(0, 0, 0, .1)",
-              marginBottom: "16px"
-            }}
-          >
-            <Burger
-              isCollapsed={false}
-              handler={() => setIsCollapsed(true)}
-            />
+    <ThemeProvider defaultTheme={{color: "red"}}>
+      <Layout>
+        <Shadow isCollapsed={isCollapsed} />
+        <Collapsed isCollapsed={true}>
+          <Brand isCollapsed={true} />
+          <div style={{ margin: "8px 0 4px 0" }}>
+            <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
           </div>
-          <Links title={"Global"} data={userLinksData} />
+          <CollapsedLinks data={userLinksData} />
           <Footer>
-            <Links title={"Others"} data={footerLinksData} />
-            <AvatarItemWrapper>
-              <AvatarItem
-                primaryText={"Johanes Does"}
-                secondaryText={"Voir le profil"}
-              >
-                <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
-              </AvatarItem>
-            </AvatarItemWrapper>
+            <CollapsedLinks data={footerLinksData} />
+            <AvatarWrapper onClick={() => setIsCollapsed(false)}>
+              <Avatar src={"https://i.pravatar.cc/40"} size={"24px"} />
+            </AvatarWrapper>
           </Footer>
-        </Content>
-      </Extended>
-    </Layout>
+        </Collapsed>
+
+        <Extended isCollapsed={isCollapsed}>
+          <Content>
+            <Brand isCollapsed={false} />
+            <div
+              style={{
+                padding: "10px 16px",
+                borderTop: "1px solid rgba(0, 0, 0, .1)",
+                borderBottom: "1px solid rgba(0, 0, 0, .1)",
+                marginBottom: "16px"
+              }}
+            >
+              <Burger
+                isCollapsed={false}
+                handler={() => setIsCollapsed(true)}
+              />
+            </div>
+            <Links title={"Global"} data={userLinksData} />
+            <Footer>
+              <Links title={"Others"} data={footerLinksData} />
+              <AvatarItemWrapper>
+                <AvatarItem
+                  primaryText={"Johanes Does"}
+                  secondaryText={"Voir le profil"}
+                >
+                  <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
+                </AvatarItem>
+              </AvatarItemWrapper>
+            </Footer>
+          </Content>
+        </Extended>
+      </Layout>
+    </ThemeProvider>
   );
 };
 
