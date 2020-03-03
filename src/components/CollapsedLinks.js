@@ -1,5 +1,6 @@
 import { setPragma, styled } from "goober";
 import { h } from "preact";
+import Icon from "./Icon";
 
 setPragma(h);
 
@@ -16,8 +17,8 @@ const Link = styled("a")(({ tooltip }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "32px",
-  height: "32px",
+  width: "40px",
+  height: "40px",
   backgroundColor: "transparent",
   borderRadius: "50%",
   cursor: "pointer",
@@ -66,9 +67,13 @@ const CollapsedLinks = ({ data }) => {
       {data &&
         data.map((link, index) => {
           return (
-            <Link href={link.href} key={index} tooltip={link.label}>
-              {link.icon}
-            </Link>
+            <Icon
+              as={Link}
+              href={link.href}
+              key={index}
+              tooltip={link.label}
+              content={link.icon}
+            />
           );
         })}
     </Wrapper>

@@ -1,5 +1,6 @@
 import { setPragma, styled } from "goober";
 import { h } from "preact";
+import Icon from "./Icon";
 
 setPragma(h);
 
@@ -40,7 +41,7 @@ const Link = styled("a")(({ isCollapsed }) => ({
   }
 }));
 
-const Icon = styled("div")({
+const IconWrapper = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -94,7 +95,9 @@ const Links = ({ data, isCollapsed, hideIcons, title }) => {
               isCollapsed={isCollapsed}
               hideIcons={hideIcons}
             >
-              {hideIcons && !isCollapsed ? null : <Icon>{link.icon}</Icon>}
+              {hideIcons && !isCollapsed ? null : (
+                  <Icon as={IconWrapper} content={link.icon} />
+              )}
               {isCollapsed ? null : (
                 <Text hideIcons={hideIcons}>{link.label}</Text>
               )}
