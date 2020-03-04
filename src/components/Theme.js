@@ -23,3 +23,22 @@ export const withTheme = Component => {
   };
   return WithTheme;
 };
+
+export const defaultTheme = {
+  collapsed: {
+    brand: {
+      background: "#ffffff"
+    },
+    primary: "#fce500",
+    color: "#eef5ff",
+    background: "#0747a6"
+  },
+  extended: {
+    brand: {
+      background: "#ffffff"
+    },
+    primary: "#0747a6",
+    color: "#3e4757",
+    background: "#ffffff"
+  }
+};
