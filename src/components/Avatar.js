@@ -4,6 +4,7 @@ import { h } from "preact";
 setPragma(h);
 
 const Wrapper = styled("div")(({ size }) => ({
+  position: "relative",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

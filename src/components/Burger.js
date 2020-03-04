@@ -3,26 +3,29 @@ import { h } from "preact";
 
 setPragma(h);
 
-const Wrapper = styled("div")(({ isCollapsed }) => ({
+const Wrapper = styled("button")(({ isCollapsed }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   boxSizing: "border-box",
-  width: isCollapsed ? "32px" : "20px",
-  height: isCollapsed ? "32px" : "auto",
+  width: isCollapsed ? "40px" : "20px",
+  height: isCollapsed ? "40px" : "auto",
   borderRadius: "50%",
   backgroundColor: "transparent",
+  border: "none",
+  padding: "0",
+  margin: "0",
+  color: "currentColor",
+  cursor: "pointer",
   "&:hover": {
-    backgroundColor: isCollapsed ? "rbga(255, 255, 255, .1)" : "",
+    backgroundColor: isCollapsed ? "rgba(0, 0, 0, .3)" : "",
   }
 }));
 
-const BurgerIcon = styled("a")({
+const BurgerIcon = styled("div")({
   display: "block",
   width: "20px",
   height: "20px",
-  cursor: "pointer",
-  textDecoration: "none",
   color: "currentColor",
   svg: {
     width: "20px",
@@ -33,9 +36,9 @@ const BurgerIcon = styled("a")({
 
 const Burger = ({ handler, isCollapsed }) => {
   return (
-    <Wrapper isCollapsed={isCollapsed}>
+    <Wrapper isCollapsed={isCollapsed} onClick={() => handler()}>
       {isCollapsed ? (
-        <BurgerIcon onClick={() => handler()}>
+        <BurgerIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -48,7 +51,7 @@ const Burger = ({ handler, isCollapsed }) => {
           </svg>
         </BurgerIcon>
       ) : (
-        <BurgerIcon onClick={() => handler()}>
+        <BurgerIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="76"

@@ -7,7 +7,7 @@ import AvatarItem from "./AvatarItem";
 import Avatar from "./Avatar";
 import Links from "./Links";
 import CollapsedLinks from "./CollapsedLinks";
-import { ThemeProvider } from "./Theme";
+import { ThemeProvider, defaultTheme, withTheme } from "./Theme";
 
 setPragma(h);
 
@@ -52,7 +52,7 @@ const userLinksData = [
 
 const footerLinksData = [
   {
-    link: "#",
+    href: "#",
     label: "Developers",
     icon: `
       <svg
@@ -66,7 +66,7 @@ const footerLinksData = [
       `
   },
   {
-    link: "#",
+    href: "#",
     label: "Terms of use",
     icon: `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -76,7 +76,7 @@ const footerLinksData = [
       `
   },
   {
-    link: "#",
+    href: "#",
     label: "Help",
     icon: `
       <svg
@@ -93,50 +93,47 @@ const footerLinksData = [
 
 const Layout = styled("div")({
   position: "relative",
-  background: "#0747a6",
-  color: "#eef5ff",
   height: "100%",
-  width: "80px",
+  width: "60px",
   fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
 });
 
-const Collapsed = styled("div")({
-  position: "absolute",
-  top: "0",
-  left: "0",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "flex-start",
-  alignItems: "center",
-  width: "80px",
-  height: "100%",
-  paddingBottom: "20px",
-  boxSizing: "border-box",
-  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)"
-});
+const Collapsed = withTheme(
+  styled("div")(({ theme }) => ({
+    position: "absolute",
+    top: "0",
+    left: "0",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "60px",
+    height: "100%",
+    paddingBottom: "20px",
+    boxSizing: "border-box",
+    boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
+    background: theme.collapsed.background,
+    color: theme.collapsed.color
+  }))
+);
 
-const Extended = styled("div")(({ isCollapsed }) => ({
-  position: "absolute",
-  top: "0",
-  left: "0",
-  transform: isCollapsed ? "translateX(-210px)" : "translateX(0)",
-  display: "flex",
-  width: "200px",
-  height: "100%",
-  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
-  transition: "transform 200ms"
-}));
-
-const Content = styled("div")({
-  position: "relative",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "flex-start",
-  width: "200px",
-  height: "100%",
-  backgroundColor: "#ffffff",
-  color: "#3e4757"
-});
+const Extended = withTheme(
+  styled("div")(({ isCollapsed, theme }) => ({
+    position: "absolute",
+    top: "0",
+    left: "0",
+    transform: isCollapsed ? "translateX(-210px)" : "translateX(0)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: "200px",
+    height: "100%",
+    boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
+    transition: "transform 200ms",
+    background: theme.extended.background,
+    color: theme.extended.color
+  }))
+);
 
 const Shadow = styled("div")(({ isCollapsed }) => ({
   position: "absolute",
@@ -154,19 +151,35 @@ const Footer = styled("div")({
   marginTop: "auto"
 });
 
-const AvatarWrapper = styled("div")({
+const AvatarWrapper = styled("button")({
+  position: "relative",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "32px",
-  height: "32px",
-  padding: "4px",
+  width: "40px",
+  height: "40px",
+  margin: "4px 0",
+  padding: "0",
   cursor: "pointer",
   backgroundColor: "transparent",
   borderRadius: "50%",
+  border: "none",
   boxSizing: "border-box",
+  "&::before": {
+    content: "''",
+    position: "absolute",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    borderRadius: "50%",
+    backgroundColor: "rgba(0, 0, 0, .3)",
+    opacity: "0",
+  },
   "&:hover": {
-    backgroundColor: "#1c5ace"
+    "&::before": {
+      opacity: "1"
+    }
   }
 });
 
@@ -179,7 +192,7 @@ const AvatarItemWrapper = styled("div")({
 const VerticalNavigation = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
-    <ThemeProvider defaultTheme={{color: "red"}}>
+    <ThemeProvider defaultTheme={defaultTheme}>
       <Layout>
         <Shadow isCollapsed={isCollapsed} />
         <Collapsed isCollapsed={true}>
@@ -191,40 +204,35 @@ const VerticalNavigation = () => {
           <Footer>
             <CollapsedLinks data={footerLinksData} />
             <AvatarWrapper onClick={() => setIsCollapsed(false)}>
-              <Avatar src={"https://i.pravatar.cc/40"} size={"24px"} />
+              <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
             </AvatarWrapper>
           </Footer>
         </Collapsed>
 
         <Extended isCollapsed={isCollapsed}>
-          <Content>
-            <Brand isCollapsed={false} />
-            <div
-              style={{
-                padding: "10px 16px",
-                borderTop: "1px solid rgba(0, 0, 0, .1)",
-                borderBottom: "1px solid rgba(0, 0, 0, .1)",
-                marginBottom: "16px"
-              }}
-            >
-              <Burger
-                isCollapsed={false}
-                handler={() => setIsCollapsed(true)}
-              />
-            </div>
-            <Links title={"Global"} data={userLinksData} />
-            <Footer>
-              <Links title={"Others"} data={footerLinksData} />
-              <AvatarItemWrapper>
-                <AvatarItem
-                  primaryText={"Johanes Does"}
-                  secondaryText={"Voir le profil"}
-                >
-                  <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
-                </AvatarItem>
-              </AvatarItemWrapper>
-            </Footer>
-          </Content>
+          <Brand isCollapsed={false} />
+          <div
+            style={{
+              padding: "10px 16px",
+              borderTop: "1px solid rgba(0, 0, 0, .1)",
+              borderBottom: "1px solid rgba(0, 0, 0, .1)",
+              marginBottom: "16px"
+            }}
+          >
+            <Burger isCollapsed={false} handler={() => setIsCollapsed(true)} />
+          </div>
+          <Links title={"Global"} data={userLinksData} />
+          <Footer>
+            <Links title={"Others"} data={footerLinksData} />
+            <AvatarItemWrapper>
+              <AvatarItem
+                primaryText={"Johanes Does"}
+                secondaryText={"Voir le profil"}
+              >
+                <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
+              </AvatarItem>
+            </AvatarItemWrapper>
+          </Footer>
         </Extended>
       </Layout>
     </ThemeProvider>

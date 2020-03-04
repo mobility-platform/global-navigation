@@ -46,7 +46,7 @@ const Link = styled("a")(({ tooltip }) => ({
     whiteSpace: "nowrap"
   },
   "&:hover": {
-    backgroundColor: "#1c5ace",
+    backgroundColor: "rgba(0, 0, 0, .3)",
     "&::after": {
       opacity: "1"
     }

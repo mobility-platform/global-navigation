@@ -1,19 +1,24 @@
 import { setPragma, styled } from "goober";
 import { h } from "preact";
+import { withTheme } from "./Theme";
 
 setPragma(h);
 
-const Wrapper = styled("div")({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "100%",
-  height: "80px",
-  overflow: "hidden",
-  pointerEvents: "none",
-  boxSizing: "border-box",
-  backgroundColor: "#ffffff"
-});
+const Wrapper = withTheme(
+  styled("div")(({ isCollapsed, theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "80px",
+    overflow: "hidden",
+    pointerEvents: "none",
+    boxSizing: "border-box",
+    backgroundColor: isCollapsed
+      ? theme.collapsed.brand.background
+      : theme.extended.brand.background
+  }))
+);
 
 const Logo = styled("div")(({ isCollapsed }) => ({
   width: isCollapsed ? "60px" : "120px"
@@ -21,7 +26,7 @@ const Logo = styled("div")(({ isCollapsed }) => ({
 
 const Brand = ({ isCollapsed }) => {
   return (
-    <Wrapper>
+    <Wrapper isCollapsed={isCollapsed}>
       <Logo isCollapsed={isCollapsed}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

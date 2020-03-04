@@ -18,7 +18,7 @@ const PrimaryText = styled("span")({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontWeight: "600",
-  color: "#3e4757"
+  color: "currentColor"
 });
 
 const SecondaryText = styled("span")({
