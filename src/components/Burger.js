@@ -18,7 +18,7 @@ const Wrapper = styled("button")(({ isCollapsed }) => ({
   color: "currentColor",
   cursor: "pointer",
   "&:hover": {
-    backgroundColor: isCollapsed ? "rgba(0, 0, 0, .3)" : "",
+    backgroundColor: isCollapsed ? "rgba(0, 0, 0, .3)" : ""
   }
 }));
 
@@ -45,9 +45,7 @@ const Burger = ({ handler, isCollapsed }) => {
             viewBox="0 0 448 512"
           >
             <defs />
-            <path
-              d="M16 132h416a16 16 0 0016-16V76a16 16 0 00-16-16H16A16 16 0 000 76v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16z"
-            />
+            <path d="M16 132h416a16 16 0 0016-16V76a16 16 0 00-16-16H16A16 16 0 000 76v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16z" />
           </svg>
         </BurgerIcon>
       ) : (

@@ -95,7 +95,7 @@ const Image = styled("img")({
   width: "20px",
   height: "20px",
   objectFit: "cover",
-  boxSizing: "border-box",
+  boxSizing: "border-box"
 });
 
 const Text = styled("span")({
@@ -124,11 +124,7 @@ const AppLinks = ({ data, isCollapsed, title }) => {
       {data &&
         data.map((link, index) => {
           return isCollapsed ? (
-            <CollapsedLink
-              href={link.href}
-              key={index}
-              tooltip={link.label}
-            >
+            <CollapsedLink href={link.href} key={index} tooltip={link.label}>
               <Image src={link.src} />
             </CollapsedLink>
           ) : (
