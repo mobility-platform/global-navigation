@@ -137,18 +137,19 @@ const Links = ({ data, isCollapsed, hideIcons, title }) => {
       {title && !isCollapsed && <Title>{title}</Title>}
       {data &&
         data.map((link, index) => {
+          const { icon, label, ...rest } = link;
           return isCollapsed ? (
             <Icon
               as={CollapsedLink}
-              href={link.href}
               key={index}
-              tooltip={link.label}
-              content={link.icon}
+              tooltip={label}
+              content={icon}
+              {...rest}
             />
           ) : (
-            <Link href={link.href} key={index}>
-              {hideIcons ? null : <Icon as={IconWrapper} content={link.icon} />}
-              <Text hideIcons={hideIcons}>{link.label}</Text>
+            <Link key={index} {...rest}>
+              {hideIcons ? null : <Icon as={IconWrapper} content={icon} />}
+              <Text hideIcons={hideIcons}>{label}</Text>
             </Link>
           );
         })}
