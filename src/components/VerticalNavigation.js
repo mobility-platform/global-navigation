@@ -116,15 +116,14 @@ const Extended = withTheme(
 );
 
 const Shadow = styled("div")(({ isCollapsed }) => ({
-  position: "absolute",
+  position: "fixed",
   top: "0",
   left: "0",
   width: "100vw",
   height: "100%",
   opacity: isCollapsed ? 0 : 1,
   backgroundColor: "rgba(0, 0, 0, .1)",
-  transition: "opacity 200ms",
-  pointerEvents: "none"
+  transition: "opacity 200ms"
 }));
 
 const AvatarWrapper = styled("button")({
