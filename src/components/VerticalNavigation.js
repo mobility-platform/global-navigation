@@ -6,6 +6,7 @@ import Brand from "./Brand";
 import AvatarItem from "./AvatarItem";
 import Avatar from "./Avatar";
 import Links from "./Links";
+import AppLinks from "./AppLinks";
 import { ThemeProvider, defaultTheme, withTheme } from "./Theme";
 
 setPragma(h);
@@ -49,7 +50,25 @@ const globalLinks = [
   }
 ];
 
-const footerLinksData = [
+const appLinksData = [
+  {
+    href: "#",
+    label: "MyInspection App",
+    src: "https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/d2/5e/5e/d25e5ef9-3027-8e51-4e3e-6b2523a1a007/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-10.png/246x0w.png"
+  },
+  {
+    href: "#",
+    label: "MyTraining App",
+    src: "https://is5-ssl.mzstatic.com/image/thumb/Purple113/v4/7c/7e/ff/7c7eff86-87ca-3376-5542-679dc859702e/mzl.arlvslkf.png/246x0w.png"
+  },
+  {
+    href: "#",
+    label: "MyRoadChallenge",
+    src: "https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/d3/87/01/d38701bd-2563-5d40-b342-909d2d6a156b/AppIcon-0-1x_U007emarketing-0-85-220-0-7.png/246x0w.png"
+  }
+];
+
+const footerLinks = [
   {
     href: "#",
     label: "Developers",
@@ -197,6 +216,9 @@ const VerticalNavigation = () => {
             <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
           </div>
           <Links isCollapsed={true} data={globalLinks} />
+          <div style={{ marginTop: "12px" }}>
+            <AppLinks isCollapsed={true} data={appLinksData} />
+          </div>
           <div
             style={{
               marginTop: "auto",
@@ -205,7 +227,7 @@ const VerticalNavigation = () => {
               flexDirection: "column"
             }}
           >
-            <Links isCollapsed={true} data={footerLinksData} />
+            <Links isCollapsed={true} data={footerLinks} />
             <AvatarWrapper onClick={() => setIsCollapsed(false)}>
               <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
             </AvatarWrapper>
@@ -229,12 +251,11 @@ const VerticalNavigation = () => {
             <Burger isCollapsed={false} handler={() => setIsCollapsed(true)} />
           </div>
           <Links isCollapsed={false} title={"Global"} data={globalLinks} />
+          <div style={{ marginTop: "12px" }}>
+            <AppLinks isCollapsed={false} title={"Apps"} data={appLinksData} />
+          </div>
           <div style={{ marginTop: "auto" }}>
-            <Links
-              isCollapsed={false}
-              title={"Others"}
-              data={footerLinksData}
-            />
+            <Links isCollapsed={false} title={"Others"} data={footerLinks} />
             <AvatarItemWrapper>
               <AvatarItem
                 primaryText={"Johanes Does"}
