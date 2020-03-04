@@ -123,7 +123,8 @@ const Shadow = styled("div")(({ isCollapsed }) => ({
   height: "100%",
   opacity: isCollapsed ? 0 : 1,
   backgroundColor: "rgba(0, 0, 0, .1)",
-  transition: "opacity 200ms"
+  transition: "opacity 200ms",
+  pointerEvents: isCollapsed ? "none" : "auto"
 }));
 
 const AvatarWrapper = styled("button")({
@@ -169,7 +170,10 @@ const VerticalNavigation = ({ footerLinks }) => {
   return (
     <ThemeProvider defaultTheme={defaultTheme}>
       <Layout>
-        <Shadow isCollapsed={isCollapsed} />
+        <Shadow
+          isCollapsed={isCollapsed}
+          onClick={() => setIsCollapsed(true)}
+        />
 
         <Collapsed>
           <Brand isCollapsed={true} />
