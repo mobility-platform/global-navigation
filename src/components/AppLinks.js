@@ -1,6 +1,6 @@
 import { setPragma, styled } from "goober";
 import { h } from "preact";
-import Icon from "./Icon";
+import { withTheme } from "./Theme";
 
 setPragma(h);
 
@@ -11,35 +11,37 @@ const Wrapper = styled("div")({
   padding: "0 8px"
 });
 
-const Link = styled("a")({
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-start",
-  width: "100%",
-  textDecoration: "none",
-  color: "currentColor",
-  boxSizing: "border-box",
-  padding: "8px",
-  marginBottom: "4px",
-  "&::before": {
-    content: "''",
-    position: "absolute",
-    top: "0",
-    left: "0",
+const Link = withTheme(
+  styled("a")(({ theme }) => ({
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
     width: "100%",
-    height: "100%",
-    borderRadius: "4px",
-    backgroundColor: "rgba(0, 103, 255, .05)",
-    opacity: "0"
-  },
-  "&:hover": {
+    textDecoration: "none",
     color: "currentColor",
+    boxSizing: "border-box",
+    padding: "8px",
+    marginBottom: "4px",
     "&::before": {
-      opacity: "1"
+      content: "''",
+      position: "absolute",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+      borderRadius: "4px",
+      backgroundColor: theme.primary,
+      opacity: "0"
+    },
+    "&:hover": {
+      color: "currentColor",
+      "&::before": {
+        opacity: "0.05"
+      }
     }
-  }
-});
+  }))
+);
 
 const CollapsedLink = styled("a")(({ tooltip }) => ({
   position: "relative",
@@ -63,7 +65,8 @@ const CollapsedLink = styled("a")(({ tooltip }) => ({
     top: "50%",
     left: "110%",
     transform: "translateY(-50%)",
-    backgroundColor: "#172b4d",
+    color: "#fff",
+    backgroundColor: "#333",
     fontSize: "11px",
     fontWeight: "400",
     padding: "2px 4px",
@@ -124,13 +127,13 @@ const AppLinks = ({ data, isCollapsed, title }) => {
       {data &&
         data.map((link, index) => {
           return isCollapsed ? (
-            <CollapsedLink href={link.href} key={index} tooltip={link.label}>
-              <Image src={link.src} />
+            <CollapsedLink href={link.href} key={index} tooltip={link.name}>
+              <Image src={link.icon} />
             </CollapsedLink>
           ) : (
             <Link href={link.href} key={index}>
-              <Image src={link.src} />
-              <Text>{link.label}</Text>
+              <Image src={link.icon} />
+              <Text>{link.name}</Text>
             </Link>
           );
         })}

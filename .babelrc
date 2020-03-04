@@ -1,5 +1,14 @@
 {
-  "presets": ["@babel/preset-env"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "loose": true,
+        "modules": false,
+        "exclude": ["transform-regenerator", "transform-async-to-generator"]
+      }
+    ]
+  ],
   "plugins": [
     [
       "@babel/plugin-transform-react-jsx",
@@ -7,6 +16,12 @@
         "pragma": "h",
         "pragmaFrag": "Fragment",
         "throwIfNamespace": false
+      }
+    ],
+    [
+      "module:fast-async",
+      {
+        "spec": "true"
       }
     ]
   ]

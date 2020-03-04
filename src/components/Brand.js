@@ -14,9 +14,7 @@ const Wrapper = withTheme(
     overflow: "hidden",
     pointerEvents: "none",
     boxSizing: "border-box",
-    backgroundColor: isCollapsed
-      ? theme.collapsed.brand.background
-      : theme.extended.brand.background
+    backgroundColor: theme.background
   }))
 );
 

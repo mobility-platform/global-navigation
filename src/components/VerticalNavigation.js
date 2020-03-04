@@ -1,13 +1,15 @@
 import { setPragma, styled } from "goober";
 import { h } from "preact";
-import { useState } from "preact/hooks";
-import Burger from "./Burger";
-import Brand from "./Brand";
-import AvatarItem from "./AvatarItem";
-import Avatar from "./Avatar";
-import Links from "./Links";
+import { useEffect, useState } from "preact/hooks";
 import AppLinks from "./AppLinks";
-import { ThemeProvider, defaultTheme, withTheme } from "./Theme";
+import Avatar from "./Avatar";
+import AvatarItem from "./AvatarItem";
+import Brand from "./Brand";
+import Burger from "./Burger";
+import Links from "./Links";
+import { fetchTheme, fetchApplications } from "../utils/api";
+import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
+import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 
 setPragma(h);
 
@@ -92,8 +94,10 @@ const Collapsed = withTheme(
     paddingBottom: "20px",
     boxSizing: "border-box",
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
-    background: theme.collapsed.background,
-    color: theme.collapsed.color
+    background: theme.primary,
+    color: isTextLegibleOverBackground("#ffffff", theme.primary)
+      ? "#ffffff"
+      : "#333333"
   }))
 );
 
@@ -110,8 +114,10 @@ const Extended = withTheme(
     height: "100%",
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
     transition: "transform 200ms",
-    background: theme.extended.background,
-    color: theme.extended.color
+    background: theme.background,
+    color: isTextLegibleOverBackground("#ffffff", theme.background)
+      ? "#ffffff"
+      : "#333333"
   }))
 );
 
@@ -165,10 +171,28 @@ const AvatarItemWrapper = styled("div")({
   borderTop: "1px solid rgba(0, 0, 0, .1)"
 });
 
-const VerticalNavigation = ({ footerLinks }) => {
+const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
+  const [theme, setTheme] = useState(defaultTheme);
+
+  useEffect(() => {
+    (async () => {
+      const apiTheme = await fetchTheme({ getToken, apiUrl });
+      setTheme(apiTheme);
+    })();
+  }, []);
+
+  const [applications, setApplications] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const apiApplications = await fetchApplications({ getToken, apiUrl });
+      setApplications(apiApplications);
+    })();
+  }, []);
+
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
-    <ThemeProvider defaultTheme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Layout>
         <Shadow
           isCollapsed={isCollapsed}
@@ -182,7 +206,7 @@ const VerticalNavigation = ({ footerLinks }) => {
           </div>
           <Links isCollapsed={true} data={globalLinks} />
           <div style={{ marginTop: "12px" }}>
-            <AppLinks isCollapsed={true} data={appLinksData} />
+            <AppLinks isCollapsed={true} data={applications} />
           </div>
           <div
             style={{
@@ -217,7 +241,7 @@ const VerticalNavigation = ({ footerLinks }) => {
           </div>
           <Links isCollapsed={false} title={"Global"} data={globalLinks} />
           <div style={{ marginTop: "12px" }}>
-            <AppLinks isCollapsed={false} title={"Apps"} data={appLinksData} />
+            <AppLinks isCollapsed={false} title={"Apps"} data={applications} />
           </div>
           <div style={{ marginTop: "auto" }}>
             <Links isCollapsed={false} title={"Others"} data={footerLinks} />

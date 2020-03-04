@@ -11,9 +11,13 @@
     "postversion": "git push --all && git push --tag"
   },
   "dependencies": {
+    "core-js": "^3.6.4",
+    "dotenv": "^8.2.0",
+    "fast-async": "^6.3.8",
     "goober": "^1.7.1",
     "preact": "^10.3.2",
-    "preact-habitat": "^3.3.0"
+    "preact-habitat": "^3.3.0",
+    "regenerator-runtime": "^0.13.3"
   },
   "browserslist": [
     "> 1%",
