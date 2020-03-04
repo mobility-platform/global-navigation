@@ -11,16 +11,16 @@ const Wrapper = styled("div")({
   padding: "0 8px"
 });
 
-const Link = styled("a")(({ isCollapsed }) => ({
+const Link = styled("a")({
   position: "relative",
   display: "flex",
   alignItems: "center",
-  justifyContent: isCollapsed ? "center" : "flex-start",
+  justifyContent: "flex-start",
   width: "100%",
   textDecoration: "none",
   color: "currentColor",
   boxSizing: "border-box",
-  padding: isCollapsed ? "4px" : "8px",
+  padding: "8px",
   marginBottom: "4px",
   "&::before": {
     content: "''",
@@ -38,6 +38,55 @@ const Link = styled("a")(({ isCollapsed }) => ({
     "&::before": {
       opacity: "1"
     }
+  }
+});
+
+const CollapsedLink = styled("a")(({ tooltip }) => ({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "40px",
+  height: "40px",
+  backgroundColor: "transparent",
+  borderRadius: "50%",
+  cursor: "pointer",
+  color: "currentColor",
+  fill: "currentColor",
+  stroke: "currentColor",
+  boxSizing: "border-box",
+  margin: "4px 0",
+  "&::after": {
+    content: `"${tooltip}"`,
+    display: "inline-block",
+    position: "absolute",
+    top: "50%",
+    left: "110%",
+    transform: "translateY(-50%)",
+    backgroundColor: "#172b4d",
+    fontSize: "11px",
+    fontWeight: "400",
+    padding: "2px 4px",
+    borderRadius: "4px",
+    opacity: "0",
+    transition: "100ms",
+    pointerEvents: "none",
+    overflowWrap: "normal",
+    whiteSpace: "nowrap"
+  },
+  "&:hover": {
+    backgroundColor: "rgba(0, 0, 0, .3)",
+    "&::after": {
+      opacity: "1"
+    }
+  },
+  svg: {
+    width: "20px",
+    height: "20px"
+  },
+  i: {
+    width: "20px",
+    height: "20px"
   }
 }));
 
@@ -88,19 +137,18 @@ const Links = ({ data, isCollapsed, hideIcons, title }) => {
       {title && !isCollapsed && <Title>{title}</Title>}
       {data &&
         data.map((link, index) => {
-          return (
-            <Link
+          return isCollapsed ? (
+            <Icon
+              as={CollapsedLink}
               href={link.href}
               key={index}
-              isCollapsed={isCollapsed}
-              hideIcons={hideIcons}
-            >
-              {hideIcons && !isCollapsed ? null : (
-                  <Icon as={IconWrapper} content={link.icon} />
-              )}
-              {isCollapsed ? null : (
-                <Text hideIcons={hideIcons}>{link.label}</Text>
-              )}
+              tooltip={link.label}
+              content={link.icon}
+            />
+          ) : (
+            <Link href={link.href} key={index}>
+              {hideIcons ? null : <Icon as={IconWrapper} content={link.icon} />}
+              <Text hideIcons={hideIcons}>{link.label}</Text>
             </Link>
           );
         })}

@@ -6,12 +6,11 @@ import Brand from "./Brand";
 import AvatarItem from "./AvatarItem";
 import Avatar from "./Avatar";
 import Links from "./Links";
-import CollapsedLinks from "./CollapsedLinks";
 import { ThemeProvider, defaultTheme, withTheme } from "./Theme";
 
 setPragma(h);
 
-const userLinksData = [
+const globalLinks = [
   {
     href: "#",
     label: "My Home",
@@ -118,11 +117,11 @@ const Collapsed = withTheme(
 );
 
 const Extended = withTheme(
-  styled("div")(({ isCollapsed, theme }) => ({
+  styled("div")(({ theme }) => ({
     position: "absolute",
     top: "0",
     left: "0",
-    transform: isCollapsed ? "translateX(-210px)" : "translateX(0)",
+    transform: "translateX(0)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
@@ -147,10 +146,6 @@ const Shadow = styled("div")(({ isCollapsed }) => ({
   pointerEvents: "none"
 }));
 
-const Footer = styled("div")({
-  marginTop: "auto"
-});
-
 const AvatarWrapper = styled("button")({
   position: "relative",
   display: "flex",
@@ -174,7 +169,7 @@ const AvatarWrapper = styled("button")({
     height: "100%",
     borderRadius: "50%",
     backgroundColor: "rgba(0, 0, 0, .3)",
-    opacity: "0",
+    opacity: "0"
   },
   "&:hover": {
     "&::before": {
@@ -195,21 +190,33 @@ const VerticalNavigation = () => {
     <ThemeProvider defaultTheme={defaultTheme}>
       <Layout>
         <Shadow isCollapsed={isCollapsed} />
-        <Collapsed isCollapsed={true}>
+
+        <Collapsed>
           <Brand isCollapsed={true} />
           <div style={{ margin: "8px 0 4px 0" }}>
             <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
           </div>
-          <CollapsedLinks data={userLinksData} />
-          <Footer>
-            <CollapsedLinks data={footerLinksData} />
+          <Links isCollapsed={true} data={globalLinks} />
+          <div
+            style={{
+              marginTop: "auto",
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column"
+            }}
+          >
+            <Links isCollapsed={true} data={footerLinksData} />
             <AvatarWrapper onClick={() => setIsCollapsed(false)}>
               <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
             </AvatarWrapper>
-          </Footer>
+          </div>
         </Collapsed>
 
-        <Extended isCollapsed={isCollapsed}>
+        <Extended
+          style={{
+            transform: isCollapsed ? "translateX(-210px)" : "translateX(0)"
+          }}
+        >
           <Brand isCollapsed={false} />
           <div
             style={{
@@ -221,9 +228,13 @@ const VerticalNavigation = () => {
           >
             <Burger isCollapsed={false} handler={() => setIsCollapsed(true)} />
           </div>
-          <Links title={"Global"} data={userLinksData} />
-          <Footer>
-            <Links title={"Others"} data={footerLinksData} />
+          <Links isCollapsed={false} title={"Global"} data={globalLinks} />
+          <div style={{ marginTop: "auto" }}>
+            <Links
+              isCollapsed={false}
+              title={"Others"}
+              data={footerLinksData}
+            />
             <AvatarItemWrapper>
               <AvatarItem
                 primaryText={"Johanes Does"}
@@ -232,7 +243,7 @@ const VerticalNavigation = () => {
                 <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
               </AvatarItem>
             </AvatarItemWrapper>
-          </Footer>
+          </div>
         </Extended>
       </Layout>
     </ThemeProvider>
