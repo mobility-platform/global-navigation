@@ -52,27 +52,6 @@ const globalLinks = [
   }
 ];
 
-const appLinksData = [
-  {
-    href: "#",
-    label: "MyInspection App",
-    src:
-      "https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/d2/5e/5e/d25e5ef9-3027-8e51-4e3e-6b2523a1a007/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-10.png/246x0w.png"
-  },
-  {
-    href: "#",
-    label: "MyTraining App",
-    src:
-      "https://is5-ssl.mzstatic.com/image/thumb/Purple113/v4/7c/7e/ff/7c7eff86-87ca-3376-5542-679dc859702e/mzl.arlvslkf.png/246x0w.png"
-  },
-  {
-    href: "#",
-    label: "MyRoadChallenge",
-    src:
-      "https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/d3/87/01/d38701bd-2563-5d40-b342-909d2d6a156b/AppIcon-0-1x_U007emarketing-0-85-220-0-7.png/246x0w.png"
-  }
-];
-
 const Layout = styled("div")({
   position: "relative",
   height: "100%",
