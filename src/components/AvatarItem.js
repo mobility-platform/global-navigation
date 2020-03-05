@@ -21,20 +21,25 @@ const PrimaryText = styled("span")({
   color: "currentColor"
 });
 
-const SecondaryText = styled("span")({
+const SecondaryText = styled("a")({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontSize: "12px",
-  opacity: 0.8
+  opacity: 0.8,
+  color: "currentColor",
+  textDecoration: "none",
+  "&:hover": {
+    textDecoration: "underline"
+  }
 });
 
-const AvatarItem = ({ children, primaryText, secondaryText }) => {
+const AvatarItem = ({ children, primaryText, secondaryText, ...rest }) => {
   return (
     <Wrapper>
       {children}
       <TextWrapper>
         <PrimaryText>{primaryText}</PrimaryText>
-        <SecondaryText>{secondaryText}</SecondaryText>
+        <SecondaryText {...rest}>{secondaryText}</SecondaryText>
       </TextWrapper>
     </Wrapper>
   );

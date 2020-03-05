@@ -232,6 +232,8 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
               <AvatarItem
                 primaryText={"Johanes Does"}
                 secondaryText={"Voir le profil"}
+                href={"#"}
+                target={"_blank"}
               >
                 <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
               </AvatarItem>
