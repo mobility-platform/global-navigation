@@ -133,7 +133,7 @@ const Title = styled("div")({
 const AppLinks = ({ data, isCollapsed, title }) => {
   return (
     <Wrapper>
-      {title && !isCollapsed && <Title>{title}</Title>}
+      {data && title && !isCollapsed && <Title>{title}</Title>}
       {data &&
         data.map((link, index) => {
           return isCollapsed ? (

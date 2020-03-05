@@ -153,7 +153,7 @@ const Title = styled("div")({
 const Links = ({ data, isCollapsed, hideIcons, title }) => {
   return (
     <Wrapper>
-      {title && !isCollapsed && <Title>{title}</Title>}
+      {data && title && !isCollapsed && <Title>{title}</Title>}
       {data &&
         data.map((link, index) => {
           const { icon, label, ...rest } = link;
