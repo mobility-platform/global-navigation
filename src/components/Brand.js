@@ -5,7 +5,7 @@ import { withTheme } from "./Theme";
 setPragma(h);
 
 const Wrapper = withTheme(
-  styled("div")(({ isCollapsed, theme }) => ({
+  styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -24,7 +24,7 @@ const Logo = styled("div")(({ isCollapsed }) => ({
 
 const Brand = ({ isCollapsed }) => {
   return (
-    <Wrapper isCollapsed={isCollapsed}>
+    <Wrapper>
       <Logo isCollapsed={isCollapsed}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

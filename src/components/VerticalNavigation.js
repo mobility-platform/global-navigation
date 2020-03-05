@@ -10,6 +10,7 @@ import Links from "./Links";
 import { fetchTheme, fetchApplications } from "../utils/api";
 import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
+import CollapsedLink from "./CollapsedLink";
 
 setPragma(h);
 
@@ -66,7 +67,6 @@ const Collapsed = withTheme(
     left: "0",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
     alignItems: "center",
     width: "60px",
     height: "100%",
@@ -85,7 +85,6 @@ const Extended = withTheme(
     position: "absolute",
     top: "0",
     left: "0",
-    transform: "translateX(0)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
@@ -111,42 +110,6 @@ const Shadow = styled("div")(({ isCollapsed }) => ({
   transition: "opacity 200ms",
   pointerEvents: isCollapsed ? "none" : "auto"
 }));
-
-const AvatarWrapper = withTheme(
-  styled("button")(({ theme }) => ({
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "40px",
-    height: "40px",
-    margin: "4px 0",
-    padding: "0",
-    cursor: "pointer",
-    backgroundColor: "transparent",
-    borderRadius: "50%",
-    border: "none",
-    boxSizing: "border-box",
-    "&::before": {
-      content: "''",
-      position: "absolute",
-      top: "0",
-      left: "0",
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      backgroundColor: isTextLegibleOverBackground("#ffffff", theme.background)
-        ? "#333333"
-        : "#ffffff",
-      opacity: "0"
-    },
-    "&:hover": {
-      "&::before": {
-        opacity: "0.15"
-      }
-    }
-  }))
-);
 
 const AvatarItemWrapper = styled("div")({
   padding: "8px 16px 8px 16px",
@@ -184,13 +147,9 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
 
         <Collapsed>
           <Brand isCollapsed={true} />
-          <div style={{ margin: "8px 0 4px 0" }}>
-            <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
-          </div>
+          <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
           <Links isCollapsed={true} data={globalLinks} />
-          <div style={{ marginTop: "12px" }}>
-            <AppLinks isCollapsed={true} data={applications} />
-          </div>
+          <AppLinks isCollapsed={true} data={applications} />
           <div
             style={{
               marginTop: "auto",
@@ -200,9 +159,9 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
             }}
           >
             <Links isCollapsed={true} data={footerLinks} />
-            <AvatarWrapper onClick={() => setIsCollapsed(false)}>
+            <CollapsedLink onClick={() => setIsCollapsed(false)}>
               <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
-            </AvatarWrapper>
+            </CollapsedLink>
           </div>
         </Collapsed>
 
