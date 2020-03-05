@@ -1,9 +1,9 @@
 import "preact/debug";
+import "core-js";
+import "regenerator-runtime/runtime";
 import { h } from "preact";
 import { setPragma } from "goober";
 import habitat from "preact-habitat";
-import "core-js";
-import "regenerator-runtime/runtime";
 import VerticalNavigation from "./components/VerticalNavigation";
 
 setPragma(h);
@@ -35,8 +35,8 @@ if (process.env.NODE_ENV === "development") {
             "<svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' viewBox='0 0 512 512'><defs /><path d='M256 8a248 248 0 100 496 248 248 0 000-496zm0 448a200 200 0 11-.1-400.1A200 200 0 01256 456zm107.2-255.2c0 67-72.4 68-72.4 92.9v6.3a12 12 0 01-12 12h-45.6a12 12 0 01-12-12v-8.7c0-35.7 27-50 47.6-61.5 17.5-9.8 28.3-16.5 28.3-29.6 0-17.2-22-28.6-39.8-28.6-23.2 0-33.9 11-49 30a12 12 0 01-16.6 2l-27.8-21a12 12 0 01-2.7-16.4C184.8 131.5 215 112 261.8 112c49 0 101.4 38.3 101.4 88.8zM298 368a42 42 0 11-84 0 42 42 0 0184 0z' /></svg>"
         }
       ],
-      getToken: () => Promise.resolve("JWT_TOKEN"),
-      apiUrl: "API_URL"
+      getToken: () => Promise.resolve(process.env.JWT_TOKEN),
+      apiUrl: process.env.API_URL
     },
     clean: true
   });

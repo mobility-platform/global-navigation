@@ -1,12 +1,13 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
-    libraryTarget: 'umd'
+    libraryTarget: "umd"
   },
   module: {
     rules: [
@@ -22,6 +23,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.ejs"
-    })
+    }),
+    new Dotenv()
   ]
 };
