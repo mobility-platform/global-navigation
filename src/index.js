@@ -1,6 +1,4 @@
 import "preact/debug";
-import "core-js";
-import "regenerator-runtime/runtime";
 import { h } from "preact";
 import { setPragma } from "goober";
 import habitat from "preact-habitat";

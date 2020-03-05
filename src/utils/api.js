@@ -1,3 +1,5 @@
+import fetch from "unfetch";
+
 export const fetchTheme = async ({ getToken, apiUrl }) => {
   const token = await getToken();
 
