@@ -230,8 +230,8 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
             <Links isCollapsed={false} title={"Others"} data={footerLinks} />
             <AvatarItemWrapper>
               <AvatarItem
-                primaryText={"Johanes Does"}
-                secondaryText={"Voir le profil"}
+                title={"Johanes Does"}
+                linkLabel={"Voir le profil"}
                 href={"#"}
                 target={"_blank"}
               >

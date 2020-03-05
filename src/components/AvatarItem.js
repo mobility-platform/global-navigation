@@ -14,14 +14,14 @@ const TextWrapper = styled("div")({
   marginLeft: "10px"
 });
 
-const PrimaryText = styled("span")({
+const Title = styled("span")({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontWeight: "600",
   color: "currentColor"
 });
 
-const SecondaryText = styled("a")({
+const Link = styled("a")({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontSize: "12px",
@@ -33,13 +33,13 @@ const SecondaryText = styled("a")({
   }
 });
 
-const AvatarItem = ({ children, primaryText, secondaryText, ...rest }) => {
+const AvatarItem = ({ children, title, linkLabel, ...rest }) => {
   return (
     <Wrapper>
       {children}
       <TextWrapper>
-        <PrimaryText>{primaryText}</PrimaryText>
-        <SecondaryText {...rest}>{secondaryText}</SecondaryText>
+        <Title>{title}</Title>
+        <Link {...rest}>{linkLabel}</Link>
       </TextWrapper>
     </Wrapper>
   );
