@@ -22,6 +22,6 @@ export const withTheme = Component => {
 
 export const defaultTheme = {
   color: "#eef5ff",
-  primary: "#ff0000",
+  primary: "#0747a6",
   background: "#FFFFFF"
 };

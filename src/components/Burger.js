@@ -1,28 +1,49 @@
 import { setPragma, styled } from "goober";
 import { h } from "preact";
+import { withTheme } from "./Theme";
+import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 
 setPragma(h);
 
-const Wrapper = styled("button")(({ isCollapsed }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  boxSizing: "border-box",
-  width: isCollapsed ? "40px" : "20px",
-  height: isCollapsed ? "40px" : "auto",
-  borderRadius: "50%",
-  backgroundColor: "transparent",
-  border: "none",
-  padding: "0",
-  margin: "0",
-  color: "currentColor",
-  cursor: "pointer",
-  "&:hover": {
-    backgroundColor: isCollapsed ? "rgba(0, 0, 0, .3)" : ""
-  }
-}));
+const Wrapper = withTheme(
+  styled("button")(({ theme, isCollapsed }) => ({
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxSizing: "border-box",
+    width: isCollapsed ? "40px" : "20px",
+    height: isCollapsed ? "40px" : "auto",
+    borderRadius: "50%",
+    backgroundColor: "transparent",
+    border: "none",
+    padding: "0",
+    margin: "0",
+    color: "currentColor",
+    cursor: "pointer",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      backgroundColor: isTextLegibleOverBackground("#ffffff", theme.background)
+        ? "#333333"
+        : "#ffffff",
+      opacity: "0"
+    },
+    "&:hover": {
+      "&::before": {
+        opacity: isCollapsed ? "0.15" : "0"
+      }
+    }
+  }))
+);
 
 const BurgerIcon = styled("div")({
+  position: "relative",
   display: "block",
   width: "20px",
   height: "20px",

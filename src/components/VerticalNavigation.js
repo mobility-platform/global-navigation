@@ -133,37 +133,41 @@ const Shadow = styled("div")(({ isCollapsed }) => ({
   pointerEvents: isCollapsed ? "none" : "auto"
 }));
 
-const AvatarWrapper = styled("button")({
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "40px",
-  height: "40px",
-  margin: "4px 0",
-  padding: "0",
-  cursor: "pointer",
-  backgroundColor: "transparent",
-  borderRadius: "50%",
-  border: "none",
-  boxSizing: "border-box",
-  "&::before": {
-    content: "''",
-    position: "absolute",
-    top: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
+const AvatarWrapper = withTheme(
+  styled("button")(({ theme }) => ({
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "40px",
+    height: "40px",
+    margin: "4px 0",
+    padding: "0",
+    cursor: "pointer",
+    backgroundColor: "transparent",
     borderRadius: "50%",
-    backgroundColor: "rgba(0, 0, 0, .3)",
-    opacity: "0"
-  },
-  "&:hover": {
+    border: "none",
+    boxSizing: "border-box",
     "&::before": {
-      opacity: "1"
+      content: "''",
+      position: "absolute",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      backgroundColor: isTextLegibleOverBackground("#ffffff", theme.background)
+        ? "#333333"
+        : "#ffffff",
+      opacity: "0"
+    },
+    "&:hover": {
+      "&::before": {
+        opacity: "0.15"
+      }
     }
-  }
-});
+  }))
+);
 
 const AvatarItemWrapper = styled("div")({
   padding: "8px 16px 8px 16px",
