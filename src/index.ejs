@@ -8,27 +8,21 @@
     <style>
       .preview {
         position: relative;
-        width: 100%;
-        max-width: 1100px;
-        height: 800px;
-        margin: 80px auto;
-        overflow: hidden;
-        border: 1px dashed rgba(0, 0, 0, 0.2);
+        width: 60px;
+        height: 100%;
       }
 
-      .preview::before {
-        content: "WIDGET PREVIEW";
+      .preview-widget {
         position: absolute;
-        display: block;
-        top: -18px;
-        font-size: 11px;
-        color: rgba(0, 0, 0, 0.5);
+        top: 50px;
+        right: 50px;
       }
     </style>
   </head>
 
   <body>
     <div data-widget-host="habitat" class="preview"></div>
+    <div data-widget-host="habitat_widget" class="preview-widget"></div>
     <script async src="/bundle.js"></script>
   </body>
 </html>
