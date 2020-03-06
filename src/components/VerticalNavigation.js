@@ -1,5 +1,5 @@
 import { setPragma, styled } from "goober";
-import { h } from "preact";
+import { h, Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import AppLinks from "./AppLinks";
 import Avatar from "./Avatar";
@@ -53,16 +53,9 @@ const globalLinks = [
   }
 ];
 
-const Layout = styled("div")({
-  position: "relative",
-  height: "100%",
-  width: "60px",
-  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
-});
-
 const Collapsed = withTheme(
   styled("div")(({ theme }) => ({
-    position: "absolute",
+    position: "fixed",
     top: "0",
     left: "0",
     display: "flex",
@@ -76,13 +69,14 @@ const Collapsed = withTheme(
     background: theme.primary,
     color: isTextLegibleOverBackground("#ffffff", theme.primary)
       ? "#ffffff"
-      : "#333333"
+      : "#333333",
+    fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
   }))
 );
 
 const Extended = withTheme(
   styled("div")(({ theme }) => ({
-    position: "absolute",
+    position: "fixed",
     top: "0",
     left: "0",
     display: "flex",
@@ -95,7 +89,8 @@ const Extended = withTheme(
     background: theme.background,
     color: isTextLegibleOverBackground("#ffffff", theme.background)
       ? "#ffffff"
-      : "#333333"
+      : "#333333",
+    fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
   }))
 );
 
@@ -139,7 +134,7 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
+      <Fragment>
         <Shadow
           isCollapsed={isCollapsed}
           onClick={() => setIsCollapsed(true)}
@@ -199,7 +194,7 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
             </AvatarItemWrapper>
           </div>
         </Extended>
-      </Layout>
+      </Fragment>
     </ThemeProvider>
   );
 };
