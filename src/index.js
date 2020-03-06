@@ -66,7 +66,7 @@ if (process.env.NODE_ENV === "development") {
       ],
       getToken: () => Promise.resolve(process.env.JWT_TOKEN),
       apiUrl: process.env.API_URL,
-      orientation: "bottom right",
+      orientation: "left bottom",
       buttonSize: 48
     },
     clean: true

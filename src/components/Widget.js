@@ -187,27 +187,27 @@ const ButtonSvg = () => {
 };
 
 const defineOrientation = (buttonSize, orientation) => {
-  const basePosition = `${buttonSize}px`;
+  const basePosition = `0px`;
   const pushedPosition = `${buttonSize + 10}px`;
   switch (orientation) {
     case "top right":
-      return { top: pushedPosition, left: basePosition };
-    case "top left":
-      return { top: pushedPosition, right: basePosition };
-    case "bottom right":
-      return { bottom: pushedPosition, right: basePosition };
-    case "bottom left":
       return { bottom: pushedPosition, left: basePosition };
+    case "top left":
+      return { bottom: pushedPosition, right: basePosition };
+    case "bottom right":
+      return { top: pushedPosition, left: basePosition };
+    case "bottom left":
+      return { top: pushedPosition, right: basePosition };
     case "right top":
-      return { top: spacing, left: spacing };
+      return { bottom: basePosition, left: pushedPosition };
     case "left top":
-      return { top: spacing, left: spacing };
+      return { bottom: basePosition, right: pushedPosition };
     case "right bottom":
-      return { bottom: spacing, right: spacing };
+      return { top: basePosition, left: pushedPosition };
     case "left bottom":
-      return { bottom: spacing, left: spacing };
+      return { top: basePosition, right: pushedPosition };
     default:
-      return { top: spacing, right: spacing };
+      return { bottom: pushedPosition, right: basePosition };
   }
 };
 
