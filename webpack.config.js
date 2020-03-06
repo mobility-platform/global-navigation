@@ -1,8 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
 
 module.exports = {
   entry: "./src/index.js",
@@ -26,7 +24,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.ejs"
     }),
-    new Dotenv(),
-    new BundleAnalyzerPlugin()
+    new Dotenv()
   ]
 };
