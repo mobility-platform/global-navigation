@@ -10,6 +10,7 @@ const Wrapper = styled("div")({
   display: "flex",
   flexDirection: "column",
   boxSizing: "border-box",
+  width: "100%",
   padding: "0 8px"
 });
 

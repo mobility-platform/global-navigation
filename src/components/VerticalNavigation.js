@@ -81,9 +81,9 @@ const Extended = withTheme(
     left: "0",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
-    width: "200px",
+    width: "100%",
     height: "100%",
+    maxWidth: "320px",
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
     transition: "transform 200ms",
     background: theme.background,
@@ -104,6 +104,14 @@ const Shadow = styled("div")(({ isCollapsed }) => ({
   backgroundColor: "rgba(0, 0, 0, .1)",
   transition: "opacity 200ms",
   pointerEvents: isCollapsed ? "none" : "auto"
+}));
+
+const Content = styled("div")(({ isCollapsed }) => ({
+  flex: "1",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: isCollapsed ? "center" : "flex-start",
+  padding: isCollapsed ? "0" : "0 12px"
 }));
 
 const AvatarItemWrapper = styled("div")({
@@ -142,30 +150,32 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
 
         <Collapsed>
           <Brand isCollapsed={true} />
-          <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
-          <Links isCollapsed={true} data={globalLinks} />
-          <AppLinks isCollapsed={true} data={applications} />
-          <div
-            style={{
-              marginTop: "auto",
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column"
-            }}
-          >
-            <Links isCollapsed={true} data={footerLinks} />
-            <CollapsedLink onClick={() => setIsCollapsed(false)}>
-              <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
-            </CollapsedLink>
-          </div>
+          <Content isCollapsed={true}>
+            <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
+            <Links isCollapsed={true} data={globalLinks} />
+            <AppLinks isCollapsed={true} data={applications} />
+            <div
+              style={{
+                marginTop: "auto",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column"
+              }}
+            >
+              <Links isCollapsed={true} data={footerLinks} />
+              <CollapsedLink onClick={() => setIsCollapsed(false)}>
+                <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
+              </CollapsedLink>
+            </div>
+          </Content>
         </Collapsed>
 
         <Extended
           style={{
-            transform: isCollapsed ? "translateX(-210px)" : "translateX(0)"
+            transform: isCollapsed ? "translateX(-100%)" : "translateX(0)"
           }}
         >
-          <Brand isCollapsed={false} />
+          <Brand />
           <div
             style={{
               padding: "10px 16px",
@@ -174,25 +184,27 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
               marginBottom: "16px"
             }}
           >
-            <Burger isCollapsed={false} handler={() => setIsCollapsed(true)} />
+            <Burger handler={() => setIsCollapsed(true)} />
           </div>
-          <Links isCollapsed={false} title={"Global"} data={globalLinks} />
-          <div style={{ marginTop: "12px" }}>
-            <AppLinks isCollapsed={false} title={"Apps"} data={applications} />
-          </div>
-          <div style={{ marginTop: "auto" }}>
-            <Links isCollapsed={false} title={"Others"} data={footerLinks} />
-            <AvatarItemWrapper>
-              <AvatarItem
-                title={"Johanes Does"}
-                linkLabel={"Voir le profil"}
-                href={"#"}
-                target={"_blank"}
-              >
-                <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
-              </AvatarItem>
-            </AvatarItemWrapper>
-          </div>
+          <Content>
+            <Links title={"Global"} data={globalLinks} />
+            <div style={{ marginTop: "12px", width: "100%" }}>
+              <AppLinks title={"Apps"} data={applications} />
+            </div>
+            <div style={{ marginTop: "auto", width: "100%" }}>
+              <Links title={"Others"} data={footerLinks} />
+            </div>
+          </Content>
+          <AvatarItemWrapper>
+            <AvatarItem
+              title={"Johanes Does"}
+              linkLabel={"Voir le profil"}
+              href={"#"}
+              target={"_blank"}
+            >
+              <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
+            </AvatarItem>
+          </AvatarItemWrapper>
         </Extended>
       </Fragment>
     </ThemeProvider>
