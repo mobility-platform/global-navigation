@@ -121,6 +121,12 @@ const AvatarItemWrapper = styled("div")({
 });
 
 const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
+  if (!apiUrl || !getToken) {
+    throw new Error(
+      "`VerticalNavigation` requires the `apiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+    );
+  }
+
   const [theme, setTheme] = useState(defaultTheme);
 
   useEffect(() => {
