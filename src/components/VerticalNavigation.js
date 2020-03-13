@@ -54,7 +54,7 @@ const globalLinks = [
 ];
 
 const Collapsed = withTheme(
-  styled("div")(({ theme }) => ({
+  styled("nav")(({ theme }) => ({
     position: "fixed",
     top: "0",
     left: "0",
@@ -73,7 +73,7 @@ const Collapsed = withTheme(
 );
 
 const Extended = withTheme(
-  styled("div")(({ theme }) => ({
+  styled("nav")(({ theme }) => ({
     position: "fixed",
     top: "0",
     left: "0",
@@ -161,7 +161,11 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
               }}
             >
               <Links isCollapsed={true} data={footerLinks} />
-              <CollapsedLink onClick={() => setIsCollapsed(false)}>
+              <CollapsedLink
+                as="button"
+                aria-label="Open the menu"
+                onClick={() => setIsCollapsed(false)}
+              >
                 <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
               </CollapsedLink>
             </div>

@@ -53,7 +53,7 @@ const CollapsedLink = withTheme(
       overflowWrap: "normal",
       whiteSpace: "nowrap"
     },
-    "&:hover": {
+    "&:hover, &:focus": {
       "&::before": {
         opacity: "0.15"
       },

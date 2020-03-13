@@ -37,7 +37,7 @@ const Burger = ({ handler, isCollapsed }) => {
   return (
     <Fragment>
       {isCollapsed ? (
-        <CollapsedLink onClick={() => handler()}>
+        <CollapsedLink as="button" aria-label="Open the menu" onClick={() => handler()}>
           <BurgerIcon>
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 448 512">
               <defs />
@@ -46,7 +46,7 @@ const Burger = ({ handler, isCollapsed }) => {
           </BurgerIcon>
         </CollapsedLink>
       ) : (
-        <BurgerWrapper onClick={() => handler()}>
+        <BurgerWrapper aria-label="Close the menu" onClick={() => handler()}>
           <BurgerIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"

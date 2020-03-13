@@ -27,6 +27,7 @@ const Brand = ({ isCollapsed }) => {
     <Wrapper>
       <Logo isCollapsed={isCollapsed}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 161 71">
+          <title>Michelin Logo</title>
           <defs />
           <path
             fill="#27509B"
