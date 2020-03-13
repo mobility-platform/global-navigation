@@ -218,6 +218,12 @@ const ApplicationSwitcher = ({
   orientation,
   buttonSize = 48
 }) => {
+  if (!apiUrl || !getToken) {
+    throw new Error(
+      "`ApplicationSwitcher` requires the `apiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+    );
+  }
+
   const [theme, setTheme] = useState(defaultTheme);
 
   useEffect(() => {
