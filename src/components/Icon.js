@@ -18,14 +18,10 @@ const Icon = ({ as: Component, content, ...props }) => {
     return <Component ref={iconRef} {...props} />;
   }
   if (typeof content === "string") {
-    return (
-      <Component dangerouslySetInnerHTML={{ __html: content }} {...props} />
-    );
+    return <Component dangerouslySetInnerHTML={{ __html: content }} {...props} />;
   }
   if (process.env.NODE_ENV !== "production") {
-    throw new Error(
-      "Expected linkIcon to be an HTMLElement or an inline html markup."
-    );
+    throw new Error("Expected linkIcon to be an HTMLElement or an inline html markup.");
   }
   return null;
 };

@@ -67,9 +67,7 @@ const Collapsed = withTheme(
     boxSizing: "border-box",
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
     background: theme.primary,
-    color: isTextLegibleOverBackground("#ffffff", theme.primary)
-      ? "#ffffff"
-      : "#333333",
+    color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
     fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
   }))
 );
@@ -87,9 +85,7 @@ const Extended = withTheme(
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
     transition: "transform 200ms",
     background: theme.background,
-    color: isTextLegibleOverBackground("#ffffff", theme.background)
-      ? "#ffffff"
-      : "#333333",
+    color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
     fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
   }))
 );
@@ -134,7 +130,7 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
       const apiTheme = await fetchTheme({ getToken, apiUrl });
       setTheme(apiTheme);
     })();
-  }, []);
+  }, [apiUrl, getToken]);
 
   const [applications, setApplications] = useState();
 
@@ -143,16 +139,13 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
       const apiApplications = await fetchApplications({ getToken, apiUrl });
       setApplications(apiApplications);
     })();
-  }, []);
+  }, [apiUrl, getToken]);
 
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
-        <Shadow
-          isCollapsed={isCollapsed}
-          onClick={() => setIsCollapsed(true)}
-        />
+        <Shadow isCollapsed={isCollapsed} onClick={() => setIsCollapsed(true)} />
 
         <Collapsed>
           <Brand isCollapsed={true} />

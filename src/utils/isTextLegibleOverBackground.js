@@ -6,11 +6,7 @@ function getLFromRgbValue(value) {
 }
 
 function getLFromRgbColor(r, g, b) {
-  return (
-    0.2126 * getLFromRgbValue(r) +
-    0.7152 * getLFromRgbValue(g) +
-    0.0722 * getLFromRgbValue(b)
-  );
+  return 0.2126 * getLFromRgbValue(r) + 0.7152 * getLFromRgbValue(g) + 0.0722 * getLFromRgbValue(b);
 }
 
 function getLFromHex(hex) {
@@ -18,10 +14,7 @@ function getLFromHex(hex) {
   return getLFromRgbColor(parseInt(r, 16), parseInt(g, 16), parseInt(b, 16));
 }
 
-export default function isTextLegibleOverBackground(
-  textColor,
-  backgroundColor
-) {
+export default function isTextLegibleOverBackground(textColor, backgroundColor) {
   var textLightness = getLFromHex(textColor),
     backgroundLightness = getLFromHex(backgroundColor);
   var contrast =

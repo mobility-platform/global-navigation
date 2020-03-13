@@ -35,11 +35,9 @@ const InlineLinks = ({ data }) => {
         data.map((link, index) => {
           const { label, ...rest } = link;
           return (
-            <Fragment>
+            <Fragment key={index}>
               {index === 0 ? null : <span>{` - `}</span>}
-              <Link key={index} {...rest}>
-                {label}
-              </Link>
+              <Link {...rest}>{label}</Link>
             </Fragment>
           );
         })}
