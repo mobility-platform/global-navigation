@@ -211,7 +211,7 @@ const defineOrientation = (buttonSize, orientation) => {
   }
 };
 
-const Widget = ({
+const ApplicationSwitcher = ({
   footerLinks,
   getToken,
   apiUrl,
@@ -277,4 +277,4 @@ const Widget = ({
   );
 };
 
-export default Widget;
+export default ApplicationSwitcher;

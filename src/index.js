@@ -3,12 +3,12 @@ import { h } from "preact";
 import { setPragma } from "goober";
 import habitat from "preact-habitat";
 import VerticalNavigation from "./components/VerticalNavigation";
-import Widget from "./components/Widget";
+import ApplicationSwitcher from "./components/ApplicationSwitcher";
 
 setPragma(h);
 
 let _habitat = habitat(VerticalNavigation);
-let _habitatWidget = habitat(Widget);
+let _habitatApplicationSwitcher = habitat(ApplicationSwitcher);
 
 if (process.env.NODE_ENV === "development") {
   _habitat.render({
@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === "development") {
     },
     clean: true
   });
-  _habitatWidget.render({
+  _habitatApplicationSwitcher.render({
     selector: '[data-widget-host="habitat_widget"]',
     defaultProps: {
       footerLinks: [
