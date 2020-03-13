@@ -1,10 +1,8 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h } from "preact";
 import Icon from "./Icon";
 import Link from "./Link";
 import CollapsedLink from "./CollapsedLink";
-
-setPragma(h);
 
 const Wrapper = styled("div")({
   display: "flex",

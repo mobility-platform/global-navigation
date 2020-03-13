@@ -1,4 +1,4 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import AppLinks from "./AppLinks";
@@ -11,8 +11,6 @@ import { fetchTheme, fetchApplications } from "../utils/api";
 import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import CollapsedLink from "./CollapsedLink";
-
-setPragma(h);
 
 const globalLinks = [
   {
@@ -161,11 +159,7 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
               }}
             >
               <Links isCollapsed={true} data={footerLinks} />
-              <CollapsedLink
-                as="button"
-                aria-label="Open the menu"
-                onClick={() => setIsCollapsed(false)}
-              >
+              <CollapsedLink aria-label="Open the menu" onClick={() => setIsCollapsed(false)}>
                 <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
               </CollapsedLink>
             </div>

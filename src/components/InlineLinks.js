@@ -1,9 +1,7 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import { withTheme } from "./Theme";
-
-setPragma(h);
 
 const Wrapper = withTheme(
   styled("div")(({ theme }) => ({

@@ -1,4 +1,4 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { Fragment, h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { fetchApplications, fetchTheme } from "../utils/api";
@@ -9,8 +9,6 @@ import Avatar from "./Avatar";
 import Links from "./Links";
 import AppLinks from "./AppLinks";
 import InlineLinks from "./InlineLinks";
-
-setPragma(h);
 
 const globalLinks = [
   {

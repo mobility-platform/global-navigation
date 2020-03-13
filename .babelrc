@@ -21,6 +21,13 @@
       }
     ],
     [
+      "emotion",
+      {
+        "sourceMap": true,
+        "autoLabel": true
+      }
+    ],
+    [
       "module:fast-async",
       {
         "spec": "true"

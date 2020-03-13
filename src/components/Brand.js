@@ -1,8 +1,6 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h } from "preact";
 import { withTheme } from "./Theme";
-
-setPragma(h);
 
 const Wrapper = withTheme(
   styled("div")(({ theme }) => ({

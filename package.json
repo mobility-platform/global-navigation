@@ -14,9 +14,11 @@
     "format": "prettier --write \"src/**/*.+(js|jsx|json)\""
   },
   "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "babel-plugin-emotion": "^10.0.29",
     "core-js": "^3.6.4",
     "fast-async": "^6.3.8",
-    "goober": "^1.7.1",
     "preact": "^10.3.2",
     "preact-habitat": "^3.3.0",
     "unfetch": "^4.1.0"

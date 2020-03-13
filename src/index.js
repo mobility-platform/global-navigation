@@ -1,11 +1,8 @@
 import "preact/debug";
 import { h } from "preact";
-import { setPragma } from "goober";
 import habitat from "preact-habitat";
 import VerticalNavigation from "./components/VerticalNavigation";
 import ApplicationSwitcher from "./components/ApplicationSwitcher";
-
-setPragma(h);
 
 let _habitat = habitat(VerticalNavigation);
 let _habitatApplicationSwitcher = habitat(ApplicationSwitcher);
