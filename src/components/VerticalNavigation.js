@@ -83,7 +83,6 @@ const Extended = withTheme(
     height: "100%",
     maxWidth: "320px",
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
-    transition: "transform 200ms",
     background: theme.background,
     color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
     fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
@@ -171,7 +170,11 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
 
         <Extended
           style={{
-            transform: isCollapsed ? "translateX(-100%)" : "translateX(0)"
+            transform: isCollapsed ? "translateX(-100%)" : "translateX(0)",
+            opacity: isCollapsed ? "0" : "1",
+            transition: isCollapsed
+              ? "transform 200ms, opacity 0ms 200ms"
+              : "opacity 0ms, transform 200ms"
           }}
         >
           <Brand />
