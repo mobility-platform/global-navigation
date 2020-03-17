@@ -180,8 +180,9 @@ const ButtonSvg = () => {
 };
 
 const defineOrientation = (buttonSize, orientation) => {
+  const gap = 14;
   const basePosition = `0px`;
-  const pushedPosition = `${buttonSize + 10}px`;
+  const pushedPosition = `${buttonSize + gap}px`;
   switch (orientation) {
     case "top right":
       return { bottom: pushedPosition, left: basePosition };
@@ -204,14 +205,7 @@ const defineOrientation = (buttonSize, orientation) => {
   }
 };
 
-const ApplicationSwitcher = ({
-  footerLinks,
-  getToken,
-  apiUrl,
-  profileApiUrl,
-  orientation,
-  buttonSize = 48
-}) => {
+const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, profileApiUrl, orientation }) => {
   if (!apiUrl || !getToken || !profileApiUrl) {
     throw new Error(
       "`ApplicationSwitcher` requires the `apiUrl`, `profileApiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
@@ -247,6 +241,8 @@ const ApplicationSwitcher = ({
   }, [profileApiUrl, getToken]);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const buttonSize = 40;
 
   return (
     <ThemeProvider theme={theme}>
