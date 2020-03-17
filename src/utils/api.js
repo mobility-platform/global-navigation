@@ -29,3 +29,16 @@ export const fetchApplications = async ({ getToken, apiUrl }) => {
 
   return data;
 };
+
+export const fetchProfile = async ({ getToken, profileApiUrl }) => {
+  const token = await getToken();
+
+  let response = await fetch(profileApiUrl, {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  });
+  let data = await response.json();
+
+  return data;
+};

@@ -33,7 +33,8 @@ if (process.env.NODE_ENV === "development") {
         }
       ],
       getToken: () => Promise.resolve(process.env.JWT_TOKEN),
-      apiUrl: process.env.API_URL
+      apiUrl: process.env.API_URL,
+      profileApiUrl: process.env.PROFILE_API_URL
     },
     clean: true
   });
@@ -63,6 +64,7 @@ if (process.env.NODE_ENV === "development") {
       ],
       getToken: () => Promise.resolve(process.env.JWT_TOKEN),
       apiUrl: process.env.API_URL,
+      profileApiUrl: process.env.PROFILE_API_URL,
       orientation: "left bottom",
       buttonSize: 48
     },

@@ -7,10 +7,11 @@ import AvatarItem from "./AvatarItem";
 import Brand from "./Brand";
 import Burger from "./Burger";
 import Links from "./Links";
-import { fetchTheme, fetchApplications } from "../utils/api";
+import { fetchTheme, fetchApplications, fetchProfile } from "../utils/api";
 import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import CollapsedLink from "./CollapsedLink";
+import { displayName, displayPicture } from "../utils/userInfo";
 
 const globalLinks = [
   {
@@ -113,10 +114,10 @@ const AvatarItemWrapper = styled("div")({
   borderTop: "1px solid rgba(0, 0, 0, .1)"
 });
 
-const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
-  if (!apiUrl || !getToken) {
+const VerticalNavigation = ({ footerLinks, getToken, apiUrl, profileApiUrl }) => {
+  if (!apiUrl || !getToken || !profileApiUrl) {
     throw new Error(
-      "`VerticalNavigation` requires the `apiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+      "`VerticalNavigation` requires the `apiUrl`, `profileApiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
     );
   }
 
@@ -137,6 +138,16 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
       setApplications(apiApplications);
     })();
   }, [apiUrl, getToken]);
+
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const apiProfile = await fetchProfile({ getToken, profileApiUrl });
+      console.log(apiProfile);
+      setUserInfo(apiProfile);
+    })();
+  }, [profileApiUrl, getToken]);
 
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
@@ -160,7 +171,7 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
             >
               <Links isCollapsed={true} data={footerLinks} />
               <CollapsedLink aria-label="Open the menu" onClick={() => setIsCollapsed(false)}>
-                <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
+                <Avatar src={displayPicture(userInfo)} size={"22px"} />
               </CollapsedLink>
             </div>
           </Content>
@@ -197,12 +208,12 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
           </Content>
           <AvatarItemWrapper>
             <AvatarItem
-              title={"Johanes Does"}
+              title={displayName(userInfo)}
               linkLabel={"Voir le profil"}
               href={"#"}
               target={"_blank"}
             >
-              <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
+              <Avatar src={displayPicture(userInfo)} size={"40px"} />
             </AvatarItem>
           </AvatarItemWrapper>
         </Extended>

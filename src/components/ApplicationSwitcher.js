@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Fragment, h } from "preact";
 import { useEffect, useState } from "preact/hooks";
-import { fetchApplications, fetchTheme } from "../utils/api";
+import { fetchApplications, fetchTheme, fetchProfile } from "../utils/api";
 import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import AvatarItem from "./AvatarItem";
@@ -9,6 +9,7 @@ import Avatar from "./Avatar";
 import Links from "./Links";
 import AppLinks from "./AppLinks";
 import InlineLinks from "./InlineLinks";
+import { displayPicture, displayName } from "../utils/userInfo";
 
 const globalLinks = [
   {
@@ -203,10 +204,17 @@ const defineOrientation = (buttonSize, orientation) => {
   }
 };
 
-const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, orientation, buttonSize = 48 }) => {
-  if (!apiUrl || !getToken) {
+const ApplicationSwitcher = ({
+  footerLinks,
+  getToken,
+  apiUrl,
+  profileApiUrl,
+  orientation,
+  buttonSize = 48
+}) => {
+  if (!apiUrl || !getToken || !profileApiUrl) {
     throw new Error(
-      "`ApplicationSwitcher` requires the `apiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+      "`ApplicationSwitcher` requires the `apiUrl`, `profileApiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
     );
   }
 
@@ -228,6 +236,16 @@ const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, orientation, butto
     })();
   }, [apiUrl, getToken]);
 
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const apiProfile = await fetchProfile({ getToken, profileApiUrl });
+      console.log(apiProfile);
+      setUserInfo(apiProfile);
+    })();
+  }, [profileApiUrl, getToken]);
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -239,12 +257,12 @@ const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, orientation, butto
         <Window isOpen={isOpen} orientation={defineOrientation(buttonSize, orientation)}>
           <AvatarItemWrapper>
             <AvatarItem
-              title={"Johanes Does"}
+              title={displayName(userInfo)}
               linkLabel={"Voir le profil"}
               href={"#"}
               target={"_blank"}
             >
-              <Avatar src={"https://i.pravatar.cc/40"} size={"40px"} />
+              <Avatar src={displayPicture(userInfo)} size={"40px"} />
             </AvatarItem>
           </AvatarItemWrapper>
           <LinksWrapper>
