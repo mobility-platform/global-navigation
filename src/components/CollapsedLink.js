@@ -1,9 +1,7 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h } from "preact";
 import { withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
-
-setPragma(h);
 
 const CollapsedLink = withTheme(
   styled("a")(({ theme, tooltip }) => ({
@@ -53,7 +51,7 @@ const CollapsedLink = withTheme(
       overflowWrap: "normal",
       whiteSpace: "nowrap"
     },
-    "&:hover": {
+    "&:hover, &:focus": {
       "&::before": {
         opacity: "0.15"
       },

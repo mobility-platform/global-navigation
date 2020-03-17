@@ -1,8 +1,6 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import CollapsedLink from "./CollapsedLink";
-
-setPragma(h);
 
 const BurgerWrapper = styled("button")({
   position: "relative",
@@ -37,20 +35,16 @@ const Burger = ({ handler, isCollapsed }) => {
   return (
     <Fragment>
       {isCollapsed ? (
-        <CollapsedLink onClick={() => handler()}>
+        <CollapsedLink aria-label="Open the menu" onClick={() => handler()}>
           <BurgerIcon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              viewBox="0 0 448 512"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 448 512">
               <defs />
               <path d="M16 132h416a16 16 0 0016-16V76a16 16 0 00-16-16H16A16 16 0 000 76v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16z" />
             </svg>
           </BurgerIcon>
         </CollapsedLink>
       ) : (
-        <BurgerWrapper onClick={() => handler()}>
+        <BurgerWrapper aria-label="Close the menu" onClick={() => handler()}>
           <BurgerIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"

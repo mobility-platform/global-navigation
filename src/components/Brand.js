@@ -1,8 +1,6 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h } from "preact";
 import { withTheme } from "./Theme";
-
-setPragma(h);
 
 const Wrapper = withTheme(
   styled("div")(({ theme }) => ({
@@ -26,11 +24,8 @@ const Brand = ({ isCollapsed }) => {
   return (
     <Wrapper>
       <Logo isCollapsed={isCollapsed}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 161 71"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 161 71">
+          <title>Michelin Logo</title>
           <defs />
           <path
             fill="#27509B"

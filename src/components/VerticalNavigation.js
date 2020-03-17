@@ -1,4 +1,4 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import AppLinks from "./AppLinks";
@@ -11,8 +11,6 @@ import { fetchTheme, fetchApplications } from "../utils/api";
 import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import CollapsedLink from "./CollapsedLink";
-
-setPragma(h);
 
 const globalLinks = [
   {
@@ -54,7 +52,7 @@ const globalLinks = [
 ];
 
 const Collapsed = withTheme(
-  styled("div")(({ theme }) => ({
+  styled("nav")(({ theme }) => ({
     position: "fixed",
     top: "0",
     left: "0",
@@ -67,15 +65,13 @@ const Collapsed = withTheme(
     boxSizing: "border-box",
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
     background: theme.primary,
-    color: isTextLegibleOverBackground("#ffffff", theme.primary)
-      ? "#ffffff"
-      : "#333333",
+    color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
     fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
   }))
 );
 
 const Extended = withTheme(
-  styled("div")(({ theme }) => ({
+  styled("nav")(({ theme }) => ({
     position: "fixed",
     top: "0",
     left: "0",
@@ -85,11 +81,8 @@ const Extended = withTheme(
     height: "100%",
     maxWidth: "320px",
     boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
-    transition: "transform 200ms",
     background: theme.background,
-    color: isTextLegibleOverBackground("#ffffff", theme.background)
-      ? "#ffffff"
-      : "#333333",
+    color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
     fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
   }))
 );
@@ -121,6 +114,12 @@ const AvatarItemWrapper = styled("div")({
 });
 
 const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
+  if (!apiUrl || !getToken) {
+    throw new Error(
+      "`VerticalNavigation` requires the `apiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+    );
+  }
+
   const [theme, setTheme] = useState(defaultTheme);
 
   useEffect(() => {
@@ -128,7 +127,7 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
       const apiTheme = await fetchTheme({ getToken, apiUrl });
       setTheme(apiTheme);
     })();
-  }, []);
+  }, [apiUrl, getToken]);
 
   const [applications, setApplications] = useState();
 
@@ -137,16 +136,13 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
       const apiApplications = await fetchApplications({ getToken, apiUrl });
       setApplications(apiApplications);
     })();
-  }, []);
+  }, [apiUrl, getToken]);
 
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
-        <Shadow
-          isCollapsed={isCollapsed}
-          onClick={() => setIsCollapsed(true)}
-        />
+        <Shadow isCollapsed={isCollapsed} onClick={() => setIsCollapsed(true)} />
 
         <Collapsed>
           <Brand isCollapsed={true} />
@@ -163,7 +159,7 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
               }}
             >
               <Links isCollapsed={true} data={footerLinks} />
-              <CollapsedLink onClick={() => setIsCollapsed(false)}>
+              <CollapsedLink aria-label="Open the menu" onClick={() => setIsCollapsed(false)}>
                 <Avatar src={"https://i.pravatar.cc/40"} size={"22px"} />
               </CollapsedLink>
             </div>
@@ -172,7 +168,11 @@ const VerticalNavigation = ({ footerLinks, getToken, apiUrl }) => {
 
         <Extended
           style={{
-            transform: isCollapsed ? "translateX(-100%)" : "translateX(0)"
+            transform: isCollapsed ? "translateX(-100%)" : "translateX(0)",
+            opacity: isCollapsed ? "0" : "1",
+            transition: isCollapsed
+              ? "transform 200ms, opacity 0ms 200ms"
+              : "opacity 0ms, transform 200ms"
           }}
         >
           <Brand />

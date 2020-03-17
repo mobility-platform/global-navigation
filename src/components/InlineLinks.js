@@ -1,9 +1,7 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import { withTheme } from "./Theme";
-
-setPragma(h);
 
 const Wrapper = withTheme(
   styled("div")(({ theme }) => ({
@@ -35,11 +33,9 @@ const InlineLinks = ({ data }) => {
         data.map((link, index) => {
           const { label, ...rest } = link;
           return (
-            <Fragment>
+            <Fragment key={index}>
               {index === 0 ? null : <span>{` - `}</span>}
-              <Link key={index} {...rest}>
-                {label}
-              </Link>
+              <Link {...rest}>{label}</Link>
             </Fragment>
           );
         })}

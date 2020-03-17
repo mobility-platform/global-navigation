@@ -1,4 +1,4 @@
-import { setPragma, styled } from "goober";
+import styled from "@emotion/styled";
 import { Fragment, h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { fetchApplications, fetchTheme } from "../utils/api";
@@ -9,8 +9,6 @@ import Avatar from "./Avatar";
 import Links from "./Links";
 import AppLinks from "./AppLinks";
 import InlineLinks from "./InlineLinks";
-
-setPragma(h);
 
 const globalLinks = [
   {
@@ -53,9 +51,7 @@ const globalLinks = [
 
 const AvatarItemWrapper = withTheme(
   styled("div")(({ theme }) => ({
-    color: isTextLegibleOverBackground("#ffffff", theme.primary)
-      ? "#ffffff"
-      : "#333333",
+    color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
     backgroundColor: theme.primary,
     padding: "8px 16px 8px 16px",
     marginBottom: "8px",
@@ -74,9 +70,7 @@ const Button = withTheme(
     position: "relative",
     height: "40px",
     width: "40px",
-    color: isTextLegibleOverBackground("#ffffff", theme.primary)
-      ? "#ffffff"
-      : "#333333",
+    color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
     backgroundColor: theme.primary,
     borderRadius: "50%",
     border: "none",
@@ -97,9 +91,7 @@ const Window = withTheme(
     overflow: "hidden",
     borderRadius: "10px",
     fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
-    color: isTextLegibleOverBackground("#ffffff", theme.background)
-      ? "#ffffff"
-      : "#333333",
+    color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
     backgroundColor: theme.background,
     ...orientation
   }))
@@ -119,7 +111,7 @@ const ButtonSvg = () => {
       viewBox="0 0 56 56"
     >
       <defs />
-      <g fill-rule="evenodd" clip-path="url(#clip0)" clip-rule="evenodd">
+      <g file-rule="evenodd" clip-path="url(#clip0)" clip-rule="evenodd">
         <path
           fill="#000"
           d="M11.22 22.2a4.8 4.8 0 00-.96.26 2.34 2.34 0 00-1.31 1.39.65.65 0 01-.13.22c-.29.28-.8.9-1.03 1.26-.5.78-.72 1.38-.9 2.38-.07.4-.07.5-.09 1.44l-.01 1-.2.3c-.3.47-.46.87-.56 1.46-.05.25-.05 1.48 0 1.66l.07.31a3.37 3.37 0 00.93 1.67c.24.26.38.37.66.56l.45.3.1.05-.14.05a17.9 17.9 0 00-2.05.85c-.5.25-.96.54-1.43.9-.3.22-.98.92-1.16 1.18a4.01 4.01 0 00-.57 1.3c-.01.04-.12.12-.33.23-.3.15-.63.36-1.03.65a6.72 6.72 0 00-1.64 2A4.86 4.86 0 00-.63 46c0 .5.01.58.08.88.04.18.1.43.15.57l.07.24-.16.26a5.05 5.05 0 00-.94 3.09 4.58 4.58 0 00.09 1.25c.01.04-.05.1-.2.2-.25.18-.7.64-.85.88-.18.28-.3.52-.38.79-.1.3-.17.78-.17 1.07 0 .19 0 .21-.06.24-.24.1-.89.7-1.17 1.06a5 5 0 00-.87 3.23l.02.45-.17.1a3.31 3.31 0 00-1.51 2.96c0 .47 0 .58.06.8.08.32.24.72.35.88l.1.13-.09.14a4.7 4.7 0 00-.34.97c-.07.28-.21.58-.56 1.18a81.82 81.82 0 00-.69 1.22c-.36.61-.88 1.8-1 2.26-.14.6-.14 1.28 0 1.82.07.25.07.27.04.54-.04.38-.02 1.4.04 1.7.13.7.39 1.2.72 1.43.2.13.55.23.76.22.1-.01.2-.03.22-.05.03 0 .1-.04.16-.07.12-.06.42-.47.47-.64.04-.14.06-.15.28-.21.33-.1.54-.25.66-.49.09-.19.1-.37.04-.7-.05-.29-.05-.3 0-.44.1-.32.13-.4.16-.7.03-.29.03-.29-.04-.43-.1-.2-.1-.3.01-.4.09-.08.14-.09.14-.03 0 .02.05.1.1.17.07.08.12.18.13.22v.45c-.04.65-.04 1.11.02 1.27.08.24.27.45.53.58l.21.12h.33c.29 0 .36-.02.56-.08.62-.21.75-.47.85-1.64A9.7 9.7 0 00-2.45 71a5.03 5.03 0 00-.1-.44 4.29 4.29 0 01-.27-1.36l-.02-.36.1-.09c.29-.21.71-.72.8-.95l.04-.09.42-.01c.43-.02.86-.1 1.25-.22a2.7 2.7 0 001.17-.83c.54-.59.86-1.34.9-2.12l.01-.34.13-.05a5.81 5.81 0 001.78-1.38c.02 0 .04.06.07.14a6 6 0 00.2.42c.11.25.13.31.12.4-.01.05-.15.35-.3.66a7.82 7.82 0 00-.83 3.56c-.03.75-.01 1.78.05 2.06l.08.43c.02.14.13.48.24.78l.19.53-.1.22c-.1.21-.37 1.25-.41 1.57a15.1 15.1 0 00-.03 2.35c.15 1.33.53 2.56.97 3.16l.11.15-.07.19c-.12.32-.16.63-.16 1.2 0 .65.08 1 .34 1.52l.08.17-.05.13c-.1.23-.33 1.1-.36 1.37-.06.62 0 1.91.12 2.44.1.39.33.93.65 1.43l.07.12-.08.29a5 5 0 00-.17 1.99c.1 1.21.24 1.67.81 2.69.32.57 1 1.22 1.64 1.58.18.1.19.11.23.26.08.25.07.99-.01 1.38-.28 1.35-1.1 2.6-2.48 3.81l-.88.77c-.93.83-1.42 1.43-1.55 1.93-.15.55-.17.69-.17 1 0 .87.23 1.1 1.27 1.37.42.11 1.14.14 1.8.07a16.23 16.23 0 002.04-.33 6.05 6.05 0 003.18-1.55c.33-.26.67-.43 1.42-.7a5.58 5.58 0 001.77-.88c.29-.16.41-.4.46-.87a5.62 5.62 0 00-.13-1.93c-.04-.3-.17-.77-.35-1.24a14.77 14.77 0 01-.82-3.19c-.01-.14-.01-.15.06-.2.21-.14.5-.42.78-.74l.31-.36.03.15c.08.38.39 1.08.67 1.52.2.3.63.76.94 1l.24.18v.13a29.19 29.19 0 01-.58 4.27 7.8 7.8 0 00-.23 1.61c-.02.39-.01.5.04.77.03.17.06.41.06.53l.02.48c.03.22.05.3.14.5.15.3.43.6.84.86l.6.4c.35.23.28.12.64.9.17.38.33.61.6.88.34.34.8.6 1.56.91.97.4 1.61.55 2.4.57.66.02 1.22-.06 1.76-.25.89-.3 1.25-.8 1.3-1.83.03-.36-.01-.75-.13-1.21a3 3 0 00-.32-.88c-.1-.14-.43-.59-.69-.9-.52-.61-.75-.91-1.07-1.38-.6-.87-1.15-1.99-1.36-2.75-.22-.81-.3-1.4-.25-2 .04-.5.1-1 .13-1.03a3.4 3.4 0 00.9-.48 4.93 4.93 0 001.67-2.65 6.01 6.01 0 00-.1-3.94c-.02-.04 0-.09.11-.2.4-.46.77-1.28.94-2.08.25-1.21.14-2.69-.28-3.66l-.13-.32.14-.2a2.46 2.46 0 00.52-1.7c0-.51-.03-.77-.15-1.19l-.07-.23.12-.08c.12-.1.64-.66.78-.85.28-.4.61-1.14.8-1.83.28-.98.4-1.86.4-2.93 0-1.03-.07-1.47-.34-2.31l-.1-.29.1-.23c.14-.36.27-.86.37-1.41.13-.75.13-.81.15-1.5a9.48 9.48 0 00-1.2-5.04l-.08-.12.12-.14c.45-.5.89-1.43 1.03-2.18a9.2 9.2 0 00.1-2.43 5.6 5.6 0 00-.32-1.31l-.12-.3.06-.1c.15-.2.45-.72.54-.91.21-.43.44-1.26.51-1.84.05-.37.05-1.65 0-2-.1-.8-.34-1.68-.61-2.2-.08-.16-.1-.24-.09-.27a11.22 11.22 0 00.73-1.17c.08-.19.38-1.05.38-1.11 0-.02.15-.07.36-.11a4.85 4.85 0 002.16-1.15l.34-.3.48-.05c.82-.06 1.53-.2 1.95-.4a4.34 4.34 0 001.5-1l.49-.55c.15-.18.18-.2.38-.27.22-.07.87-.49 1.12-.71.2-.2.7-.8.85-1.07l.15-.26.48-.12c.54-.13.7-.2 1.2-.47.27-.15.42-.25.73-.52.42-.36.64-.61.93-1.05.2-.32.2-.3.44-.44A4 4 0 0043.26 37c.28-.55.4-1.12.42-1.91l.01-.52.09-.04c.18-.1.65-.28 1.14-.43.6-.18 1.7-.58 2.03-.73l.5-.24c.15-.08.44-.2.64-.27.43-.16.55-.23 1.02-.56a4.14 4.14 0 001.23-1.3c.06-.11.2-.28.48-.56.33-.33.4-.42.49-.6l.1-.24c0-.02.1-.14.22-.27.12-.12.25-.29.3-.36.06-.14.06-.17.06-.5 0-.32 0-.36-.07-.5-.08-.19-.33-.46-.44-.5-.05 0-.1-.05-.15-.17-.1-.19-.3-.4-.46-.45a2.4 2.4 0 00-.61-.04c-.62 0-.7.02-2.12.46-1.26.39-1.15.36-1.13.27.13-.6.07-.96-.19-1.27-.17-.2-.31-.27-.6-.28-.34-.01-.47.03-.9.3-.5.3-.98.57-1.59.87a5.15 5.15 0 00-1.54 1.04c-.08.06-.28.24-.43.4-.23.24-.3.32-.38.5-.45.97-.5 1.05-.75 1.1-.12.03-.18.02-.46-.04-.3-.07-.38-.08-.97-.08-.57 0-.67 0-.94.06a4.06 4.06 0 00-2.37 1.42c-.09.12-.13.16-.23.18a4.4 4.4 0 00-2.06 1.4l-.12.15-.37-.01c-.32 0-.44 0-.76.06a2.9 2.9 0 00-.9.28c-.17.1-.18.1-.35.07a6.8 6.8 0 00-1.91.18 4.3 4.3 0 00-1.04.43l-.23.12-.33-.07a6.62 6.62 0 00-2.36-.04c-.73.13-.9.19-1.6.53l-.61.31-.33-.07a16.05 16.05 0 00-3.45-.37c-.04-.01-.03-.03.04-.13.2-.24.48-.75.67-1.18.4-.93.5-2.1.27-3a4.6 4.6 0 00-1.72-2.62l-.25-.2-.09-.26a7.16 7.16 0 00-2.58-3.54 5.14 5.14 0 00-2.04-.78l-.2-.03-.25-.24a1.6 1.6 0 00-.86-.47 3.7 3.7 0 00-1.01-.04"
@@ -211,13 +203,13 @@ const defineOrientation = (buttonSize, orientation) => {
   }
 };
 
-const Widget = ({
-  footerLinks,
-  getToken,
-  apiUrl,
-  orientation,
-  buttonSize = 48
-}) => {
+const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, orientation, buttonSize = 48 }) => {
+  if (!apiUrl || !getToken) {
+    throw new Error(
+      "`ApplicationSwitcher` requires the `apiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+    );
+  }
+
   const [theme, setTheme] = useState(defaultTheme);
 
   useEffect(() => {
@@ -225,7 +217,7 @@ const Widget = ({
       const apiTheme = await fetchTheme({ getToken, apiUrl });
       setTheme(apiTheme);
     })();
-  }, []);
+  }, [apiUrl, getToken]);
 
   const [applications, setApplications] = useState();
 
@@ -234,24 +226,17 @@ const Widget = ({
       const apiApplications = await fetchApplications({ getToken, apiUrl });
       setApplications(apiApplications);
     })();
-  }, []);
+  }, [apiUrl, getToken]);
 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
-        <Button
-          size={buttonSize}
-          isOpen={isOpen}
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <Button size={buttonSize} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
           <ButtonSvg />
         </Button>
-        <Window
-          isOpen={isOpen}
-          orientation={defineOrientation(buttonSize, orientation)}
-        >
+        <Window isOpen={isOpen} orientation={defineOrientation(buttonSize, orientation)}>
           <AvatarItemWrapper>
             <AvatarItem
               title={"Johanes Does"}
@@ -277,4 +262,4 @@ const Widget = ({
   );
 };
 
-export default Widget;
+export default ApplicationSwitcher;

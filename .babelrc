@@ -4,7 +4,7 @@
       "@babel/preset-env",
       {
         "loose": true,
-        "modules": false,
+        "modules": "auto",
         "exclude": ["transform-regenerator", "transform-async-to-generator"],
         "useBuiltIns": "usage",
         "corejs": 3
@@ -18,6 +18,13 @@
         "pragma": "h",
         "pragmaFrag": "Fragment",
         "throwIfNamespace": false
+      }
+    ],
+    [
+      "emotion",
+      {
+        "sourceMap": true,
+        "autoLabel": true
       }
     ],
     [
