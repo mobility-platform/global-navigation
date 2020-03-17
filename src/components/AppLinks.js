@@ -10,12 +10,20 @@ const Wrapper = styled("div")({
   width: "100%"
 });
 
-const Image = styled("img")({
+const ImageWrapper = styled("div")({
   position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   width: "20px",
   height: "20px",
-  objectFit: "cover",
-  boxSizing: "border-box"
+  overflow: "hidden",
+  boxSizing: "border-box",
+  borderRadius: "50%"
+});
+
+const Image = styled("img")({
+  height: "20px"
 });
 
 const Text = styled("span")({
@@ -45,11 +53,15 @@ const AppLinks = ({ data, isCollapsed, title }) => {
         data.map((link, index) => {
           return isCollapsed ? (
             <CollapsedLink href={link.href} key={index} tooltip={link.name}>
-              <Image src={link.icon} />
+              <ImageWrapper>
+                <Image src={link.icon} />
+              </ImageWrapper>
             </CollapsedLink>
           ) : (
             <Link href={link.href} key={index}>
-              <Image src={link.icon} />
+              <ImageWrapper>
+                <Image src={link.icon} />
+              </ImageWrapper>
               <Text>{link.name}</Text>
             </Link>
           );
