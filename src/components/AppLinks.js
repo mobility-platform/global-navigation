@@ -15,15 +15,15 @@ const ImageWrapper = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "20px",
-  height: "20px",
+  width: "22px",
+  height: "22px",
   overflow: "hidden",
   boxSizing: "border-box",
   borderRadius: "50%"
 });
 
 const Image = styled("img")({
-  height: "20px"
+  height: "22px"
 });
 
 const Text = styled("span")({

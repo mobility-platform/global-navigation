@@ -21,12 +21,12 @@ const BurgerWrapper = styled("button")({
 const BurgerIcon = styled("div")({
   position: "relative",
   display: "block",
-  width: "20px",
-  height: "20px",
+  width: "22px",
+  height: "22px",
   color: "currentColor",
   svg: {
-    width: "20px",
-    height: "20px",
+    width: "22px",
+    height: "22px",
     fill: "currentColor"
   }
 });
@@ -37,9 +37,20 @@ const Burger = ({ handler, isCollapsed }) => {
       {isCollapsed ? (
         <CollapsedLink aria-label="Open the menu" onClick={() => handler()}>
           <BurgerIcon>
-            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 448 512">
-              <defs />
-              <path d="M16 132h416a16 16 0 0016-16V76a16 16 0 00-16-16H16A16 16 0 000 76v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16zm0 160h416a16 16 0 0016-16v-40a16 16 0 00-16-16H16a16 16 0 00-16 16v40a16 16 0 0016 16z" />
+            <svg
+              stroke="currentColor"
+              fill="none"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </BurgerIcon>
         </CollapsedLink>
