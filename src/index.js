@@ -4,11 +4,11 @@ import habitat from "preact-habitat";
 import VerticalNavigation from "./components/VerticalNavigation";
 import ApplicationSwitcher from "./components/ApplicationSwitcher";
 
-let _habitat = habitat(VerticalNavigation);
-let _habitatApplicationSwitcher = habitat(ApplicationSwitcher);
+export const verticalNavigation = habitat(VerticalNavigation);
+export const applicationSwitcher = habitat(ApplicationSwitcher);
 
 if (process.env.NODE_ENV === "development") {
-  _habitat.render({
+  verticalNavigation.render({
     selector: '[data-widget-host="habitat"]',
     defaultProps: {
       footerLinks: [
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === "development") {
     },
     clean: true
   });
-  _habitatApplicationSwitcher.render({
+  applicationSwitcher.render({
     selector: '[data-widget-host="habitat_widget"]',
     defaultProps: {
       footerLinks: [
@@ -70,4 +70,3 @@ if (process.env.NODE_ENV === "development") {
     clean: true
   });
 }
-export default _habitat;
