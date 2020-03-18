@@ -16,10 +16,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "babel-plugin-emotion": "^10.0.29",
-    "fast-async": "^6.3.8",
-    "core-js": "^3.6.4",
     "emotion-theming": "^10.0.27",
+    "core-js": "^3.6.4",
     "preact": "^10.3.2",
     "preact-habitat": "^3.3.0",
     "unfetch": "^4.1.0"
@@ -46,7 +44,9 @@
     "prettier": "^1.19.1",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "babel-plugin-emotion": "^10.0.29",
+    "fast-async": "^6.3.8"
   },
   "browserslist": [
     "IE >= 11"
