@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { Fragment, h } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import { ThemeProvider } from "emotion-theming";
+import defaultTheme from "../utils/defaultTheme";
 import { fetchApplications, fetchTheme, fetchProfile } from "../utils/api";
-import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import AvatarItem from "./AvatarItem";
 import Avatar from "./Avatar";
@@ -50,53 +51,47 @@ const globalLinks = [
   }
 ];
 
-const AvatarItemWrapper = withTheme(
-  styled("div")(({ theme }) => ({
-    color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
-    backgroundColor: theme.primary,
-    padding: "8px 16px 8px 16px",
-    marginBottom: "8px",
-    width: "100%",
-    boxSizing: "border-box"
-  }))
-);
+const AvatarItemWrapper = styled("div")(({ theme }) => ({
+  color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
+  backgroundColor: theme.primary,
+  padding: "8px 16px 8px 16px",
+  marginBottom: "8px",
+  width: "100%",
+  boxSizing: "border-box"
+}));
 
 const LinksWrapper = styled("div")({
   color: "currentColor",
   padding: "8px 16px 8px 16px"
 });
 
-const Button = withTheme(
-  styled("button")(({ theme }) => ({
-    position: "relative",
-    height: "40px",
-    width: "40px",
-    color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
-    backgroundColor: theme.primary,
-    borderRadius: "50%",
-    border: "none",
-    margin: "0",
-    padding: "0",
-    cursor: "pointer"
-  }))
-);
+const Button = styled("button")(({ theme }) => ({
+  position: "relative",
+  height: "40px",
+  width: "40px",
+  color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
+  backgroundColor: theme.primary,
+  borderRadius: "50%",
+  border: "none",
+  margin: "0",
+  padding: "0",
+  cursor: "pointer"
+}));
 
-const Window = withTheme(
-  styled("div")(({ isOpen, theme, orientation }) => ({
-    position: "absolute",
-    display: isOpen ? "flex" : "none",
-    flexDirection: "column",
-    width: "240px",
-    marginBottom: "8px",
-    boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-    overflow: "hidden",
-    borderRadius: "10px",
-    fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
-    color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
-    backgroundColor: theme.background,
-    ...orientation
-  }))
-);
+const Window = styled("div")(({ isOpen, theme, orientation }) => ({
+  position: "absolute",
+  display: isOpen ? "flex" : "none",
+  flexDirection: "column",
+  width: "240px",
+  marginBottom: "8px",
+  boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+  overflow: "hidden",
+  borderRadius: "10px",
+  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
+  color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
+  backgroundColor: theme.background,
+  ...orientation
+}));
 
 const ButtonSvg = () => {
   return (
@@ -235,7 +230,6 @@ const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, profileApiUrl, ori
   useEffect(() => {
     (async () => {
       const apiProfile = await fetchProfile({ getToken, profileApiUrl });
-      console.log(apiProfile);
       setUserInfo(apiProfile);
     })();
   }, [profileApiUrl, getToken]);

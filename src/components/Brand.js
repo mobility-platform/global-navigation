@@ -1,20 +1,17 @@
 import styled from "@emotion/styled";
 import { h } from "preact";
-import { withTheme } from "./Theme";
 
-const Wrapper = withTheme(
-  styled("div")(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "80px",
-    overflow: "hidden",
-    pointerEvents: "none",
-    boxSizing: "border-box",
-    backgroundColor: theme.background
-  }))
-);
+const Wrapper = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  height: "80px",
+  overflow: "hidden",
+  pointerEvents: "none",
+  boxSizing: "border-box",
+  backgroundColor: theme.background
+}));
 
 const Logo = styled("div")(({ isCollapsed }) => ({
   width: isCollapsed ? "60px" : "120px"

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import { ThemeProvider } from "emotion-theming";
+import defaultTheme from "../utils/defaultTheme";
 import AppLinks from "./AppLinks";
 import Avatar from "./Avatar";
 import AvatarItem from "./AvatarItem";
@@ -8,7 +10,6 @@ import Brand from "./Brand";
 import Burger from "./Burger";
 import Links from "./Links";
 import { fetchTheme, fetchApplications, fetchProfile } from "../utils/api";
-import { defaultTheme, ThemeProvider, withTheme } from "./Theme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import CollapsedLink from "./CollapsedLink";
 import { displayName, displayPicture } from "../utils/userInfo";
@@ -52,41 +53,37 @@ const globalLinks = [
   }
 ];
 
-const Collapsed = withTheme(
-  styled("nav")(({ theme }) => ({
-    position: "fixed",
-    top: "0",
-    left: "0",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "60px",
-    height: "100%",
-    paddingBottom: "20px",
-    boxSizing: "border-box",
-    boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
-    background: theme.primary,
-    color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
-    fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
-  }))
-);
+const Collapsed = styled("nav")(({ theme }) => ({
+  position: "fixed",
+  top: "0",
+  left: "0",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "60px",
+  height: "100%",
+  paddingBottom: "20px",
+  boxSizing: "border-box",
+  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
+  background: theme.primary,
+  color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
+  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
+}));
 
-const Extended = withTheme(
-  styled("nav")(({ theme }) => ({
-    position: "fixed",
-    top: "0",
-    left: "0",
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
-    maxWidth: "320px",
-    boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
-    background: theme.background,
-    color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
-    fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
-  }))
-);
+const Extended = styled("nav")(({ theme }) => ({
+  position: "fixed",
+  top: "0",
+  left: "0",
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  height: "100%",
+  maxWidth: "320px",
+  boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
+  background: theme.background,
+  color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
+  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
+}));
 
 const Shadow = styled("div")(({ isCollapsed }) => ({
   position: "fixed",
