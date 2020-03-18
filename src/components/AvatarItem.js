@@ -31,13 +31,16 @@ const Link = styled("a")({
   }
 });
 
-const AvatarItem = ({ children, title, linkLabel, ...rest }) => {
+const AvatarItem = ({ children, title, link }) => {
+  const { label, ...rest } = link;
   return (
     <Wrapper>
       {children}
       <TextWrapper>
         <Title>{title}</Title>
-        <Link {...rest}>{linkLabel}</Link>
+        <Link rel="noopener nofollow" {...rest}>
+          {label}
+        </Link>
       </TextWrapper>
     </Wrapper>
   );

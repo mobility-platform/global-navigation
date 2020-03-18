@@ -7,7 +7,7 @@ describe("VerticalNavigation", () => {
     expect(() => {
       mount(<VerticalNavigation />);
     }).toThrow(
-      "`VerticalNavigation` requires the `apiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+      "`VerticalNavigation` requires the `apiUrl`, `profileApiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
     );
   });
 });
