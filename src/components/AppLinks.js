@@ -52,13 +52,13 @@ const AppLinks = ({ data, isCollapsed, title }) => {
       {data &&
         data.map((link, index) => {
           return isCollapsed ? (
-            <CollapsedLink href={link.href} key={index} tooltip={link.name}>
+            <CollapsedLink rel="noopener nofollow" href={link.href} key={index} tooltip={link.name}>
               <ImageWrapper>
                 <Image src={link.icon} />
               </ImageWrapper>
             </CollapsedLink>
           ) : (
-            <Link href={link.href} key={index}>
+            <Link rel="noopener nofollow" href={link.href} key={index}>
               <ImageWrapper>
                 <Image src={link.icon} />
               </ImageWrapper>

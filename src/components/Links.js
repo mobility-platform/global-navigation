@@ -57,9 +57,16 @@ const Links = ({ data, isCollapsed, hideIcons, title }) => {
         data.map((link, index) => {
           const { icon, label, ...rest } = link;
           return isCollapsed ? (
-            <Icon as={CollapsedLink} key={index} tooltip={label} content={icon} {...rest} />
+            <Icon
+              rel="noopener nofollow"
+              as={CollapsedLink}
+              key={index}
+              tooltip={label}
+              content={icon}
+              {...rest}
+            />
           ) : (
-            <Link key={index} {...rest}>
+            <Link rel="noopener nofollow" key={index} {...rest}>
               {hideIcons ? null : <Icon as={IconWrapper} content={icon} />}
               <Text hideIcons={hideIcons}>{label}</Text>
             </Link>

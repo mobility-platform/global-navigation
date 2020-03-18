@@ -1,55 +1,17 @@
 import styled from "@emotion/styled";
-import { Fragment, h } from "preact";
+import { h, Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { ThemeProvider } from "emotion-theming";
 import defaultTheme from "../utils/defaultTheme";
-import { fetchApplications, fetchTheme, fetchProfile } from "../utils/api";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
-import AvatarItem from "./AvatarItem";
-import Avatar from "./Avatar";
-import Links from "./Links";
+import { fetchTheme, fetchApplications, fetchProfile } from "../utils/api";
+import { displayName, displayPicture } from "../utils/userInfo";
+import getNavigationLinks from "../utils/getNavigationLinks";
 import AppLinks from "./AppLinks";
+import Links from "./Links";
 import InlineLinks from "./InlineLinks";
-import { displayPicture, displayName } from "../utils/userInfo";
-
-const globalLinks = [
-  {
-    href: "#",
-    label: "My Home",
-    icon: `
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="17"
-        fill="none"
-        viewBox="0 0 16 17"
-      >
-        <defs />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M1 6.3L8 1l7 5.3v8.2c0 .8-.7 1.5-1.6 1.5H2.6c-.9 0-1.6-.7-1.6-1.5V6.2z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      `
-  },
-  {
-    href: "#",
-    label: "My Organization",
-    icon: `
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        viewBox="0 0 448 512"
-      >
-        <defs />
-        <path d="M352 320a95.6 95.6 0 00-59.8 20.9l-102.5-64a96.6 96.6 0 000-41.7L292.2 171a96 96 0 10-34-54.3l-102.4 64a96 96 0 100 150.2l102.5 64.2A96.3 96.3 0 00256 416a96 96 0 1096-96z" />
-      </svg>
-      `
-  }
-];
+import Avatar from "./Avatar";
+import AvatarItem from "./AvatarItem";
 
 const AvatarItemWrapper = styled("div")(({ theme }) => ({
   color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
@@ -200,12 +162,22 @@ const defineOrientation = (buttonSize, orientation) => {
   }
 };
 
-const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, profileApiUrl, orientation }) => {
+const ApplicationSwitcher = ({
+  footerLinks,
+  getToken,
+  apiUrl,
+  profileApiUrl,
+  backofficeUrl,
+  orientation
+}) => {
   if (!apiUrl || !getToken || !profileApiUrl) {
     throw new Error(
       "`ApplicationSwitcher` requires the `apiUrl`, `profileApiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
     );
   }
+  console.log(backofficeUrl);
+
+  const { globalLinks, profileLink } = getNavigationLinks(backofficeUrl);
 
   const [theme, setTheme] = useState(defaultTheme);
 
@@ -246,12 +218,7 @@ const ApplicationSwitcher = ({ footerLinks, getToken, apiUrl, profileApiUrl, ori
         </Button>
         <Window isOpen={isOpen} orientation={defineOrientation(buttonSize, orientation)}>
           <AvatarItemWrapper>
-            <AvatarItem
-              title={displayName(userInfo)}
-              linkLabel={"Voir le profil"}
-              href={"#"}
-              target={"_blank"}
-            >
+            <AvatarItem title={displayName(userInfo)} link={profileLink}>
               <Avatar src={displayPicture(userInfo)} size={"40px"} />
             </AvatarItem>
           </AvatarItemWrapper>

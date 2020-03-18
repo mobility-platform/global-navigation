@@ -32,7 +32,9 @@ const InlineLinks = ({ data }) => {
           return (
             <Fragment key={index}>
               {index === 0 ? null : <span>{` - `}</span>}
-              <Link {...rest}>{label}</Link>
+              <Link rel="noopener nofollow" {...rest}>
+                {label}
+              </Link>
             </Fragment>
           );
         })}
