@@ -15,18 +15,23 @@ const IconWrapper = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "20px",
-  height: "20px",
+  width: "22px",
+  height: "22px",
   backgroundColor: "transparent",
   cursor: "pointer",
   color: "currentColor",
   fill: "currentColor",
   stroke: "currentColor",
   boxSizing: "border-box",
-  "&:first-child": {
+  svg: {
     position: "relative",
-    width: "20px",
-    height: "20px"
+    width: "22px",
+    height: "22px"
+  },
+  img: {
+    position: "relative",
+    width: "22px",
+    height: "22px"
   }
 });
 

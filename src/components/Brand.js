@@ -14,7 +14,7 @@ const Wrapper = styled("div")(({ theme }) => ({
 }));
 
 const Logo = styled("div")(({ isCollapsed }) => ({
-  width: isCollapsed ? "60px" : "120px"
+  width: isCollapsed ? "60px" : "122px"
 }));
 
 const Brand = ({ isCollapsed }) => {

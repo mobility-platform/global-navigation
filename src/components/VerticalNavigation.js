@@ -24,7 +24,6 @@ const Collapsed = styled("nav")(({ theme }) => ({
   alignItems: "center",
   width: "60px",
   height: "100%",
-  paddingBottom: "20px",
   boxSizing: "border-box",
   boxShadow: "2px 0 8px -3px rgba(0, 0, 0, .2)",
   background: theme.primary,
@@ -64,7 +63,7 @@ const Content = styled("div")(({ isCollapsed }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: isCollapsed ? "center" : "flex-start",
-  padding: isCollapsed ? "0" : "0 12px"
+  padding: isCollapsed ? "10px 0" : "0 12px"
 }));
 
 const AvatarItemWrapper = styled("div")({

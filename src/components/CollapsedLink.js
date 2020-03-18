@@ -58,12 +58,12 @@ const CollapsedLink = styled("a")(({ theme, tooltip }) => ({
     }
   },
   svg: {
-    width: "20px",
-    height: "20px"
+    width: "22px",
+    height: "22px"
   },
   i: {
-    width: "20px",
-    height: "20px"
+    width: "22px",
+    height: "22px"
   }
 }));
 

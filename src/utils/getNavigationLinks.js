@@ -7,38 +7,12 @@ const getNavigationLinks = baseUrl => {
       {
         href: `${baseUrl}`,
         label: "My Home",
-        icon: `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="17"
-          fill="none"
-          viewBox="0 0 16 17"
-        >
-          <defs />
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 6.3L8 1l7 5.3v8.2c0 .8-.7 1.5-1.6 1.5H2.6c-.9 0-1.6-.7-1.6-1.5V6.2z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        `
+        icon: `<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>`
       },
       {
         href: `${baseUrl}/groups`,
         label: "My Organization",
-        icon: `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          viewBox="0 0 448 512"
-        >
-          <defs />
-          <path d="M352 320a95.6 95.6 0 00-59.8 20.9l-102.5-64a96.6 96.6 0 000-41.7L292.2 171a96 96 0 10-34-54.3l-102.4 64a96 96 0 100 150.2l102.5 64.2A96.3 96.3 0 00256 416a96 96 0 1096-96z" />
-        </svg>
-        `
+        icon: `<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`
       }
     ],
     profileLink: {
