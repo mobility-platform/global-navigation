@@ -1,12 +1,10 @@
 import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import { ThemeProvider } from "emotion-theming";
 import defaultTheme from "../utils/defaultTheme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
-import { fetchTheme, fetchApplications, fetchProfile } from "../utils/api";
 import { displayName, displayPicture } from "../utils/userInfo";
-import getNavigationLinks from "../utils/getNavigationLinks";
 import AppLinks from "./AppLinks";
 import Links from "./Links";
 import InlineLinks from "./InlineLinks";
@@ -16,7 +14,7 @@ import AvatarItem from "./AvatarItem";
 const AvatarItemWrapper = styled("div")(({ theme }) => ({
   color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
   backgroundColor: theme.primary,
-  padding: "8px 16px 8px 16px",
+  padding: "12px 24px 12px 24px",
   marginBottom: "8px",
   width: "100%",
   boxSizing: "border-box"
@@ -38,21 +36,6 @@ const Button = styled("button")(({ theme }) => ({
   margin: "0",
   padding: "0",
   cursor: "pointer"
-}));
-
-const Window = styled("div")(({ isOpen, theme, orientation }) => ({
-  position: "absolute",
-  display: isOpen ? "flex" : "none",
-  flexDirection: "column",
-  width: "240px",
-  marginBottom: "8px",
-  boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-  overflow: "hidden",
-  borderRadius: "10px",
-  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
-  color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
-  backgroundColor: theme.background,
-  ...orientation
 }));
 
 const ButtonSvg = () => {
@@ -136,6 +119,21 @@ const ButtonSvg = () => {
   );
 };
 
+const Window = styled("div")(({ isOpen, theme, orientation }) => ({
+  position: "absolute",
+  display: isOpen ? "flex" : "none",
+  flexDirection: "column",
+  width: "260px",
+  marginBottom: "8px",
+  boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+  overflow: "hidden",
+  borderRadius: "10px",
+  fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
+  color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
+  backgroundColor: theme.background,
+  ...orientation
+}));
+
 const defineOrientation = (buttonSize, orientation) => {
   const gap = 14;
   const basePosition = `0px`;
@@ -163,77 +161,37 @@ const defineOrientation = (buttonSize, orientation) => {
 };
 
 const ApplicationSwitcher = ({
+  applications,
+  userInfo,
   footerLinks,
-  getToken,
-  apiUrl,
-  profileApiUrl,
-  backofficeUrl,
+  globalLinks,
+  profileLink,
   orientation
 }) => {
-  if (!apiUrl || !getToken || !profileApiUrl) {
-    throw new Error(
-      "`ApplicationSwitcher` requires the `apiUrl`, `profileApiUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
-    );
-  }
-  console.log(backofficeUrl);
-
-  const { globalLinks, profileLink } = getNavigationLinks(backofficeUrl);
-
-  const [theme, setTheme] = useState(defaultTheme);
-
-  useEffect(() => {
-    (async () => {
-      const apiTheme = await fetchTheme({ getToken, apiUrl });
-      setTheme(apiTheme);
-    })();
-  }, [apiUrl, getToken]);
-
-  const [applications, setApplications] = useState();
-
-  useEffect(() => {
-    (async () => {
-      const apiApplications = await fetchApplications({ getToken, apiUrl });
-      setApplications(apiApplications);
-    })();
-  }, [apiUrl, getToken]);
-
-  const [userInfo, setUserInfo] = useState({});
-
-  useEffect(() => {
-    (async () => {
-      const apiProfile = await fetchProfile({ getToken, profileApiUrl });
-      setUserInfo(apiProfile);
-    })();
-  }, [profileApiUrl, getToken]);
-
   const [isOpen, setIsOpen] = useState(false);
-
   const buttonSize = 40;
-
   return (
-    <ThemeProvider theme={theme}>
-      <Fragment>
-        <Button size={buttonSize} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-          <ButtonSvg />
-        </Button>
-        <Window isOpen={isOpen} orientation={defineOrientation(buttonSize, orientation)}>
-          <AvatarItemWrapper>
-            <AvatarItem title={displayName(userInfo)} link={profileLink}>
-              <Avatar src={displayPicture(userInfo)} size={"40px"} />
-            </AvatarItem>
-          </AvatarItemWrapper>
-          <LinksWrapper>
-            <Links title={"Global"} data={globalLinks} />
-            <div style={{ marginTop: "8px", width: "100%" }}>
-              <AppLinks title={"Apps"} data={applications} />
-            </div>
-            <div style={{ marginTop: "8px", width: "100%" }}>
-              <InlineLinks data={footerLinks} />
-            </div>
-          </LinksWrapper>
-        </Window>
-      </Fragment>
-    </ThemeProvider>
+    <Fragment>
+      <Button size={buttonSize} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+        <ButtonSvg />
+      </Button>
+      <Window isOpen={isOpen} orientation={defineOrientation(buttonSize, orientation)}>
+        <AvatarItemWrapper>
+          <AvatarItem title={displayName(userInfo)} link={profileLink}>
+            <Avatar src={displayPicture(userInfo)} size={"40px"} />
+          </AvatarItem>
+        </AvatarItemWrapper>
+        <LinksWrapper>
+          <Links title={"Global"} data={globalLinks} />
+          <div style={{ marginTop: "8px", width: "100%" }}>
+            <AppLinks title={"Apps"} data={applications} />
+          </div>
+          <div style={{ marginTop: "8px", width: "100%" }}>
+            <InlineLinks data={footerLinks} />
+          </div>
+        </LinksWrapper>
+      </Window>
+    </Fragment>
   );
 };
 

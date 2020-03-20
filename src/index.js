@@ -3,9 +3,15 @@ import { h } from "preact";
 import habitat from "preact-habitat";
 import VerticalNavigation from "./components/VerticalNavigation";
 import ApplicationSwitcher from "./components/ApplicationSwitcher";
+import GlobalNavigationContainer from "./components/GlobalNavigationContainer";
 
-export const verticalNavigation = habitat(VerticalNavigation);
-export const applicationSwitcher = habitat(ApplicationSwitcher);
+export const verticalNavigation = habitat(props => (
+  <GlobalNavigationContainer as={VerticalNavigation} {...props} />
+));
+
+export const applicationSwitcher = habitat(props => (
+  <GlobalNavigationContainer as={ApplicationSwitcher} {...props} />
+));
 
 if (process.env.NODE_ENV === "development") {
   const defaultProps = {
@@ -37,6 +43,7 @@ if (process.env.NODE_ENV === "development") {
     defaultProps,
     clean: true
   });
+
   applicationSwitcher.render({
     selector: '[data-widget-host="habitat_widget"]',
     defaultProps: {
