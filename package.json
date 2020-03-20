@@ -2,7 +2,7 @@
   "name": "@mobility-platform/global-navigation",
   "version": "2.2.1",
   "main": "dist/main.js",
-  "license": "MIT",
+  "license": "CC-BY-ND-4.0",
   "repository": "mobility-platform/global-navigation",
   "scripts": {
     "build": "webpack -p",
