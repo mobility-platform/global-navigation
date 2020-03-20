@@ -7,7 +7,7 @@ import { TranslationProvider } from "../utils/i18n";
 import getNavigationLinks from "../utils/getNavigationLinks";
 
 const GlobalNavigationContainer = ({ as: Component, ...props }) => {
-  const { footerLinks, getToken, apiUrl, profileApiUrl, backofficeUrl, orientation } = props;
+  const { getToken, apiUrl, profileApiUrl, backofficeUrl, preferredLanguage } = props;
 
   if (!apiUrl || !getToken || !profileApiUrl || !backofficeUrl) {
     throw new Error(
@@ -46,7 +46,7 @@ const GlobalNavigationContainer = ({ as: Component, ...props }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <TranslationProvider>
+      <TranslationProvider preferredLanguage={preferredLanguage}>
         <Component
           applications={applications}
           userInfo={userInfo}

@@ -10,6 +10,7 @@ import Brand from "./Brand";
 import Burger from "./Burger";
 import CollapsedLink from "./CollapsedLink";
 import Links from "./Links";
+import { useTranslation } from "../utils/i18n";
 
 const Collapsed = styled("nav")(({ theme }) => ({
   position: "fixed",
@@ -70,6 +71,7 @@ const AvatarItemWrapper = styled("div")({
 
 const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, profileLink }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const t = useTranslation();
   return (
     <Fragment>
       <Shadow isCollapsed={isCollapsed} onClick={() => setIsCollapsed(true)} />
@@ -89,7 +91,7 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
             }}
           >
             <Links isCollapsed={true} data={footerLinks} />
-            <CollapsedLink aria-label="Open the menu" onClick={() => setIsCollapsed(false)}>
+            <CollapsedLink aria-label={t("Open the menu")} onClick={() => setIsCollapsed(false)}>
               <Avatar src={displayPicture(userInfo)} size={"22px"} />
             </CollapsedLink>
           </div>
@@ -117,12 +119,12 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
           <Burger handler={() => setIsCollapsed(true)} />
         </div>
         <Content>
-          <Links title={"Global"} data={globalLinks} />
+          <Links title={t("Global")} data={globalLinks} />
           <div style={{ marginTop: "12px", width: "100%" }}>
-            <AppLinks title={"Apps"} data={applications} />
+            <AppLinks title={t("Apps")} data={applications} />
           </div>
           <div style={{ marginTop: "auto", width: "100%" }}>
-            <Links title={"Others"} data={footerLinks} />
+            <Links title={t("Others")} data={footerLinks} />
           </div>
         </Content>
         <AvatarItemWrapper>

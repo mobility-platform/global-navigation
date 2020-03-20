@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { h } from "preact";
+import { useTranslation } from "../utils/i18n";
 
 const Wrapper = styled("div")({
   display: "flex"
@@ -33,13 +34,14 @@ const Link = styled("a")({
 
 const AvatarItem = ({ children, title, link }) => {
   const { label, ...rest } = link;
+  const t = useTranslations();
   return (
     <Wrapper>
       {children}
       <TextWrapper>
         <Title>{title}</Title>
         <Link rel="noopener nofollow" {...rest}>
-          {label}
+          {t(label)}
         </Link>
       </TextWrapper>
     </Wrapper>

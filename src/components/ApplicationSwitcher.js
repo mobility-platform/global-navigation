@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import { useState } from "preact/hooks";
-import { ThemeProvider } from "emotion-theming";
-import defaultTheme from "../utils/defaultTheme";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import { displayName, displayPicture } from "../utils/userInfo";
 import AppLinks from "./AppLinks";
-import Links from "./Links";
-import InlineLinks from "./InlineLinks";
 import Avatar from "./Avatar";
 import AvatarItem from "./AvatarItem";
+import InlineLinks from "./InlineLinks";
+import Links from "./Links";
+import { useTranslation } from "../utils/i18n";
 
 const AvatarItemWrapper = styled("div")(({ theme }) => ({
   color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
@@ -170,6 +169,7 @@ const ApplicationSwitcher = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonSize = 40;
+  const t = useTranslation();
   return (
     <Fragment>
       <Button size={buttonSize} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
@@ -182,9 +182,9 @@ const ApplicationSwitcher = ({
           </AvatarItem>
         </AvatarItemWrapper>
         <LinksWrapper>
-          <Links title={"Global"} data={globalLinks} />
+          <Links title={t("Global")} data={globalLinks} />
           <div style={{ marginTop: "8px", width: "100%" }}>
-            <AppLinks title={"Apps"} data={applications} />
+            <AppLinks title={t("Apps")} data={applications} />
           </div>
           <div style={{ marginTop: "8px", width: "100%" }}>
             <InlineLinks data={footerLinks} />
