@@ -34,7 +34,7 @@ const Link = styled("a")({
 
 const AvatarItem = ({ children, title, link }) => {
   const { label, ...rest } = link;
-  const t = useTranslations();
+  const t = useTranslation();
   return (
     <Wrapper>
       {children}
