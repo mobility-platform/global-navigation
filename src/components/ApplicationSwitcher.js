@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
-import { useState } from "preact/hooks";
+import { useState, useRef, useEffect } from "preact/hooks";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import { displayName, displayPicture } from "../utils/userInfo";
 import AppLinks from "./AppLinks";
@@ -170,12 +170,35 @@ const ApplicationSwitcher = ({
   const [isOpen, setIsOpen] = useState(false);
   const buttonSize = 40;
   const t = useTranslation();
+  const modalWindow = useRef(null);
+  const modalButton = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", function(event) {
+      const isClickInside = modalWindow.current.contains(event.target);
+      const isNotButton = modalButton.current.contains(event.target) || modalButton == event.target;
+
+      if (!isClickInside && !isNotButton) {
+        setIsOpen(false);
+      }
+    });
+  }, []);
+
   return (
     <Fragment>
-      <Button size={buttonSize} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+      <Button
+        size={buttonSize}
+        isOpen={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+        ref={modalButton}
+      >
         <ButtonSvg />
       </Button>
-      <Window isOpen={isOpen} orientation={defineOrientation(buttonSize, orientation)}>
+      <Window
+        isOpen={isOpen}
+        orientation={defineOrientation(buttonSize, orientation)}
+        ref={modalWindow}
+      >
         <AvatarItemWrapper>
           <AvatarItem title={displayName(userInfo)} link={profileLink}>
             <Avatar src={displayPicture(userInfo)} size={"40px"} />
