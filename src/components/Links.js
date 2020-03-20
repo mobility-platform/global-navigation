@@ -3,6 +3,7 @@ import { h } from "preact";
 import Icon from "./Icon";
 import Link from "./Link";
 import CollapsedLink from "./CollapsedLink";
+import { useTranslation } from "../utils/i18n";
 
 const Wrapper = styled("div")({
   display: "flex",
@@ -55,6 +56,7 @@ const Title = styled("div")({
 });
 
 const Links = ({ data, isCollapsed, hideIcons, title }) => {
+  const t = useTranslation();
   return (
     <Wrapper>
       {data && title && !isCollapsed && <Title>{title}</Title>}
@@ -66,14 +68,14 @@ const Links = ({ data, isCollapsed, hideIcons, title }) => {
               rel="noopener nofollow"
               as={CollapsedLink}
               key={index}
-              tooltip={label}
+              tooltip={t(label)}
               content={icon}
               {...rest}
             />
           ) : (
             <Link rel="noopener nofollow" key={index} {...rest}>
               {hideIcons ? null : <Icon as={IconWrapper} content={icon} />}
-              <Text hideIcons={hideIcons}>{label}</Text>
+              <Text hideIcons={hideIcons}>{t(label)}</Text>
             </Link>
           );
         })}

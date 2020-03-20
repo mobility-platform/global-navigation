@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { h, Fragment } from "preact";
 import CollapsedLink from "./CollapsedLink";
+import { useTranslation } from "../utils/i18n";
 
 const BurgerWrapper = styled("button")({
   position: "relative",
@@ -32,10 +33,11 @@ const BurgerIcon = styled("div")({
 });
 
 const Burger = ({ handler, isCollapsed }) => {
+  const t = useTranslation();
   return (
     <Fragment>
       {isCollapsed ? (
-        <CollapsedLink aria-label="Open the menu" onClick={() => handler()}>
+        <CollapsedLink aria-label={t("Open the menu")} onClick={() => handler()}>
           <BurgerIcon>
             <svg
               stroke="currentColor"
@@ -55,7 +57,7 @@ const Burger = ({ handler, isCollapsed }) => {
           </BurgerIcon>
         </CollapsedLink>
       ) : (
-        <BurgerWrapper aria-label="Close the menu" onClick={() => handler()}>
+        <BurgerWrapper aria-label={t("Close the menu")} onClick={() => handler()}>
           <BurgerIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"
