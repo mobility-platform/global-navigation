@@ -13,7 +13,7 @@ function App() {
         backofficeUrl: "https://mybackoffice.com"
       }
     });
-  }, []);
+  }, [getOAuthToken]);
 
   return (
     <div style={{ marginLeft: "60px" }}>
