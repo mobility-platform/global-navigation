@@ -124,7 +124,7 @@ const ButtonSvg = () => {
 
 const Window = styled("div")(({ isOpen, theme, orientation }) => ({
   position: "absolute",
-  display: isOpen ? "flex" : "none",
+  opacity: isOpen ? "1" : "0",
   flexDirection: "column",
   width: "260px",
   marginBottom: "8px",
@@ -134,6 +134,7 @@ const Window = styled("div")(({ isOpen, theme, orientation }) => ({
   fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
   color: isTextLegibleOverBackground("#ffffff", theme.background) ? "#ffffff" : "#333333",
   backgroundColor: theme.background,
+  transition: "opacity 300ms",
   ...orientation
 }));
 
@@ -161,6 +162,20 @@ const defineOrientation = (buttonSize, orientation) => {
     default:
       return { bottom: pushedPosition, right: basePosition };
   }
+};
+
+const menuToggle = (handlerState, isOpen, modalReference) => {
+  console.log(isOpen);
+  if (isOpen) {
+    console.log(modalReference.current);
+    setTimeout(function() {
+      modalReference.current.style.display = "none";
+    }, 400);
+  }
+  setTimeout(function() {
+    modalReference.current.style.display = "flex";
+  }, 400);
+  handlerState(!isOpen);
 };
 
 const ApplicationSwitcher = ({
@@ -193,7 +208,7 @@ const ApplicationSwitcher = ({
       <Button
         size={buttonSize}
         isOpen={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => menuToggle(setIsOpen, isOpen, modalWindow)}
         aria-label={isOpen ? t("Close the menu") : t("Open the menu")}
         ref={modalButton}
       >
