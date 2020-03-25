@@ -33,5 +33,9 @@ module.exports = {
       template: "./src/index.ejs"
     }),
     new Dotenv()
-  ]
+  ],
+  output: {
+    library: "globalnavigation",
+    libraryTarget: "umd"
+  }
 };
