@@ -18,7 +18,7 @@ const Link = styled("a")({
   textDecoration: "none",
   color: "currentColor",
   fontSize: "12px",
-  "&:hover": {
+  "&:hover, &:focus": {
     textDecoration: "underline"
   }
 });
