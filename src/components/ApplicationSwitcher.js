@@ -8,6 +8,7 @@ import Avatar from "./Avatar";
 import AvatarItem from "./AvatarItem";
 import InlineLinks from "./InlineLinks";
 import Links from "./Links";
+import ButtonIcon from "./ButtonIcon";
 import { useTranslation } from "../utils/i18n";
 
 const AvatarItemWrapper = styled("div")(({ theme }) => ({
@@ -34,7 +35,10 @@ const Button = styled("button")(({ theme }) => ({
   border: "none",
   margin: "0",
   padding: "0",
-  cursor: "pointer"
+  cursor: "pointer",
+  "&:hover, &:focus": {
+    boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
+  }
 }));
 
 const ButtonSvg = () => {
@@ -190,14 +194,19 @@ const ApplicationSwitcher = ({
         size={buttonSize}
         isOpen={isOpen}
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? t("Close the menu") : t("Open the menu")}
         ref={modalButton}
       >
+        <div style={{ position: "absolute", top: "15%", right: "25%" }}>
+          <ButtonIcon isOpen={isOpen} />
+        </div>
         <ButtonSvg />
       </Button>
       <Window
         isOpen={isOpen}
         orientation={defineOrientation(buttonSize, orientation)}
         ref={modalWindow}
+        aria-hidden={!isOpen}
       >
         <AvatarItemWrapper>
           <AvatarItem title={displayName(userInfo)} link={profileLink}>
