@@ -76,7 +76,12 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
     <Fragment>
       <Shadow isCollapsed={isCollapsed} onClick={() => setIsCollapsed(true)} />
 
-      <Collapsed>
+      <Collapsed
+        style={{
+          visibility: isCollapsed ? "visible" : "hidden"
+        }}
+        aria-hidden={!isCollapsed}
+      >
         <Brand isCollapsed={true} />
         <Content isCollapsed={true}>
           <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
@@ -91,7 +96,12 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
             }}
           >
             <Links isCollapsed={true} data={footerLinks} />
-            <CollapsedLink aria-label={t("Open the menu")} onClick={() => setIsCollapsed(false)}>
+            <CollapsedLink
+              as={"button"}
+              style={{ border: "none", padding: 0 }}
+              aria-label={t("Open the menu")}
+              onClick={() => setIsCollapsed(false)}
+            >
               <Avatar src={displayPicture(userInfo)} size={"22px"} />
             </CollapsedLink>
           </div>
@@ -103,9 +113,11 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
           transform: isCollapsed ? "translateX(-100%)" : "translateX(0)",
           opacity: isCollapsed ? "0" : "1",
           transition: isCollapsed
-            ? "transform 200ms, opacity 0ms 200ms"
-            : "opacity 0ms, transform 200ms"
+            ? "transform 200ms, opacity 0ms 200ms, visibility 0ms 200ms"
+            : "opacity 0ms, transform 200ms",
+          visibility: isCollapsed ? "hidden" : "visible"
         }}
+        aria-hidden={isCollapsed}
       >
         <Brand />
         <div

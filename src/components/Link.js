@@ -23,7 +23,7 @@ const Link = styled("a")(({ theme }) => ({
     backgroundColor: theme.primary,
     opacity: "0"
   },
-  "&:hover": {
+  "&:hover, &:focus": {
     color: "currentColor",
     "&::before": {
       opacity: "0.05"
