@@ -165,9 +165,7 @@ const defineOrientation = (buttonSize, orientation) => {
 };
 
 const menuToggle = (handlerState, isOpen, modalReference) => {
-  console.log(isOpen);
   if (isOpen) {
-    console.log(modalReference.current);
     setTimeout(function() {
       modalReference.current.style.display = "none";
     }, 400);
