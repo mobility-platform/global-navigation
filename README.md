@@ -1,7 +1,7 @@
 # Global Navigation
 
 Global navigation is part of the Michelin Mobility Platform. The navigation is used to travel between Mobility Platform applications and can be used on any website.
-We have worked to make the package as light and independent as possible, check it [Bundlephobia](https://bundlephobia.com/result?p=@mobility-platform/global-navigation)
+We have worked to make the package as light and independent as possible, check at [Bundlephobia](https://bundlephobia.com/result?p=@mobility-platform/global-navigation)
 
 ## Installation
 
@@ -20,7 +20,7 @@ https://unpkg.com/@mobility-platform/global-navigation
 ## Usage
 
 After adding the package you have two ways to display the global navigation and for that two components.
-You can see usage exemples in `/exemples` folder in the repository.
+You can see usage exemples in example section.
 
 ##### Vertical Navigation
 
@@ -64,9 +64,15 @@ applicationSwitcher.render({
 
 More information about the Mobility Platform can be find here : https://mobility-platform-docs.netlify.com/getting-started
 
-## Exemples
+## Examples
 
-You can find examples of integrations in the `/examples` folder of this repository
+##### Vertical Navigation with React
+
+https://codesandbox.io/s/mobility-platformglobal-navigationreact-verticalnavigation-9y9j9
+
+##### Application Switcher with React
+
+https://codesandbox.io/s/mobility-platformglobal-navigationreact-applicationswitcher-7zhcx
 
 ## License
 
