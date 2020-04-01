@@ -1,9 +1,8 @@
-import "preact/debug";
 import { h } from "preact";
 import habitat from "preact-habitat";
-import VerticalNavigation from "./components/VerticalNavigation";
 import ApplicationSwitcher from "./components/ApplicationSwitcher";
 import GlobalNavigationContainer from "./components/GlobalNavigationContainer";
+import VerticalNavigation from "./components/VerticalNavigation";
 
 export const verticalNavigation = habitat(props => (
   <GlobalNavigationContainer as={VerticalNavigation} {...props} />
