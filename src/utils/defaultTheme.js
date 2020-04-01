@@ -1,6 +1,4 @@
-const defaultTheme = {
-  color: "#eef5ff",
+export default {
   primary: "#27509b",
   background: "#FFFFFF"
 };
-export default defaultTheme;
