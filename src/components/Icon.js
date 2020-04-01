@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "preact/hooks";
 import { h } from "preact";
+import { useEffect, useRef } from "preact/hooks";
 
 const Icon = ({ as: Component, content, ...props }) => {
   const iconRef = useRef();

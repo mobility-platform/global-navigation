@@ -1,8 +1,8 @@
-import { h } from "preact";
 import { mount } from "enzyme";
+import { h } from "preact";
+import ApplicationSwitcher from "./ApplicationSwitcher";
 import GlobalNavigationContainer from "./GlobalNavigationContainer";
 import VerticalNavigation from "./VerticalNavigation";
-import ApplicationSwitcher from "./ApplicationSwitcher";
 
 describe("VerticalNavigation", () => {
   it("should throw and link to documentation when the component is launched without required props", () => {

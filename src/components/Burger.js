@@ -1,6 +1,7 @@
 import styled from "@emotion/styled-base";
-import CollapsedLink from "./CollapsedLink";
+import { Fragment, h } from "preact";
 import { useTranslation } from "../utils/i18n";
+import CollapsedLink from "./CollapsedLink";
 
 const BurgerWrapper = styled("button")({
   position: "relative",

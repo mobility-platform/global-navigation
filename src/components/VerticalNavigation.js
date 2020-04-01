@@ -1,5 +1,7 @@
 import styled from "@emotion/styled-base";
+import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
+import { useTranslation } from "../utils/i18n";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import { displayName, displayPicture } from "../utils/userInfo";
 import AppLinks from "./AppLinks";
@@ -9,7 +11,6 @@ import Brand from "./Brand";
 import Burger from "./Burger";
 import CollapsedLink from "./CollapsedLink";
 import Links from "./Links";
-import { useTranslation } from "../utils/i18n";
 
 const Collapsed = styled("nav")(({ theme }) => ({
   position: "fixed",

@@ -1,13 +1,15 @@
 import styled from "@emotion/styled-base";
+import { Fragment, h } from "preact";
+import { useEffect, useRef, useState } from "preact/hooks";
+import { useTranslation } from "../utils/i18n";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import { displayName, displayPicture } from "../utils/userInfo";
 import AppLinks from "./AppLinks";
 import Avatar from "./Avatar";
 import AvatarItem from "./AvatarItem";
+import ButtonIcon from "./ButtonIcon";
 import InlineLinks from "./InlineLinks";
 import Links from "./Links";
-import ButtonIcon from "./ButtonIcon";
-import { useTranslation } from "../utils/i18n";
 
 const AvatarItemWrapper = styled("div")(({ theme }) => ({
   color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",

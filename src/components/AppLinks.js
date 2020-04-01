@@ -1,7 +1,7 @@
 import styled from "@emotion/styled-base";
 import { h } from "preact";
-import Link from "./Link";
 import CollapsedLink from "./CollapsedLink";
+import Link from "./Link";
 
 const Wrapper = styled("div")({
   display: "flex",
