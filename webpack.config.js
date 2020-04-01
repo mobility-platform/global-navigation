@@ -1,3 +1,4 @@
+/* eslint-env node */
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
@@ -7,6 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
+    library: "globalnavigation",
     libraryTarget: "umd"
   },
   module: {
@@ -33,9 +35,5 @@ module.exports = {
       template: "./src/index.ejs"
     }),
     new Dotenv()
-  ],
-  output: {
-    library: "globalnavigation",
-    libraryTarget: "umd"
-  }
+  ]
 };
