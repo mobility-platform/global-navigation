@@ -1,8 +1,8 @@
 import styled from "@emotion/styled-base";
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 
-const Wrapper = styled("div")(({ theme }) => ({
+const InlineLinksWrapper = styled("div")(({ theme }) => ({
   boxSizing: "border-box",
   width: "100%",
   padding: "8px",
@@ -13,7 +13,7 @@ const Wrapper = styled("div")(({ theme }) => ({
     : "1px solid rgba(0, 0, 0, .1)"
 }));
 
-const Link = styled("a")({
+export const InlineLink = styled("a")({
   display: "inline-block",
   textDecoration: "none",
   color: "currentColor",
@@ -23,23 +23,12 @@ const Link = styled("a")({
   }
 });
 
-const InlineLinks = ({ data }) => {
-  return (
-    <Wrapper>
-      {data &&
-        data.map((link, index) => {
-          const { label, ...rest } = link;
-          return (
-            <Fragment key={index}>
-              {index === 0 ? null : <span>{` - `}</span>}
-              <Link rel="noopener nofollow" {...rest}>
-                {label}
-              </Link>
-            </Fragment>
-          );
-        })}
-    </Wrapper>
-  );
+InlineLink.defaultProps = {
+  rel: "noopener nofollow"
+};
+
+const InlineLinks = ({ children }) => {
+  return <InlineLinksWrapper>{children}</InlineLinksWrapper>;
 };
 
 export default InlineLinks;

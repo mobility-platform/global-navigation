@@ -1,6 +1,6 @@
 import styled from "@emotion/styled-base";
 
-const Link = styled("a")(({ theme }) => ({
+export const Link = styled("a")(({ theme }) => ({
   position: "relative",
   display: "flex",
   alignItems: "center",
@@ -11,6 +11,7 @@ const Link = styled("a")(({ theme }) => ({
   boxSizing: "border-box",
   padding: "8px",
   marginBottom: "4px",
+  fontSize: "14px",
   "&::before": {
     content: "''",
     position: "absolute",
@@ -29,4 +30,33 @@ const Link = styled("a")(({ theme }) => ({
     }
   }
 }));
-export default Link;
+
+Link.defaultProps = {
+  rel: "noopener nofollow"
+};
+
+export const LinkIcon = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "22px",
+  height: "22px",
+  backgroundColor: "transparent",
+  cursor: "pointer",
+  color: "currentColor",
+  fill: "currentColor",
+  stroke: "currentColor",
+  boxSizing: "border-box",
+  marginRight: 12,
+  "&:last-child": {
+    marginRight: 0
+  },
+  "svg, img": {
+    position: "relative",
+    width: "22px",
+    height: "22px"
+  },
+  img: {
+    borderRadius: "50%"
+  }
+});

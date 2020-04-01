@@ -1,7 +1,6 @@
 import { ThemeContext } from "@emotion/core";
 import { h } from "preact";
 import defaultTheme from "../utils/defaultTheme";
-import getNavigationLinks from "../utils/getNavigationLinks";
 import { TranslationProvider } from "../utils/i18n";
 import { useAuthenticatedFetch } from "../utils/useAuthenticatedFetch";
 
@@ -24,16 +23,13 @@ const GlobalNavigationContainer = ({
   const applications = useAuthenticatedFetch(getToken, `${apiUrl}/applications`);
   const userInfo = useAuthenticatedFetch(getToken, profileApiUrl);
 
-  const { globalLinks, profileLink } = getNavigationLinks(backofficeUrl);
-
   return (
     <ThemeContext.Provider value={theme}>
       <TranslationProvider value={preferredLanguage}>
         <Component
           applications={applications}
           userInfo={userInfo}
-          globalLinks={globalLinks}
-          profileLink={profileLink}
+          backofficeUrl={backofficeUrl}
           footerLinks={footerLinks}
           orientation={orientation}
         />

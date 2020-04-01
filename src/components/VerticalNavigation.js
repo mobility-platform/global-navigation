@@ -1,16 +1,18 @@
 import styled from "@emotion/styled-base";
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import { useState } from "preact/hooks";
 import { useTranslation } from "../utils/i18n";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
+import { FiHome, FiUsers } from "../utils/SVG";
 import { displayName, displayPicture } from "../utils/userInfo";
-import AppLinks from "./AppLinks";
 import Avatar from "./Avatar";
-import AvatarItem from "./AvatarItem";
 import Brand from "./Brand";
 import Burger from "./Burger";
 import CollapsedLink from "./CollapsedLink";
-import Links from "./Links";
+import Icon from "./Icon";
+import { Link, LinkIcon } from "./Link";
+import NavLinks from "./NavLinks";
+import UserProfile from "./UserProfile";
 
 const Collapsed = styled("nav")(({ theme }) => ({
   position: "fixed",
@@ -63,17 +65,17 @@ const Content = styled("div")(({ isCollapsed }) => ({
   padding: isCollapsed ? "10px 0" : "0 12px"
 }));
 
-const AvatarItemWrapper = styled("div")({
+const UserProfileWrapper = styled("div")({
   padding: "8px 16px 8px 16px",
   marginTop: "8px",
   borderTop: "1px solid rgba(0, 0, 0, .1)"
 });
 
-const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, profileLink }) => {
+const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const t = useTranslation();
   return (
-    <Fragment>
+    <>
       <Shadow isCollapsed={isCollapsed} onClick={() => setIsCollapsed(true)} />
 
       <Collapsed
@@ -85,8 +87,35 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
         <Brand isCollapsed={true} />
         <Content isCollapsed={true}>
           <Burger isCollapsed={true} handler={() => setIsCollapsed(false)} />
-          <Links isCollapsed={true} data={globalLinks} />
-          <AppLinks isCollapsed={true} data={applications} />
+
+          {/* Global links */}
+          <NavLinks>
+            <CollapsedLink tooltip={t("My Home")} href={backofficeUrl}>
+              <FiHome />
+            </CollapsedLink>
+            <CollapsedLink tooltip={t("My Organization")} href={`${backofficeUrl}/groups`}>
+              <FiUsers />
+            </CollapsedLink>
+          </NavLinks>
+
+          {/* Application links */}
+          {applications && (
+            <NavLinks>
+              {applications.map(application => (
+                <CollapsedLink
+                  key={application.id}
+                  tooltip={application.name}
+                  href={application.url}
+                >
+                  <LinkIcon>
+                    <img src={application.icon} alt={application.name} />
+                  </LinkIcon>
+                </CollapsedLink>
+              ))}
+            </NavLinks>
+          )}
+
+          {/* Footer links */}
           <div
             style={{
               marginTop: "auto",
@@ -95,10 +124,17 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
               flexDirection: "column"
             }}
           >
-            <Links isCollapsed={true} data={footerLinks} />
+            {footerLinks && (
+              <NavLinks>
+                {footerLinks.map(({ label, icon, ...rest }, index) => (
+                  <CollapsedLink key={index} tooltip={label} {...rest}>
+                    <Icon as={LinkIcon} content={icon} />
+                  </CollapsedLink>
+                ))}
+              </NavLinks>
+            )}
             <CollapsedLink
-              as={"button"}
-              style={{ border: "none", padding: 0 }}
+              as="button"
               aria-label={t("Open the menu")}
               onClick={() => setIsCollapsed(false)}
             >
@@ -131,21 +167,59 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
           <Burger handler={() => setIsCollapsed(true)} />
         </div>
         <Content>
-          <Links title={t("Global")} data={globalLinks} />
+          {/* Global links */}
+          <NavLinks title={t("Global")}>
+            <Link rel="noopener nofollow" href={backofficeUrl}>
+              <LinkIcon>
+                <FiHome />
+              </LinkIcon>
+              <span>{t("My Home")}</span>
+            </Link>
+            <Link rel="noopener nofollow" href={`${backofficeUrl}/groups`}>
+              <LinkIcon>
+                <FiUsers />
+              </LinkIcon>
+              <span>{t("My Organization")}</span>
+            </Link>
+          </NavLinks>
+
+          {/* Application links */}
           <div style={{ marginTop: "12px", width: "100%" }}>
-            <AppLinks title={t("Apps")} data={applications} />
+            {applications && (
+              <NavLinks title={t("Apps")}>
+                {applications.map(application => (
+                  <Link key={application.id} href={application.url}>
+                    <LinkIcon>
+                      <img src={application.icon} alt={application.name} />
+                    </LinkIcon>
+                    <span>{application.name}</span>
+                  </Link>
+                ))}
+              </NavLinks>
+            )}
           </div>
-          <div style={{ marginTop: "auto", width: "100%" }}>
-            <Links title={t("Others")} data={footerLinks} />
-          </div>
+
+          {/* Footer links */}
+          {footerLinks && (
+            <div style={{ marginTop: "auto", width: "100%" }}>
+              <NavLinks title={t("Others")}>
+                {footerLinks.map(({ label, icon, ...rest }, index) => (
+                  <Link key={index} {...rest}>
+                    <Icon as={LinkIcon} content={icon} />
+                    <span>{label}</span>
+                  </Link>
+                ))}
+              </NavLinks>
+            </div>
+          )}
         </Content>
-        <AvatarItemWrapper>
-          <AvatarItem title={displayName(userInfo)} link={profileLink}>
+        <UserProfileWrapper>
+          <UserProfile title={displayName(userInfo)} link={`${backofficeUrl}/users/me`}>
             <Avatar src={displayPicture(userInfo)} size={40} />
-          </AvatarItem>
-        </AvatarItemWrapper>
+          </UserProfile>
+        </UserProfileWrapper>
       </Extended>
-    </Fragment>
+    </>
   );
 };
 

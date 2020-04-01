@@ -1,7 +1,7 @@
 export const displayName = userInfo => {
-  return userInfo.name;
+  return userInfo?.name;
 };
 
 export const displayPicture = userInfo => {
-  return userInfo.picture;
+  return userInfo?.picture;
 };

@@ -1,17 +1,18 @@
 import styled from "@emotion/styled-base";
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { useTranslation } from "../utils/i18n";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
+import { FiHome, FiUsers } from "../utils/SVG";
 import { displayName, displayPicture } from "../utils/userInfo";
-import AppLinks from "./AppLinks";
 import Avatar from "./Avatar";
-import AvatarItem from "./AvatarItem";
 import ButtonIcon from "./ButtonIcon";
-import InlineLinks from "./InlineLinks";
-import Links from "./Links";
+import InlineLinks, { InlineLink } from "./InlineLinks";
+import { Link, LinkIcon } from "./Link";
+import NavLinks from "./NavLinks";
+import UserProfile from "./UserProfile";
 
-const AvatarItemWrapper = styled("div")(({ theme }) => ({
+const UserProfileWrapper = styled("div")(({ theme }) => ({
   color: isTextLegibleOverBackground("#ffffff", theme.primary) ? "#ffffff" : "#333333",
   backgroundColor: theme.primary,
   padding: "12px 24px 12px 24px",
@@ -122,7 +123,7 @@ const ButtonSvg = () => {
   );
 };
 
-const Window = styled("div")(({ isOpen, theme, orientation }) => ({
+const Modal = styled("div")(({ isOpen, theme, orientation }) => ({
   position: "absolute",
   opacity: isOpen ? "1" : "0",
   flexDirection: "column",
@@ -180,8 +181,7 @@ const ApplicationSwitcher = ({
   applications,
   userInfo,
   footerLinks,
-  globalLinks,
-  profileLink,
+  backofficeUrl,
   orientation
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -202,7 +202,7 @@ const ApplicationSwitcher = ({
   }, []);
 
   return (
-    <Fragment>
+    <>
       <Button
         size={buttonSize}
         isOpen={isOpen}
@@ -215,28 +215,68 @@ const ApplicationSwitcher = ({
         </div>
         <ButtonSvg />
       </Button>
-      <Window
+      <Modal
         isOpen={isOpen}
         orientation={defineOrientation(buttonSize, orientation)}
         ref={modalWindow}
         aria-hidden={!isOpen}
       >
-        <AvatarItemWrapper>
-          <AvatarItem title={displayName(userInfo)} link={profileLink}>
+        <UserProfileWrapper>
+          <UserProfile title={displayName(userInfo)} link={`${backofficeUrl}/users/me`}>
             <Avatar src={displayPicture(userInfo)} size={40} />
-          </AvatarItem>
-        </AvatarItemWrapper>
+          </UserProfile>
+        </UserProfileWrapper>
         <LinksWrapper>
-          <Links title={t("Global")} data={globalLinks} />
-          <div style={{ marginTop: "8px", width: "100%" }}>
-            <AppLinks title={t("Apps")} data={applications} />
-          </div>
-          <div style={{ marginTop: "8px", width: "100%" }}>
-            <InlineLinks data={footerLinks} />
-          </div>
+          {/* Global links */}
+          <NavLinks title={t("Global")}>
+            <Link href={backofficeUrl}>
+              <LinkIcon>
+                <FiHome />
+              </LinkIcon>
+              <span>{t("My Home")}</span>
+            </Link>
+            <Link href={`${backofficeUrl}/groups`}>
+              <LinkIcon>
+                <FiUsers />
+              </LinkIcon>
+              <span>{t("My Organization")}</span>
+            </Link>
+          </NavLinks>
+
+          {/* Application links */}
+          {applications && (
+            <div style={{ marginTop: "8px", width: "100%" }}>
+              <NavLinks title={t("Apps")}>
+                {applications.map(application => (
+                  <Link key={application.id} href={application.url}>
+                    <LinkIcon>
+                      <img src={application.icon} alt={application.name} />
+                    </LinkIcon>
+                    <span>{application.name}</span>
+                  </Link>
+                ))}
+              </NavLinks>
+            </div>
+          )}
+
+          {/* Footer links */}
+          {footerLinks && (
+            <div style={{ marginTop: "8px", width: "100%" }}>
+              <InlineLinks>
+                {footerLinks.map(({ label, ...rest }, index) => (
+                  <>
+                    {index !== 0 && <span> - </span>}
+                    <InlineLink key={index} {...rest}>
+                      {label}
+                    </InlineLink>
+                  </>
+                ))}
+              </InlineLinks>
+            </div>
+          )}
         </LinksWrapper>
-      </Window>
-    </Fragment>
+      </Modal>
+    </>
   );
 };
 

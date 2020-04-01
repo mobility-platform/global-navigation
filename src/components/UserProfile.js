@@ -2,25 +2,25 @@ import styled from "@emotion/styled-base";
 import { h } from "preact";
 import { useTranslation } from "../utils/i18n";
 
-const Wrapper = styled("div")({
+const UserProfileWrapper = styled("div")({
   display: "flex"
 });
 
-const TextWrapper = styled("div")({
+const UserInformation = styled("div")({
   flex: 1,
   display: "flex",
   flexDirection: "column",
   marginLeft: "10px"
 });
 
-const Title = styled("span")({
+const UserName = styled("span")({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontWeight: "600",
   color: "currentColor"
 });
 
-const Link = styled("a")({
+const UserProfileLink = styled("a")({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontSize: "12px",
@@ -32,20 +32,19 @@ const Link = styled("a")({
   }
 });
 
-const AvatarItem = ({ children, title, link }) => {
-  const { label, ...rest } = link;
+const UserProfile = ({ children, title, link }) => {
   const t = useTranslation();
   return (
-    <Wrapper>
+    <UserProfileWrapper>
       {children}
-      <TextWrapper>
-        <Title>{title}</Title>
-        <Link rel="noopener nofollow" {...rest}>
-          {t(label)}
-        </Link>
-      </TextWrapper>
-    </Wrapper>
+      <UserInformation>
+        <UserName>{title}</UserName>
+        <UserProfileLink href={link} rel="noopener nofollow">
+          {t("View my profile")}
+        </UserProfileLink>
+      </UserInformation>
+    </UserProfileWrapper>
   );
 };
 
-export default AvatarItem;
+export default UserProfile;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled-base";
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import { useTranslation } from "../utils/i18n";
 import CollapsedLink from "./CollapsedLink";
 
@@ -35,7 +35,7 @@ const BurgerIcon = styled("div")({
 const Burger = ({ handler, isCollapsed }) => {
   const t = useTranslation();
   return (
-    <Fragment>
+    <>
       {isCollapsed ? (
         <CollapsedLink
           as={"button"}
@@ -82,7 +82,7 @@ const Burger = ({ handler, isCollapsed }) => {
           </BurgerIcon>
         </BurgerWrapper>
       )}
-    </Fragment>
+    </>
   );
 };
 

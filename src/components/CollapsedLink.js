@@ -16,6 +16,8 @@ const CollapsedLink = styled("a")(({ theme, tooltip }) => ({
   stroke: "currentColor",
   boxSizing: "border-box",
   margin: "4px 0",
+  padding: 0,
+  border: 0,
   textDecoration: "none",
   "&::before": {
     content: "''",
