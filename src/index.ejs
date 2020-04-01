@@ -7,21 +7,50 @@
 
     <style>
       .preview {
-        position: relative;
+        position: fixed;
         width: 60px;
         height: 100%;
       }
 
       .preview-widget {
-        position: absolute;
+        position: fixed;
+      }
+
+      .preview-widget--top {
         top: 50px;
+      }
+
+      .preview-widget--right {
         right: 50px;
+      }
+
+      .preview-widget--bottom {
+        bottom: 50px;
+      }
+
+      .preview-widget--left {
+        left: 110px;
       }
     </style>
   </head>
 
   <body>
+    <div
+      data-widget-host="application-switcher-top-right"
+      class="preview-widget preview-widget--top preview-widget--right"
+    ></div>
+    <div
+      data-widget-host="application-switcher-top-left"
+      class="preview-widget preview-widget--top preview-widget--left"
+    ></div>
+    <div
+      data-widget-host="application-switcher-bottom-right"
+      class="preview-widget preview-widget--bottom preview-widget--right"
+    ></div>
+    <div
+      data-widget-host="application-switcher-bottom-left"
+      class="preview-widget preview-widget--bottom preview-widget--left"
+    ></div>
     <div data-widget-host="habitat" class="preview"></div>
-    <div data-widget-host="habitat_widget" class="preview-widget"></div>
   </body>
 </html>

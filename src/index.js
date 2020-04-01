@@ -47,7 +47,40 @@ if (process.env.NODE_ENV !== "production") {
     selector: '[data-widget-host="habitat_widget"]',
     defaultProps: {
       ...defaultProps,
-      orientation: "left bottom"
+      orientation: "bottom left"
+    },
+    clean: true
+  });
+
+  applicationSwitcher.render({
+    selector: '[data-widget-host="application-switcher-top-right"]',
+    defaultProps: {
+      ...defaultProps,
+      orientation: "bottom left"
+    },
+    clean: true
+  });
+  applicationSwitcher.render({
+    selector: '[data-widget-host="application-switcher-top-left"]',
+    defaultProps: {
+      ...defaultProps,
+      orientation: "bottom right"
+    },
+    clean: true
+  });
+  applicationSwitcher.render({
+    selector: '[data-widget-host="application-switcher-bottom-right"]',
+    defaultProps: {
+      ...defaultProps,
+      orientation: "top left"
+    },
+    clean: true
+  });
+  applicationSwitcher.render({
+    selector: '[data-widget-host="application-switcher-bottom-left"]',
+    defaultProps: {
+      ...defaultProps,
+      orientation: "top right"
     },
     clean: true
   });
