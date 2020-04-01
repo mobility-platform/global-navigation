@@ -5,13 +5,15 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended"
   ],
   "plugins": ["react-hooks"],
   "parser": "babel-eslint",
   "settings": {
     "react": {
-      "pragma": "h"
+      "pragma": "h",
+      "version": "latest"
     }
   },
   "rules": {
