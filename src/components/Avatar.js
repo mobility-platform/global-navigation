@@ -1,26 +1,23 @@
 import styled from "@emotion/styled-base";
 import { h } from "preact";
 
-const Wrapper = styled("div")(({ size }) => ({
+const AvatarWrapper = styled("div")(({ size }) => ({
   position: "relative",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
   width: size,
   height: size,
   borderRadius: "50%",
   overflow: "hidden"
 }));
 
-const Image = styled("img")({
-  flex: 1
+const AvatarImage = styled("img")({
+  width: "100%"
 });
 
-const Avatar = ({ src, size = "45px" }) => {
+const Avatar = ({ src, size }) => {
   return (
-    <Wrapper size={size}>
-      <Image src={src} />
-    </Wrapper>
+    <AvatarWrapper size={size}>
+      <AvatarImage src={src} />
+    </AvatarWrapper>
   );
 };
 

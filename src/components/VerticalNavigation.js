@@ -101,7 +101,7 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
               aria-label={t("Open the menu")}
               onClick={() => setIsCollapsed(false)}
             >
-              <Avatar src={displayPicture(userInfo)} size={"22px"} />
+              <Avatar src={displayPicture(userInfo)} size={22} />
             </CollapsedLink>
           </div>
         </Content>
@@ -140,7 +140,7 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, globalLinks, 
         </Content>
         <AvatarItemWrapper>
           <AvatarItem title={displayName(userInfo)} link={profileLink}>
-            <Avatar src={displayPicture(userInfo)} size={"40px"} />
+            <Avatar src={displayPicture(userInfo)} size={40} />
           </AvatarItem>
         </AvatarItemWrapper>
       </Extended>

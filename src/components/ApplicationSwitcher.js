@@ -221,7 +221,7 @@ const ApplicationSwitcher = ({
       >
         <AvatarItemWrapper>
           <AvatarItem title={displayName(userInfo)} link={profileLink}>
-            <Avatar src={displayPicture(userInfo)} size={"40px"} />
+            <Avatar src={displayPicture(userInfo)} size={40} />
           </AvatarItem>
         </AvatarItemWrapper>
         <LinksWrapper>
