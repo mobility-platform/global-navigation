@@ -4,10 +4,7 @@
       "@babel/preset-env",
       {
         "loose": true,
-        "modules": "auto",
-        "exclude": ["transform-regenerator", "transform-async-to-generator"],
-        "useBuiltIns": "usage",
-        "corejs": 3
+        "modules": "auto"
       }
     ]
   ],
@@ -20,18 +17,6 @@
         "throwIfNamespace": false
       }
     ],
-    [
-      "emotion",
-      {
-        "sourceMap": true,
-        "autoLabel": true
-      }
-    ],
-    [
-      "module:fast-async",
-      {
-        "spec": "true"
-      }
-    ]
+    ["emotion"]
   ]
 }
