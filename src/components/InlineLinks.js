@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { h, Fragment } from "preact";
+import styled from "@emotion/styled-base";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 
 const Wrapper = styled("div")(({ theme }) => ({

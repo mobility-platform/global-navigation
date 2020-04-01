@@ -1,5 +1,4 @@
 import { h } from "preact";
-import styled from "@emotion/styled";
 
 const ButtonIcon = ({ isOpen }) => {
   return isOpen ? (

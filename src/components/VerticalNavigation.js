@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { h, Fragment } from "preact";
+import styled from "@emotion/styled-base";
 import { useState } from "preact/hooks";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 import { displayName, displayPicture } from "../utils/userInfo";

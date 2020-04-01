@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { h } from "preact";
+import styled from "@emotion/styled-base";
 import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 
 const CollapsedLink = styled("a")(({ theme, tooltip }) => ({

@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { h } from "preact";
+import styled from "@emotion/styled-base";
 
 const Link = styled("a")(({ theme }) => ({
   position: "relative",

@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { h, Fragment } from "preact";
+import styled from "@emotion/styled-base";
 import CollapsedLink from "./CollapsedLink";
 import { useTranslation } from "../utils/i18n";
 

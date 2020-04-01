@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/styled-base": "^10.0.31",
     "core-js": "^3.6.4",
     "emotion-theming": "^10.0.27",
     "preact": "^10.3.2",

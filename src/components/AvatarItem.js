@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "@emotion/styled-base";
 import { h } from "preact";
 import { useTranslation } from "../utils/i18n";
 

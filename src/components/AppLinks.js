@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "@emotion/styled-base";
 import { h } from "preact";
 import Link from "./Link";
 import CollapsedLink from "./CollapsedLink";
