@@ -13,7 +13,7 @@ export const applicationSwitcher = habitat(props => (
   <GlobalNavigationContainer as={ApplicationSwitcher} {...props} />
 ));
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "production") {
   const defaultProps = {
     footerLinks: [
       {
