@@ -1,9 +1,7 @@
-import { h, createContext } from "preact";
-import { useContext } from "preact/hooks";
+import { createContext } from "preact";
+import { useCallback, useContext, useMemo } from "preact/hooks";
 
-const TranslationContext = createContext();
-
-const localTranslations = {
+const translations = {
   fr: {
     "My Home": "Tableau de bord",
     "My Organization": "Mon organisation",
@@ -16,36 +14,31 @@ const localTranslations = {
   }
 };
 
-export const TranslationProvider = ({ children, preferredLanguage }) => {
-  let currentLang = null;
-  currentLang = navigator.languages ? navigator.languages[0] : navigator.language;
-  if (preferredLanguage) {
-    currentLang = preferredLanguage;
-  }
-  currentLang = currentLang.substr(0, 2);
-
-  return (
-    <TranslationContext.Provider
-      value={{
-        localTranslations,
-        currentLang
-      }}
-    >
-      {children}
-    </TranslationContext.Provider>
-  );
+/** @type {() => string} */
+const useDefaultLanguage = () => {
+  return useMemo(() => navigator.languages?.[0] || navigator.language, []);
 };
 
+/** @type {(language: string) => string} */
+const normalizeLanguage = language => {
+  return language.substr(0, 2);
+};
+
+/** @type {import("preact").Context<string>} */
+const TranslationContext = createContext("en");
+
+export const TranslationProvider = TranslationContext.Provider;
+
+/** @type {(key: string, language: string) => string} */
+export const t = (key, language) => translations?.[language]?.[key] || key;
+
+/** @type {() => (key: string) => string} */
 export const useTranslation = () => {
-  const { localTranslations, currentLang } = useContext(TranslationContext);
-
-  return key => t(key, localTranslations, currentLang);
-};
-
-const t = (key, localTranslations, currentLang) => {
-  if (localTranslations && localTranslations[currentLang] && localTranslations[currentLang][key]) {
-    return localTranslations[currentLang][key];
-  }
-
-  return key;
+  const contextLanguage = useContext(TranslationContext);
+  const defaultLanguage = useDefaultLanguage();
+  const language = useMemo(() => normalizeLanguage(contextLanguage || defaultLanguage), [
+    contextLanguage,
+    defaultLanguage
+  ]);
+  return useCallback(key => t(key, language), [language]);
 };

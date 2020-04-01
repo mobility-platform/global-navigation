@@ -1,61 +1,44 @@
+import { ThemeContext } from "@emotion/core";
 import { h } from "preact";
-import { useEffect, useState } from "preact/hooks";
-import { ThemeProvider } from "emotion-theming";
 import defaultTheme from "../utils/defaultTheme";
-import { fetchTheme, fetchApplications, fetchProfile } from "../utils/api";
-import { TranslationProvider } from "../utils/i18n";
 import getNavigationLinks from "../utils/getNavigationLinks";
+import { TranslationProvider } from "../utils/i18n";
+import { useAuthenticatedFetch } from "../utils/useAuthenticatedFetch";
 
-const GlobalNavigationContainer = ({ as: Component, ...props }) => {
-  const { getToken, apiUrl, profileApiUrl, backofficeUrl, preferredLanguage } = props;
-
+const GlobalNavigationContainer = ({
+  as: Component,
+  apiUrl,
+  getToken,
+  profileApiUrl,
+  backofficeUrl,
+  preferredLanguage,
+  footerLinks,
+  orientation
+}) => {
   if (!apiUrl || !getToken || !profileApiUrl || !backofficeUrl) {
     throw new Error(
-      "`" +
-        Component.name +
-        "` requires the `apiUrl`, `profileApiUrl`, `backofficeUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+      `\`${Component.name}\` requires the \`apiUrl\`, \`backofficeUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
     );
   }
-
-  const [theme, setTheme] = useState(defaultTheme);
-  const [applications, setApplications] = useState();
-  const [userInfo, setUserInfo] = useState({});
-
-  useEffect(() => {
-    (async () => {
-      const apiTheme = await fetchTheme({ getToken, apiUrl });
-      setTheme(apiTheme);
-    })();
-  }, [apiUrl, getToken]);
-
-  useEffect(() => {
-    (async () => {
-      const apiApplications = await fetchApplications({ getToken, apiUrl });
-      setApplications(apiApplications);
-    })();
-  }, [apiUrl, getToken]);
-
-  useEffect(() => {
-    (async () => {
-      const apiProfile = await fetchProfile({ getToken, profileApiUrl });
-      setUserInfo(apiProfile);
-    })();
-  }, [profileApiUrl, getToken]);
+  const theme = useAuthenticatedFetch(getToken, `${apiUrl}/themes/current`, defaultTheme);
+  const applications = useAuthenticatedFetch(getToken, `${apiUrl}/applications`);
+  const userInfo = useAuthenticatedFetch(getToken, profileApiUrl);
 
   const { globalLinks, profileLink } = getNavigationLinks(backofficeUrl);
 
   return (
-    <ThemeProvider theme={theme}>
-      <TranslationProvider preferredLanguage={preferredLanguage}>
+    <ThemeContext.Provider value={theme}>
+      <TranslationProvider value={preferredLanguage}>
         <Component
           applications={applications}
           userInfo={userInfo}
           globalLinks={globalLinks}
           profileLink={profileLink}
-          {...props}
+          footerLinks={footerLinks}
+          orientation={orientation}
         />
       </TranslationProvider>
-    </ThemeProvider>
+    </ThemeContext.Provider>
   );
 };
 
