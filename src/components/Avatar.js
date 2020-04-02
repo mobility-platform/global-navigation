@@ -6,17 +6,16 @@ const AvatarWrapper = styled("div")(({ size }) => ({
   width: size,
   height: size,
   borderRadius: "50%",
-  overflow: "hidden"
+  overflow: "hidden",
+  img: {
+    width: "100%"
+  }
 }));
-
-const AvatarImage = styled("img")({
-  width: "100%"
-});
 
 const Avatar = ({ src, size }) => {
   return (
     <AvatarWrapper size={size}>
-      <AvatarImage src={src} />
+      <img src={src} alt="" />
     </AvatarWrapper>
   );
 };
