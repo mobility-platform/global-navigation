@@ -18,11 +18,23 @@ function getLuminanceFromHex(hex) {
   return getLuminanceFromRgbColor(parseInt(r, 16), parseInt(g, 16), parseInt(b, 16));
 }
 
-export default function isTextLegibleOverBackground(textColor, backgroundColor) {
+export function isTextLegibleOverBackground(textColor, backgroundColor) {
   const textLightness = getLuminanceFromHex(textColor),
     backgroundLightness = getLuminanceFromHex(backgroundColor);
   const contrast =
     (Math.max(textLightness, backgroundLightness) + 0.05) /
     (Math.min(textLightness, backgroundLightness) + 0.05);
-  return contrast >= 3;
+  return contrast >= 4.5;
+}
+
+export function isDark(background) {
+  return isTextLegibleOverBackground("#ffffff", background);
+}
+
+export function isLight(background) {
+  return !isDark(background);
+}
+
+export function getContrastColor(background) {
+  return isDark(background) ? "#ffffff" : "#333333";
 }

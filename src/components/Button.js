@@ -1,0 +1,63 @@
+import styled from "@emotion/styled-base";
+
+export const Button = styled("button")(({ theme }) => ({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  width: "100%",
+  textDecoration: "none",
+  color: "currentColor",
+  boxSizing: "border-box",
+  padding: 8,
+  marginBottom: 4,
+  fontSize: "14px",
+  "&::before": {
+    content: "''",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    borderRadius: 5,
+    backgroundColor: theme.primary,
+    opacity: 0
+  },
+  "&:hover, &:focus": {
+    outline: "none",
+    color: "currentColor",
+    "&::before": {
+      opacity: 0.05
+    }
+  }
+}));
+
+Button.defaultProps = {
+  rel: "noopener nofollow"
+};
+
+export const ButtonIcon = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: 22,
+  height: 22,
+  backgroundColor: "transparent",
+  cursor: "pointer",
+  color: "currentColor",
+  fill: "currentColor",
+  stroke: "currentColor",
+  boxSizing: "border-box",
+  marginRight: 12,
+  "&:last-child": {
+    marginRight: 0
+  },
+  "svg, img": {
+    position: "relative",
+    width: 22,
+    height: 22
+  },
+  img: {
+    borderRadius: "50%"
+  }
+});

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled-base";
 import { h } from "preact";
 import { useTranslation } from "../utils/i18n";
+import Link from "./Link";
 
 const UserProfileWrapper = styled("div")({
   display: "flex"
@@ -10,35 +11,32 @@ const UserInformation = styled("div")({
   flex: 1,
   display: "flex",
   flexDirection: "column",
-  marginLeft: "10px"
+  alignItems: "flex-start",
+  marginLeft: 10,
+  overflow: "hidden",
+  width: "100%"
 });
 
 const UserName = styled("span")({
+  width: "100%",
+  overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontWeight: "600",
   color: "currentColor"
 });
 
-const UserProfileLink = styled("a")({
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  fontSize: "12px",
-  opacity: 0.8,
-  color: "currentColor",
-  textDecoration: "none",
-  "&:hover, &:focus": {
-    textDecoration: "underline"
-  }
+const UserProfileLink = styled(Link)({
+  opacity: 0.8
 });
 
-const UserProfile = ({ children, title, link }) => {
+const UserProfile = ({ avatar, name, link }) => {
   const t = useTranslation();
   return (
     <UserProfileWrapper>
-      {children}
+      {avatar}
       <UserInformation>
-        <UserName>{title}</UserName>
+        <UserName>{name}</UserName>
         <UserProfileLink href={link} rel="noopener nofollow">
           {t("View my profile")}
         </UserProfileLink>

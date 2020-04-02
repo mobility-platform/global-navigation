@@ -1,7 +1,6 @@
 import styled from "@emotion/styled-base";
-import isTextLegibleOverBackground from "../utils/isTextLegibleOverBackground";
 
-const CollapsedLink = styled("a")(({ theme, tooltip }) => ({
+const IconButton = styled("button")(({ tooltip }) => ({
   position: "relative",
   display: "flex",
   alignItems: "center",
@@ -27,9 +26,7 @@ const CollapsedLink = styled("a")(({ theme, tooltip }) => ({
     width: "100%",
     height: "100%",
     borderRadius: "50%",
-    backgroundColor: isTextLegibleOverBackground("#ffffff", theme.background)
-      ? "#333333"
-      : "#ffffff",
+    backgroundColor: "currentColor",
     opacity: "0"
   },
   "&::after": {
@@ -46,13 +43,14 @@ const CollapsedLink = styled("a")(({ theme, tooltip }) => ({
     padding: "2px 4px",
     borderRadius: "4px",
     opacity: "0",
-    transition: "100ms",
+    transition: "opacity 125ms cubic-bezier(0.4, 0.0, 0.2, 1)",
     pointerEvents: "none",
     overflowWrap: "normal",
     whiteSpace: "nowrap",
     textDecoration: "none"
   },
   "&:hover, &:focus": {
+    outline: "none",
     "&::before": {
       opacity: "0.15"
     },
@@ -60,14 +58,14 @@ const CollapsedLink = styled("a")(({ theme, tooltip }) => ({
       opacity: "1"
     }
   },
-  svg: {
-    width: "22px",
-    height: "22px"
-  },
-  i: {
-    width: "22px",
-    height: "22px"
+  "svg, i": {
+    width: 22,
+    height: 22
   }
 }));
 
-export default CollapsedLink;
+IconButton.defaultProps = {
+  rel: "noopener nofollow"
+};
+
+export default IconButton;

@@ -1,7 +1,10 @@
 import { h } from "preact";
 import { useEffect, useRef } from "preact/hooks";
 
-const Icon = ({ as: Component, content, ...props }) => {
+/**
+ * Custom icon component allowing insertion of raw HTML or DOM HTML elements
+ */
+const CustomIcon = ({ as: Component, content, ...props }) => {
   const iconRef = useRef();
 
   useEffect(() => {
@@ -20,10 +23,7 @@ const Icon = ({ as: Component, content, ...props }) => {
   if (typeof content === "string") {
     return <Component dangerouslySetInnerHTML={{ __html: content }} {...props} />;
   }
-  if (process.env.NODE_ENV !== "production") {
-    throw new Error("Expected linkIcon to be an HTMLElement or an inline html markup.");
-  }
   return null;
 };
 
-export default Icon;
+export default CustomIcon;
