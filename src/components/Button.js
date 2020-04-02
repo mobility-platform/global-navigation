@@ -1,4 +1,14 @@
+import { keyframes } from "@emotion/core";
 import styled from "@emotion/styled-base";
+
+const fadeIn = keyframes({
+  "0%": {
+    opacity: 0
+  },
+  "100%": {
+    opacity: 1
+  }
+});
 
 export const Button = styled("button")(({ theme }) => ({
   position: "relative",
@@ -58,6 +68,9 @@ export const ButtonIcon = styled("div")({
     height: 22
   },
   img: {
-    borderRadius: "50%"
+    borderRadius: "50%",
+    animationName: fadeIn,
+    animationDuration: "225ms",
+    animationTimingFunction: "cubic-bezier(0.4, 0.0, 0.2, 1)"
   }
 });

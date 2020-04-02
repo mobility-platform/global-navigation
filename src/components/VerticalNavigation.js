@@ -8,6 +8,7 @@ import Avatar from "./Avatar";
 import { Button, ButtonIcon } from "./Button";
 import CustomIcon from "./CustomIcon";
 import IconButton from "./IconButton";
+import ImageSkeleton from "./ImageSkeleton";
 import Logo from "./Logo";
 import NavHeading from "./NavHeading";
 import UserProfile from "./UserProfile";
@@ -122,7 +123,7 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
           </IconButton>
 
           {/* Application links */}
-          {applications &&
+          {applications ? (
             applications.map(application => (
               <IconButton
                 as="a"
@@ -131,10 +132,24 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
                 href={application.url}
               >
                 <ButtonIcon>
+                  <ImageSkeleton as={ButtonIcon} />
                   <img src={application.icon} alt={application.name} />
                 </ButtonIcon>
               </IconButton>
-            ))}
+            ))
+          ) : (
+            <Fragment>
+              <IconButton>
+                <ImageSkeleton as={ButtonIcon} />
+              </IconButton>
+              <IconButton>
+                <ImageSkeleton as={ButtonIcon} />
+              </IconButton>
+              <IconButton>
+                <ImageSkeleton as={ButtonIcon} />
+              </IconButton>
+            </Fragment>
+          )}
 
           <Spacer />
 
@@ -148,7 +163,7 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
 
           {/* Avatar button */}
           <IconButton as="button" aria-label={t("Open the menu")} onClick={onOpen}>
-            <Avatar src={userInfo?.picture} size={22} />
+            {userInfo ? <Avatar src={userInfo.picture} size={22} /> : <ImageSkeleton />}
           </IconButton>
         </Content>
       </Container>
