@@ -16,6 +16,8 @@ const skeletonAnimation = keyframes({
 
 const ImageSkeleton = styled("span")(({ theme }) => ({
   position: "absolute",
+  top: 8,
+  left: 8,
   display: "block",
   animationName: skeletonAnimation,
   animationDuration: "1.5s",
