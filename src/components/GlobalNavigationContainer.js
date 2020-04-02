@@ -16,7 +16,7 @@ const GlobalNavigationContainer = ({
 }) => {
   if (!apiUrl || !getToken || !profileApiUrl || !backofficeUrl) {
     throw new Error(
-      `\`${Component.name}\` requires the \`apiUrl\`, \`backofficeUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
+      `\`${Component.name}\` requires the \`apiUrl\`, \`profileApiUrl\`, \`backofficeUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
     );
   }
   const theme = useAuthenticatedFetch(getToken, `${apiUrl}/themes/current`, defaultTheme);
