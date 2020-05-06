@@ -16,6 +16,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled-base": "^10.0.31",
+    "jwt-decode": "^2.2.0",
     "preact": "^10.3.2",
     "preact-habitat": "^3.3.0"
   },

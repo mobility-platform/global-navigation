@@ -33,7 +33,6 @@ if (process.env.NODE_ENV !== "production") {
     ],
     getToken: () => Promise.resolve(process.env.JWT_TOKEN),
     apiUrl: process.env.API_URL,
-    profileApiUrl: process.env.PROFILE_API_URL,
     backofficeUrl: process.env.BACKOFFICE_URL
   };
 

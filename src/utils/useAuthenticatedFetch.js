@@ -3,7 +3,7 @@ import { useEffect, useState } from "preact/hooks";
 /** @typedef {() => Promise<string> | string} TokenResolver */
 
 /** @type {<T>(getToken: TokenResolver, url: string) => Promise<T>} */
-const authenticatedFetch = (getToken, url) =>
+export const authenticatedFetch = (getToken, url) =>
   getToken()
     .then(token => fetch(url, { headers: { Authorization: `Bearer ${token}` } }))
     .then(response => response.json());

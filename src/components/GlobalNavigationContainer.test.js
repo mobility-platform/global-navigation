@@ -9,7 +9,7 @@ describe("VerticalNavigation", () => {
     expect(() => {
       mount(<GlobalNavigationContainer as={VerticalNavigation} />);
     }).toThrow(
-      "`VerticalNavigation` requires the `apiUrl`, `profileApiUrl`, `backofficeUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+      "`VerticalNavigation` requires the `apiUrl`, `backofficeUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
     );
   });
 });
@@ -19,7 +19,7 @@ describe("ApplicationSwitcher", () => {
     expect(() => {
       mount(<GlobalNavigationContainer as={ApplicationSwitcher} />);
     }).toThrow(
-      "`ApplicationSwitcher` requires the `apiUrl`, `profileApiUrl`, `backofficeUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
+      "`ApplicationSwitcher` requires the `apiUrl`, `backofficeUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
     );
   });
 });

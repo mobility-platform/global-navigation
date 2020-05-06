@@ -3,25 +3,25 @@ import { h } from "preact";
 import defaultTheme from "../utils/defaultTheme";
 import { TranslationProvider } from "../utils/i18n";
 import { useAuthenticatedFetch } from "../utils/useAuthenticatedFetch";
+import { useUserProfile } from "../utils/useUserProfile";
 
 const GlobalNavigationContainer = ({
   as: Component,
   apiUrl,
   getToken,
-  profileApiUrl,
   backofficeUrl,
   preferredLanguage,
   footerLinks,
   orientation
 }) => {
-  if (!apiUrl || !getToken || !profileApiUrl || !backofficeUrl) {
+  if (!apiUrl || !getToken || !backofficeUrl) {
     throw new Error(
-      `\`${Component.name}\` requires the \`apiUrl\`, \`profileApiUrl\`, \`backofficeUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
+      `\`${Component.name}\` requires the \`apiUrl\`, \`backofficeUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
     );
   }
   const theme = useAuthenticatedFetch(getToken, `${apiUrl}/themes/current`, defaultTheme);
   const applications = useAuthenticatedFetch(getToken, `${apiUrl}/applications`);
-  const userInfo = useAuthenticatedFetch(getToken, profileApiUrl);
+  const userInfo = useUserProfile(getToken, apiUrl);
 
   return (
     <ThemeContext.Provider value={theme}>

@@ -58,7 +58,6 @@ applicationSwitcher.render({
 | ------------- | ------------------- | -------- | ------------------------------------------------------------------------------------------------ |
 | getToken      | function(): Promise | true     | This method return a promise with the a JWT token who used to fetch Mobility Platform ressources |
 | apiUrl        | string              | true     | Url of the Mobility Platform API                                                                 |
-| profileApiUrl | string              | true     | Url of profile API                                                                               |
 | backofficeUrl | string              | true     | Url of the backoffice provided by the Mobility Platform                                          |
 | orientation   | string              | false    | Used in the applicationSwitcher to set orientation of the modal. By exemple : "top left"         |
 
