@@ -5,7 +5,7 @@ import { useTranslation } from "../utils/i18n";
 import { FiArrowLeft, FiHome, FiMenu, FiUsers } from "../utils/SVG";
 import useDisclosure from "../utils/useDisclosure";
 import Avatar from "./Avatar";
-import { Button, ButtonIcon } from "./Button";
+import { Button, ButtonIcon, ButtonText } from "./Button";
 import CustomIcon from "./CustomIcon";
 import IconButton from "./IconButton";
 import ImageSkeleton from "./ImageSkeleton";
@@ -20,8 +20,8 @@ const Spacer = styled("div")({
 const Container = styled("nav")(
   {
     position: "fixed",
-    top: "0",
-    left: "0",
+    top: 0,
+    left: 0,
     display: "flex",
     flexDirection: "column",
     width: "100%",
@@ -55,8 +55,8 @@ const Container = styled("nav")(
 const Backdrop = styled("div")(
   {
     position: "fixed",
-    top: "0",
-    left: "0",
+    top: 0,
+    left: 0,
     width: "100vw",
     height: "100%",
     backgroundColor: "rgba(0, 0, 0, .15)",
@@ -186,13 +186,13 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
             <ButtonIcon>
               <FiHome />
             </ButtonIcon>
-            <span>{t("My Home")}</span>
+            <ButtonText>{t("My Home")}</ButtonText>
           </Button>
           <Button as="a" href={`${backofficeUrl}/groups`}>
             <ButtonIcon>
               <FiUsers />
             </ButtonIcon>
-            <span>{t("My Organization")}</span>
+            <ButtonText>{t("My Organization")}</ButtonText>
           </Button>
 
           {/* Application links */}
@@ -204,7 +204,7 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
                   <ButtonIcon>
                     <img src={application.icon} alt={application.name} />
                   </ButtonIcon>
-                  <span>{application.name}</span>
+                  <ButtonText>{application.name}</ButtonText>
                 </Button>
               ))}
             </Fragment>
@@ -218,7 +218,7 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
               <NavHeading>{t("Others")}</NavHeading>
               {footerLinks.map(({ label, ...rest }, index) => (
                 <Button as="a" key={index} {...rest}>
-                  <span>{label}</span>
+                  <ButtonText>{label}</ButtonText>
                 </Button>
               ))}
             </Fragment>

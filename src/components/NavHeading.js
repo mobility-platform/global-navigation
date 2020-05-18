@@ -1,6 +1,7 @@
 import styled from "@emotion/styled-base";
+import { Text } from "./Text";
 
-const NavHeading = styled("span")({
+const NavHeading = styled(Text)({
   boxSizing: "border-box",
   display: "block",
   width: "100%",
@@ -9,8 +10,8 @@ const NavHeading = styled("span")({
   paddingLeft: 8,
   paddingRight: 8,
 
-  fontSize: "11px",
-  fontWeight: "700",
+  fontSize: 11,
+  fontWeight: 700,
   textTransform: "uppercase",
   letterSpacing: "0.08em",
   overflow: "hidden",

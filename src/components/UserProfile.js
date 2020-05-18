@@ -2,6 +2,7 @@ import styled from "@emotion/styled-base";
 import { h } from "preact";
 import { useTranslation } from "../utils/i18n";
 import Link from "./Link";
+import { Text } from "./Text";
 
 const UserProfileWrapper = styled("div")({
   display: "flex"
@@ -17,7 +18,7 @@ const UserInformation = styled("div")({
   width: "100%"
 });
 
-const UserName = styled("span")({
+const UserName = styled(Text)({
   width: "100%",
   overflow: "hidden",
   textOverflow: "ellipsis",

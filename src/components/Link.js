@@ -1,10 +1,11 @@
 import styled from "@emotion/styled-base";
+import { Text } from "./Text";
 
-const Link = styled("a")({
+const Link = styled(Text)({
   display: "inline",
   textDecoration: "none",
   color: "currentColor",
-  fontSize: "12px",
+  fontSize: 12,
   "&:hover, &:focus": {
     outline: "none",
     textDecoration: "underline"
@@ -12,6 +13,7 @@ const Link = styled("a")({
 });
 
 Link.defaultProps = {
+  as: "a",
   rel: "noopener nofollow"
 };
 

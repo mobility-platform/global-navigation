@@ -5,7 +5,7 @@
   "license": "CC-BY-ND-4.0",
   "repository": "mobility-platform/global-navigation",
   "scripts": {
-    "build": "webpack -p",
+    "build": "cross-env NODE_ENV=production webpack -p",
     "start": "webpack-dev-server",
     "prepublishOnly": "yarn build",
     "postversion": "git push --all && git push --tag",
@@ -27,6 +27,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-emotion": "^10.0.29",
+    "cross-env": "^7.0.2",
     "dotenv-webpack": "^1.7.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-preact-pure": "^2.2.0",

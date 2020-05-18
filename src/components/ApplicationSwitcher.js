@@ -7,7 +7,7 @@ import { FiHome, FiMenu, FiUsers, FiX, MichelinLogo } from "../utils/SVG";
 import useClickOutside from "../utils/useClickOutside";
 import useDisclosure from "../utils/useDisclosure";
 import Avatar from "./Avatar";
-import { Button, ButtonIcon } from "./Button";
+import { Button, ButtonIcon, ButtonText } from "./Button";
 import Link from "./Link";
 import NavHeading from "./NavHeading";
 import UserProfile from "./UserProfile";
@@ -44,8 +44,8 @@ const FloatingActionButton = styled("button")(({ size, theme }) => ({
   backgroundColor: theme.primary,
   borderRadius: "50%",
   border: "none",
-  margin: "0",
-  padding: "0",
+  margin: 0,
+  padding: 0,
   cursor: "pointer",
   overflow: "hidden",
   transition: "box-shadow 125ms cubic-bezier(0.4, 0.0, 0.2, 1)",
@@ -163,13 +163,13 @@ const ApplicationSwitcher = ({
             <ButtonIcon>
               <FiHome />
             </ButtonIcon>
-            <span>{t("My Home")}</span>
+            <ButtonText>{t("My Home")}</ButtonText>
           </Button>
           <Button as="a" href={`${backofficeUrl}/groups`}>
             <ButtonIcon>
               <FiUsers />
             </ButtonIcon>
-            <span>{t("My Organization")}</span>
+            <ButtonText>{t("My Organization")}</ButtonText>
           </Button>
 
           {/* Application links */}
@@ -181,7 +181,7 @@ const ApplicationSwitcher = ({
                   <ButtonIcon>
                     <img src={application.icon} alt={application.name} />
                   </ButtonIcon>
-                  <span>{application.name}</span>
+                  <ButtonText>{application.name}</ButtonText>
                 </Button>
               ))}
             </Fragment>

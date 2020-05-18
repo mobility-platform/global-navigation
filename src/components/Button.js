@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/core";
 import styled from "@emotion/styled-base";
+import { Text } from "./Text";
 
 const fadeIn = keyframes({
   "0%": {
@@ -21,7 +22,7 @@ export const Button = styled("button")(({ theme }) => ({
   boxSizing: "border-box",
   padding: 8,
   marginBottom: 4,
-  fontSize: "14px",
+  fontSize: 14,
   "&::before": {
     content: "''",
     position: "absolute",
@@ -36,6 +37,7 @@ export const Button = styled("button")(({ theme }) => ({
   "&:hover, &:focus": {
     outline: "none",
     color: "currentColor",
+    textDecoration: "none",
     "&::before": {
       opacity: 0.05
     }
@@ -45,6 +47,10 @@ export const Button = styled("button")(({ theme }) => ({
 Button.defaultProps = {
   rel: "noopener nofollow"
 };
+
+export const ButtonText = styled(Text)({
+  fontSize: 14
+});
 
 export const ButtonIcon = styled("div")({
   display: "flex",

@@ -5,6 +5,7 @@ const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.js",
+  devtool: process.env.NODE_ENV === "production" ? "source-map" : "cheap-module-eval-source-map",
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
