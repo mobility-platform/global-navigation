@@ -2,7 +2,7 @@ import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
 import { getContrastColor, isLight } from "../utils/color";
 import { useTranslation } from "../utils/i18n";
-import { FiArrowLeft, FiHome, FiMenu, FiUsers } from "../utils/SVG";
+import { FiArrowLeft, FiHome, FiMenu } from "../utils/SVG";
 import useDisclosure from "../utils/useDisclosure";
 import Avatar from "./Avatar";
 import { Button, ButtonIcon, ButtonText } from "./Button";
@@ -96,7 +96,7 @@ const UserProfileWrapper = styled("div")(({ theme }) => ({
     : "1px solid rgba(255, 255, 255, .1)"
 }));
 
-const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl }) => {
+const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUrl }) => {
   const t = useTranslation();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -115,11 +115,8 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl }) => {
           </IconButton>
 
           {/* Global links */}
-          <IconButton as="a" tooltip={t("My Home")} href={backofficeUrl}>
+          <IconButton as="a" tooltip={t("My Showcase")} href={myshowcaseUrl}>
             <FiHome />
-          </IconButton>
-          <IconButton as="a" tooltip={t("My Organization")} href={`${backofficeUrl}/groups`}>
-            <FiUsers />
           </IconButton>
 
           <Spacer />
@@ -153,17 +150,11 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl }) => {
         <Content>
           {/* Global links */}
           <NavHeading>{t("Global")}</NavHeading>
-          <Button as="a" href={backofficeUrl}>
+          <Button as="a" href={myshowcaseUrl}>
             <ButtonIcon>
               <FiHome />
             </ButtonIcon>
-            <ButtonText>{t("My Home")}</ButtonText>
-          </Button>
-          <Button as="a" href={`${backofficeUrl}/groups`}>
-            <ButtonIcon>
-              <FiUsers />
-            </ButtonIcon>
-            <ButtonText>{t("My Organization")}</ButtonText>
+            <ButtonText>{t("My Showcase")}</ButtonText>
           </Button>
 
           <Spacer />

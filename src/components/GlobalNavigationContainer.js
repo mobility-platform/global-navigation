@@ -10,6 +10,7 @@ const GlobalNavigationContainer = ({
   apiUrl,
   getToken,
   backofficeUrl,
+  myshowcaseUrl,
   preferredLanguage,
   footerLinks
 }) => {
@@ -24,7 +25,12 @@ const GlobalNavigationContainer = ({
   return (
     <ThemeContext.Provider value={theme}>
       <TranslationProvider value={preferredLanguage}>
-        <Component userInfo={userInfo} backofficeUrl={backofficeUrl} footerLinks={footerLinks} />
+        <Component
+          userInfo={userInfo}
+          backofficeUrl={backofficeUrl}
+          myshowcaseUrl={myshowcaseUrl}
+          footerLinks={footerLinks}
+        />
       </TranslationProvider>
     </ThemeContext.Provider>
   );

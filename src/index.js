@@ -28,7 +28,8 @@ if (process.env.NODE_ENV !== "production") {
     ],
     getToken: () => Promise.resolve(process.env.JWT_TOKEN),
     apiUrl: process.env.API_URL,
-    backofficeUrl: process.env.BACKOFFICE_URL
+    backofficeUrl: process.env.BACKOFFICE_URL,
+    myshowcaseUrl: process.env.MYSHOWCASE_URL
   };
 
   verticalNavigation.render({
