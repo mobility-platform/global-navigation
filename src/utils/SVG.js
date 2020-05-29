@@ -74,24 +74,6 @@ export const FiArrowLeft = () => {
   );
 };
 
-export const FiX = () => {
-  return (
-    <svg
-      stroke="currentColor"
-      fill="none"
-      stroke-width="2"
-      viewBox="0 0 24 24"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      height="1em"
-      width="1em"
-    >
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
-};
-
 export const MichelinLogo = props => {
   return (
     <svg fill="none" viewBox="0 0 198 105" {...props}>

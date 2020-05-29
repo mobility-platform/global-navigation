@@ -1,15 +1,10 @@
 import { h } from "preact";
 import habitat from "preact-habitat";
-import ApplicationSwitcher from "./components/ApplicationSwitcher";
 import GlobalNavigationContainer from "./components/GlobalNavigationContainer";
 import VerticalNavigation from "./components/VerticalNavigation";
 
 export const verticalNavigation = habitat(props => (
   <GlobalNavigationContainer as={VerticalNavigation} {...props} />
-));
-
-export const applicationSwitcher = habitat(props => (
-  <GlobalNavigationContainer as={ApplicationSwitcher} {...props} />
 ));
 
 if (process.env.NODE_ENV !== "production") {
@@ -39,48 +34,6 @@ if (process.env.NODE_ENV !== "production") {
   verticalNavigation.render({
     selector: '[data-widget-host="habitat"]',
     defaultProps,
-    clean: true
-  });
-
-  applicationSwitcher.render({
-    selector: '[data-widget-host="habitat_widget"]',
-    defaultProps: {
-      ...defaultProps,
-      orientation: "bottom left"
-    },
-    clean: true
-  });
-
-  applicationSwitcher.render({
-    selector: '[data-widget-host="application-switcher-top-right"]',
-    defaultProps: {
-      ...defaultProps,
-      orientation: "bottom left"
-    },
-    clean: true
-  });
-  applicationSwitcher.render({
-    selector: '[data-widget-host="application-switcher-top-left"]',
-    defaultProps: {
-      ...defaultProps,
-      orientation: "bottom right"
-    },
-    clean: true
-  });
-  applicationSwitcher.render({
-    selector: '[data-widget-host="application-switcher-bottom-right"]',
-    defaultProps: {
-      ...defaultProps,
-      orientation: "top left"
-    },
-    clean: true
-  });
-  applicationSwitcher.render({
-    selector: '[data-widget-host="application-switcher-bottom-left"]',
-    defaultProps: {
-      ...defaultProps,
-      orientation: "top right"
-    },
     clean: true
   });
 }

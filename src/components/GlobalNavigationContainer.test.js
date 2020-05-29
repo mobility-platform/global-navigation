@@ -1,6 +1,5 @@
 import { mount } from "enzyme";
 import { h } from "preact";
-import ApplicationSwitcher from "./ApplicationSwitcher";
 import GlobalNavigationContainer from "./GlobalNavigationContainer";
 import VerticalNavigation from "./VerticalNavigation";
 
@@ -10,16 +9,6 @@ describe("VerticalNavigation", () => {
       mount(<GlobalNavigationContainer as={VerticalNavigation} />);
     }).toThrow(
       "`VerticalNavigation` requires the `apiUrl`, `backofficeUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
-    );
-  });
-});
-
-describe("ApplicationSwitcher", () => {
-  it("should throw and link to documentation when the component is launched without required props", () => {
-    expect(() => {
-      mount(<GlobalNavigationContainer as={ApplicationSwitcher} />);
-    }).toThrow(
-      "`ApplicationSwitcher` requires the `apiUrl`, `backofficeUrl` and `getToken` props. See https://mobility-platform-docs.netlify.com/"
     );
   });
 });

@@ -11,8 +11,7 @@ const GlobalNavigationContainer = ({
   getToken,
   backofficeUrl,
   preferredLanguage,
-  footerLinks,
-  orientation
+  footerLinks
 }) => {
   if (!apiUrl || !getToken || !backofficeUrl) {
     throw new Error(
@@ -31,7 +30,6 @@ const GlobalNavigationContainer = ({
           userInfo={userInfo}
           backofficeUrl={backofficeUrl}
           footerLinks={footerLinks}
-          orientation={orientation}
         />
       </TranslationProvider>
     </ThemeContext.Provider>
