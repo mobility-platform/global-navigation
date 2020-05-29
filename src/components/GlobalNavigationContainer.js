@@ -19,18 +19,12 @@ const GlobalNavigationContainer = ({
     );
   }
   const theme = useAuthenticatedFetch(getToken, `${apiUrl}/themes/current`, defaultTheme);
-  const applications = useAuthenticatedFetch(getToken, `${apiUrl}/applications`);
   const userInfo = useUserProfile(getToken, apiUrl);
 
   return (
     <ThemeContext.Provider value={theme}>
       <TranslationProvider value={preferredLanguage}>
-        <Component
-          applications={applications}
-          userInfo={userInfo}
-          backofficeUrl={backofficeUrl}
-          footerLinks={footerLinks}
-        />
+        <Component userInfo={userInfo} backofficeUrl={backofficeUrl} footerLinks={footerLinks} />
       </TranslationProvider>
     </ThemeContext.Provider>
   );

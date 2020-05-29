@@ -96,7 +96,7 @@ const UserProfileWrapper = styled("div")(({ theme }) => ({
     : "1px solid rgba(255, 255, 255, .1)"
 }));
 
-const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl }) => {
+const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl }) => {
   const t = useTranslation();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -121,35 +121,6 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
           <IconButton as="a" tooltip={t("My Organization")} href={`${backofficeUrl}/groups`}>
             <FiUsers />
           </IconButton>
-
-          {/* Application links */}
-          {applications ? (
-            applications.map(application => (
-              <IconButton
-                as="a"
-                key={application.id}
-                tooltip={application.name}
-                href={application.url}
-              >
-                <ButtonIcon>
-                  <ImageSkeleton as={ButtonIcon} />
-                  <img src={application.icon} alt={application.name} />
-                </ButtonIcon>
-              </IconButton>
-            ))
-          ) : (
-            <Fragment>
-              <IconButton>
-                <ImageSkeleton as={ButtonIcon} />
-              </IconButton>
-              <IconButton>
-                <ImageSkeleton as={ButtonIcon} />
-              </IconButton>
-              <IconButton>
-                <ImageSkeleton as={ButtonIcon} />
-              </IconButton>
-            </Fragment>
-          )}
 
           <Spacer />
 
@@ -194,21 +165,6 @@ const VerticalNavigation = ({ applications, userInfo, footerLinks, backofficeUrl
             </ButtonIcon>
             <ButtonText>{t("My Organization")}</ButtonText>
           </Button>
-
-          {/* Application links */}
-          {applications && (
-            <Fragment>
-              <NavHeading>{t("Apps")}</NavHeading>
-              {applications.map(application => (
-                <Button as="a" key={application.id} href={application.url}>
-                  <ButtonIcon>
-                    <img src={application.icon} alt={application.name} />
-                  </ButtonIcon>
-                  <ButtonText>{application.name}</ButtonText>
-                </Button>
-              ))}
-            </Fragment>
-          )}
 
           <Spacer />
 
