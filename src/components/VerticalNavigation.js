@@ -134,6 +134,18 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
               />
             </ButtonIcon>
           </IconButton>
+          <IconButton
+            as="a"
+            tooltip={"My Inspection"}
+            href="https://myinspection-bo-dev.azurewebsites.net"
+          >
+            <ButtonIcon>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/effidrive-967c0.appspot.com/o/application-launcher%2F61f8514e339ede3de5229a1a08883a9c.png?alt=media"
+                alt="My Inspection"
+              />
+            </ButtonIcon>
+          </IconButton>
 
           <Spacer />
 
@@ -191,6 +203,15 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
                   />
                 </ButtonIcon>
                 <ButtonText>Mobility Platform BO</ButtonText>
+              </Button>
+              <Button as="a" href="https://myinspection-bo-dev.azurewebsites.net">
+                <ButtonIcon>
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/effidrive-967c0.appspot.com/o/application-launcher%2F61f8514e339ede3de5229a1a08883a9c.png?alt=media"
+                    alt="My Inspection"
+                  />
+                </ButtonIcon>
+                <ButtonText>My Inspection</ButtonText>
               </Button>
             </Fragment>
           )}
