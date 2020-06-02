@@ -11,6 +11,7 @@ const GlobalNavigationContainer = ({
   getToken,
   backofficeUrl,
   myshowcaseUrl,
+  loginUrl,
   preferredLanguage,
   footerLinks
 }) => {
@@ -29,6 +30,7 @@ const GlobalNavigationContainer = ({
           userInfo={userInfo}
           backofficeUrl={backofficeUrl}
           myshowcaseUrl={myshowcaseUrl}
+          logInUrl={loginUrl}
           footerLinks={footerLinks}
         />
       </TranslationProvider>

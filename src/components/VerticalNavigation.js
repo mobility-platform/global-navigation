@@ -2,13 +2,12 @@ import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
 import { getContrastColor, isLight } from "../utils/color";
 import { useTranslation } from "../utils/i18n";
-import { FiArrowLeft, FiHome, FiMenu } from "../utils/SVG";
+import { FiArrowLeft, FiHome, FiMenu, FiLogIn } from "../utils/SVG";
 import useDisclosure from "../utils/useDisclosure";
 import Avatar from "./Avatar";
 import { Button, ButtonIcon, ButtonText } from "./Button";
 import CustomIcon from "./CustomIcon";
 import IconButton from "./IconButton";
-import ImageSkeleton from "./ImageSkeleton";
 import Logo from "./Logo";
 import NavHeading from "./NavHeading";
 import UserProfile from "./UserProfile";
@@ -96,7 +95,7 @@ const UserProfileWrapper = styled("div")(({ theme }) => ({
     : "1px solid rgba(255, 255, 255, .1)"
 }));
 
-const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUrl }) => {
+const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUrl, logInUrl }) => {
   const t = useTranslation();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -131,7 +130,7 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
 
           {/* Avatar button */}
           <IconButton as="button" aria-label={t("Open the menu")} onClick={onOpen}>
-            {userInfo ? <Avatar src={userInfo.picture} size={22} /> : <ImageSkeleton />}
+            {userInfo ? <Avatar src={userInfo.picture} size={22} /> : <FiLogIn />}
           </IconButton>
         </Content>
       </Container>
@@ -163,23 +162,37 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
           {footerLinks && (
             <Fragment>
               <NavHeading>{t("Others")}</NavHeading>
-              {footerLinks.map(({ label, ...rest }, index) => (
+              {footerLinks.map(({ label, icon, ...rest }, index) => (
                 <Button as="a" key={index} {...rest}>
+                  <ButtonIcon>
+                    <CustomIcon content={icon} />
+                  </ButtonIcon>
                   <ButtonText>{label}</ButtonText>
                 </Button>
               ))}
             </Fragment>
           )}
+
+          {!userInfo && (
+            <Button as="a" href={logInUrl}>
+              <ButtonIcon>
+                <FiLogIn />
+              </ButtonIcon>
+              <ButtonText>{t("Login")}</ButtonText>
+            </Button>
+          )}
         </Content>
 
         {/* User profile */}
-        <UserProfileWrapper>
-          <UserProfile
-            avatar={<Avatar src={userInfo?.picture} size={40} />}
-            name={userInfo?.name}
-            link={`${backofficeUrl}/users/me`}
-          />
-        </UserProfileWrapper>
+        {userInfo && (
+          <UserProfileWrapper>
+            <UserProfile
+              avatar={<Avatar src={userInfo?.picture} size={40} />}
+              name={userInfo?.name}
+              link={`${backofficeUrl}/users/me`}
+            />
+          </UserProfileWrapper>
+        )}
       </Container>
     </Fragment>
   );

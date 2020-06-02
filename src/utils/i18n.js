@@ -10,7 +10,8 @@ const translations = {
     Others: "Autres",
     "View my profile": "Voir mon profil",
     "Open the menu": "Ouvrir le menu",
-    "Close the menu": "Fermer le menu"
+    "Close the menu": "Fermer le menu",
+    Login: "Se connecter"
   }
 };
 
