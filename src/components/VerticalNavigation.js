@@ -2,7 +2,7 @@ import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
 import { getContrastColor, isLight } from "../utils/color";
 import { useTranslation } from "../utils/i18n";
-import { FiArrowLeft, FiHome, FiMenu, FiLogIn } from "../utils/SVG";
+import { FiArrowLeft, FiHome, FiMenu, FiLogIn, FiGrid } from "../utils/SVG";
 import useDisclosure from "../utils/useDisclosure";
 import Avatar from "./Avatar";
 import { Button, ButtonIcon, ButtonText } from "./Button";
@@ -117,6 +117,9 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
           <IconButton as="a" tooltip={t("My Showcase")} href={myshowcaseUrl}>
             <FiHome />
           </IconButton>
+          <IconButton as="a" tooltip={t("My Shop")} href={"https://myshop.services.michelin.com/"}>
+            <FiGrid />
+          </IconButton>
 
           <Spacer />
 
@@ -154,6 +157,12 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
               <FiHome />
             </ButtonIcon>
             <ButtonText>{t("My Showcase")}</ButtonText>
+          </Button>
+          <Button as="a" href={"https://myshop.services.michelin.com/"}>
+            <ButtonIcon>
+              <FiGrid />
+            </ButtonIcon>
+            <ButtonText>{t("My Shop")}</ButtonText>
           </Button>
 
           <Spacer />
