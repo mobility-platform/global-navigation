@@ -121,6 +121,20 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
             <FiGrid />
           </IconButton>
 
+          {/* Application links */}
+          <IconButton
+            as="a"
+            tooltip={"Mobility Platform BO"}
+            href="https://stbomobilityplatform001.z6.web.core.windows.net"
+          >
+            <ButtonIcon>
+              <img
+                src="https://stbomobilityplatform001.z6.web.core.windows.net/logo192.png"
+                alt="Mobility Platform BackOffice logo"
+              />
+            </ButtonIcon>
+          </IconButton>
+
           <Spacer />
 
           {/* Footer links */}
@@ -164,6 +178,22 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
             </ButtonIcon>
             <ButtonText>{t("My Shop")}</ButtonText>
           </Button>
+
+          {/* Application links */}
+          {userInfo && (
+            <Fragment>
+              <NavHeading>{t("Apps")}</NavHeading>
+              <Button as="a" href="https://stbomobilityplatform001.z6.web.core.windows.net">
+                <ButtonIcon>
+                  <img
+                    src="https://stbomobilityplatform001.z6.web.core.windows.net/logo192.png"
+                    alt="Mobility Platform back-office logo"
+                  />
+                </ButtonIcon>
+                <ButtonText>Mobility Platform BO</ButtonText>
+              </Button>
+            </Fragment>
+          )}
 
           <Spacer />
 

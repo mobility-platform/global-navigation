@@ -6,7 +6,7 @@ const translations = {
     "My Home": "Tableau de bord",
     "My Organization": "Mon organisation",
     Global: "General",
-    Apps: "Apps",
+    Apps: "Applications",
     Others: "Autres",
     "View my profile": "Voir mon profil",
     "Open the menu": "Ouvrir le menu",
