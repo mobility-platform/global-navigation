@@ -2,7 +2,7 @@ import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
 import { getContrastColor, isLight } from "../utils/color";
 import { useTranslation } from "../utils/i18n";
-import { FiArrowLeft, FiHome, FiMenu, FiLogIn, FiGrid } from "../utils/SVG";
+import { FiArrowLeft, FiHome, FiMenu, FiLogIn, FiGrid, FiBell } from "../utils/SVG";
 import useDisclosure from "../utils/useDisclosure";
 import Avatar from "./Avatar";
 import { Button, ButtonIcon, ButtonText } from "./Button";
@@ -11,6 +11,7 @@ import IconButton from "./IconButton";
 import Logo from "./Logo";
 import NavHeading from "./NavHeading";
 import UserProfile from "./UserProfile";
+import { NotificationIndicator } from "./Notification";
 
 const Spacer = styled("div")({
   flex: 1
@@ -89,6 +90,9 @@ const Content = styled("div")({
 });
 
 const UserProfileWrapper = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
   padding: 10,
   borderTop: isLight(theme.background)
     ? "1px solid rgba(0, 0, 0, .1)"
@@ -159,7 +163,14 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
 
           {/* Avatar button */}
           <IconButton as="button" aria-label={t("Open the menu")} onClick={onOpen}>
-            {userInfo ? <Avatar src={userInfo.picture} size={22} /> : <FiLogIn />}
+            {userInfo ? (
+              <>
+                <Avatar src={userInfo.picture} size={22} />
+                <NotificationIndicator />
+              </>
+            ) : (
+              <FiLogIn />
+            )}
           </IconButton>
         </Content>
       </Container>
@@ -251,6 +262,12 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
               name={userInfo?.name}
               link={`${backofficeUrl}/users/me`}
             />
+            <div>
+              <IconButton onClick={onOpen} aria-label={t("Open the menu")}>
+                <FiBell />
+                <NotificationIndicator />
+              </IconButton>
+            </div>
           </UserProfileWrapper>
         )}
       </Container>
