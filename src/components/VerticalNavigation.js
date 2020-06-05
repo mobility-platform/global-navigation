@@ -99,7 +99,14 @@ const UserProfileWrapper = styled("div")(({ theme }) => ({
     : "1px solid rgba(255, 255, 255, .1)"
 }));
 
-const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUrl, logInUrl }) => {
+const VerticalNavigation = ({
+  userInfo,
+  notifications,
+  footerLinks,
+  backofficeUrl,
+  myshowcaseUrl,
+  logInUrl
+}) => {
   const t = useTranslation();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -166,7 +173,7 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
             {userInfo ? (
               <>
                 <Avatar src={userInfo.picture} size={22} />
-                <NotificationIndicator />
+                <NotificationIndicator number={notifications ? notifications.length : null} />
               </>
             ) : (
               <FiLogIn />
@@ -265,7 +272,7 @@ const VerticalNavigation = ({ userInfo, footerLinks, backofficeUrl, myshowcaseUr
             <div>
               <IconButton onClick={onOpen} aria-label={t("Open the menu")}>
                 <FiBell />
-                <NotificationIndicator />
+                <NotificationIndicator number={notifications ? notifications.length : null} />
               </IconButton>
             </div>
           </UserProfileWrapper>

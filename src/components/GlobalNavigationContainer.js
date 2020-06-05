@@ -20,6 +20,11 @@ const GlobalNavigationContainer = ({
       `\`${Component.name}\` requires the \`apiUrl\`, \`backofficeUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
     );
   }
+  const language = window.navigator.language.slice(0, 2);
+  const notifications = useAuthenticatedFetch(
+    getToken,
+    `http://localhost:9000/v1/notifications?language=${language}`
+  );
   const theme = useAuthenticatedFetch(getToken, `${apiUrl}/themes/current`, defaultTheme);
   const userInfo = useUserProfile(getToken, apiUrl);
 
@@ -28,6 +33,7 @@ const GlobalNavigationContainer = ({
       <TranslationProvider value={preferredLanguage}>
         <Component
           userInfo={userInfo}
+          notifications={notifications}
           backofficeUrl={backofficeUrl}
           myshowcaseUrl={myshowcaseUrl}
           logInUrl={loginUrl}
