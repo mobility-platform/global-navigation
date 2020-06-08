@@ -36,7 +36,7 @@ export const FiMenu = () => {
   );
 };
 
-export const FiLogIn = () => {
+export const FiUser = () => {
   return (
     <svg
       stroke="currentColor"
@@ -48,9 +48,8 @@ export const FiLogIn = () => {
       height="1em"
       width="1em"
     >
-      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-      <polyline points="10 17 15 12 10 7"></polyline>
-      <line x1="15" y1="12" x2="3" y2="12"></line>
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+      <circle cx="12" cy="7" r="4"></circle>
     </svg>
   );
 };
