@@ -2,7 +2,7 @@ import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
 import { getContrastColor, isLight } from "../utils/color";
 import { useTranslation } from "../utils/i18n";
-import { FiArrowLeft, FiHome, FiMenu, FiLogIn, FiGrid, FiBell } from "../utils/SVG";
+import { FiArrowLeft, FiHome, FiMenu, FiUser, FiGrid, FiBell } from "../utils/SVG";
 import useDisclosure from "../utils/useDisclosure";
 import Avatar from "./Avatar";
 import { Button, ButtonIcon, ButtonText } from "./Button";
@@ -11,7 +11,7 @@ import IconButton from "./IconButton";
 import Logo from "./Logo";
 import NavHeading from "./NavHeading";
 import UserProfile from "./UserProfile";
-import { NotificationIndicator } from "./Notification";
+import { NotificationIndicator, Notifications } from "./Notification";
 
 const Spacer = styled("div")({
   flex: 1
@@ -108,6 +108,11 @@ const VerticalNavigation = ({
   logInUrl
 }) => {
   const t = useTranslation();
+  const {
+    isOpen: notificationIsOpen,
+    onClose: notificationOnClose,
+    onOpen: notificationOnOpen
+  } = useDisclosure();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
@@ -176,7 +181,7 @@ const VerticalNavigation = ({
                 <NotificationIndicator number={notifications ? notifications.length : null} />
               </>
             ) : (
-              <FiLogIn />
+              <FiUser />
             )}
           </IconButton>
         </Content>
@@ -193,73 +198,77 @@ const VerticalNavigation = ({
           </IconButton>
         </MenuButtonWrapper>
 
-        <Content>
-          {/* Global links */}
-          <NavHeading>{t("Global")}</NavHeading>
-          <Button as="a" href={myshowcaseUrl}>
-            <ButtonIcon>
-              <FiHome />
-            </ButtonIcon>
-            <ButtonText>{t("My Showcase")}</ButtonText>
-          </Button>
-          <Button as="a" href={"https://myshop.services.michelin.com/"}>
-            <ButtonIcon>
-              <FiGrid />
-            </ButtonIcon>
-            <ButtonText>{t("My Shop")}</ButtonText>
-          </Button>
-
-          {/* Application links */}
-          {userInfo && (
-            <Fragment>
-              <NavHeading>{t("Apps")}</NavHeading>
-              <Button as="a" href="https://stbomobilityplatform001.z6.web.core.windows.net">
-                <ButtonIcon>
-                  <img
-                    src="https://stbomobilityplatform001.z6.web.core.windows.net/logo192.png"
-                    alt="Mobility Platform back-office logo"
-                  />
-                </ButtonIcon>
-                <ButtonText>Mobility Platform BO</ButtonText>
-              </Button>
-              <Button as="a" href="https://myinspection-bo-dev.azurewebsites.net">
-                <ButtonIcon>
-                  <img
-                    src="https://firebasestorage.googleapis.com/v0/b/effidrive-967c0.appspot.com/o/application-launcher%2F61f8514e339ede3de5229a1a08883a9c.png?alt=media"
-                    alt="My Inspection"
-                  />
-                </ButtonIcon>
-                <ButtonText>My Inspection</ButtonText>
-              </Button>
-            </Fragment>
-          )}
-
-          <Spacer />
-
-          {/* Footer links */}
-          {footerLinks && (
-            <Fragment>
-              <NavHeading>{t("Others")}</NavHeading>
-              {footerLinks.map(({ label, icon, ...rest }, index) => (
-                <Button as="a" key={index} {...rest}>
-                  <ButtonIcon>
-                    <CustomIcon content={icon} />
-                  </ButtonIcon>
-                  <ButtonText>{label}</ButtonText>
-                </Button>
-              ))}
-            </Fragment>
-          )}
-
-          {!userInfo && (
-            <Button as="a" href={logInUrl}>
+        {notificationIsOpen ? (
+          <Notifications notifications={notifications} onClose={notificationOnClose} />
+        ) : (
+          <Content style={{ display: notificationIsOpen ? "none" : "flex" }}>
+            {/* Global links */}
+            <NavHeading>{t("Global")}</NavHeading>
+            <Button as="a" href={myshowcaseUrl}>
               <ButtonIcon>
-                <FiLogIn />
+                <FiHome />
               </ButtonIcon>
-              <ButtonText>{t("Login")}</ButtonText>
+              <ButtonText>{t("My Showcase")}</ButtonText>
             </Button>
-          )}
-        </Content>
+            <Button as="a" href={"https://myshop.services.michelin.com/"}>
+              <ButtonIcon>
+                <FiGrid />
+              </ButtonIcon>
+              <ButtonText>{t("My Shop")}</ButtonText>
+            </Button>
+
+            {/* Application links */}
+            {userInfo && (
+              <Fragment>
+                <NavHeading>{t("Apps")}</NavHeading>
+                <Button as="a" href="https://stbomobilityplatform001.z6.web.core.windows.net">
+                  <ButtonIcon>
+                    <img
+                      src="https://stbomobilityplatform001.z6.web.core.windows.net/logo192.png"
+                      alt="Mobility Platform back-office logo"
+                    />
+                  </ButtonIcon>
+                  <ButtonText>Mobility Platform BO</ButtonText>
+                </Button>
+                <Button as="a" href="https://myinspection-bo-dev.azurewebsites.net">
+                  <ButtonIcon>
+                    <img
+                      src="https://firebasestorage.googleapis.com/v0/b/effidrive-967c0.appspot.com/o/application-launcher%2F61f8514e339ede3de5229a1a08883a9c.png?alt=media"
+                      alt="My Inspection"
+                    />
+                  </ButtonIcon>
+                  <ButtonText>My Inspection</ButtonText>
+                </Button>
+              </Fragment>
+            )}
+
+            <Spacer />
+
+            {/* Footer links */}
+            {footerLinks && (
+              <Fragment>
+                <NavHeading>{t("Others")}</NavHeading>
+                {footerLinks.map(({ label, icon, ...rest }, index) => (
+                  <Button as="a" key={index} {...rest}>
+                    <ButtonIcon>
+                      <CustomIcon content={icon} />
+                    </ButtonIcon>
+                    <ButtonText>{label}</ButtonText>
+                  </Button>
+                ))}
+              </Fragment>
+            )}
+
+            {!userInfo && (
+              <Button as="a" href={logInUrl}>
+                <ButtonIcon>
+                  <FiUser />
+                </ButtonIcon>
+                <ButtonText>{t("Login")}</ButtonText>
+              </Button>
+            )}
+          </Content>
+        )}
 
         {/* User profile */}
         {userInfo && (
@@ -270,7 +279,10 @@ const VerticalNavigation = ({
               link={`${backofficeUrl}/users/me`}
             />
             <div>
-              <IconButton onClick={onOpen} aria-label={t("Open the menu")}>
+              <IconButton
+                onClick={notificationIsOpen ? notificationOnClose : notificationOnOpen}
+                aria-label={t("Open the notification")}
+              >
                 <FiBell />
                 <NotificationIndicator number={notifications ? notifications.length : null} />
               </IconButton>
