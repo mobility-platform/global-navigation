@@ -20,6 +20,13 @@ const CustomIcon = ({ as: Component, content, ...props }) => {
   if (content instanceof HTMLElement) {
     return <Component ref={iconRef} {...props} />;
   }
+  if (typeof content === "string" && content.startsWith("http")) {
+    return (
+      <Component>
+        <img src={content} alt="" />
+      </Component>
+    );
+  }
   if (typeof content === "string") {
     return <Component dangerouslySetInnerHTML={{ __html: content }} {...props} />;
   }

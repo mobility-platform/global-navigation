@@ -1,11 +1,7 @@
-import { h } from "preact";
 import habitat from "preact-habitat";
-import GlobalNavigationContainer from "./components/GlobalNavigationContainer";
 import VerticalNavigation from "./components/VerticalNavigation";
 
-export const verticalNavigation = habitat(props => (
-  <GlobalNavigationContainer as={VerticalNavigation} {...props} />
-));
+export const verticalNavigation = habitat(VerticalNavigation);
 
 if (process.env.NODE_ENV !== "production") {
   const defaultProps = {
@@ -27,9 +23,7 @@ if (process.env.NODE_ENV !== "production") {
       }
     ],
     getToken: () => Promise.resolve(process.env.JWT_TOKEN),
-    apiUrl: process.env.API_URL,
-    backofficeUrl: process.env.BACKOFFICE_URL,
-    myshowcaseUrl: process.env.MYSHOWCASE_URL,
+    configurationUrl: process.env.CONFIGURATION_URL,
     loginUrl: process.env.LOGIN_URL
   };
 

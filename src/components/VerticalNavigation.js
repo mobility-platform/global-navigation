@@ -1,17 +1,19 @@
 import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
 import { getContrastColor, isLight } from "../utils/color";
-import { useTranslation } from "../utils/i18n";
-import { FiArrowLeft, FiHome, FiMenu, FiUser, FiGrid, FiBell } from "../utils/SVG";
+import { ConfigurationProvider, useConfiguration } from "../utils/Configuration";
+import { TranslationProvider, useTranslation } from "../utils/i18n";
+import { FiArrowLeft, FiMenu } from "../utils/SVG";
+import { ThemeProvider } from "../utils/Theme";
 import useDisclosure from "../utils/useDisclosure";
-import Avatar from "./Avatar";
+import { UserInfoProvider, useUserInfo } from "../utils/UserInfo";
 import { Button, ButtonIcon, ButtonText } from "./Button";
 import CustomIcon from "./CustomIcon";
 import IconButton from "./IconButton";
 import Logo from "./Logo";
 import NavHeading from "./NavHeading";
-import UserProfile from "./UserProfile";
-import { NotificationIndicator, Notifications } from "./Notification";
+import { Notifications, NotificationsProvider } from "../utils/Notification";
+import { CollapsedUserProfile, ExtendedUserProfile, LoginUserProfile } from "./UserProfile";
 
 const Spacer = styled("div")({
   flex: 1
@@ -89,24 +91,65 @@ const Content = styled("div")({
   padding: 10
 });
 
-const UserProfileWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: 10,
-  borderTop: isLight(theme.background)
-    ? "1px solid rgba(0, 0, 0, .1)"
-    : "1px solid rgba(255, 255, 255, .1)"
-}));
+const ExtendedSections = () => {
+  const configuration = useConfiguration();
+  const userInfo = useUserInfo();
+  const t = useTranslation();
+  return (
+    configuration &&
+    configuration.sections
+      .filter(section => (userInfo ? section : !section.requiresAuthentification))
+      .map((section, index) => (
+        <Fragment key={index}>
+          {section.links
+            .filter(application => (userInfo ? application : !application.requiresAuthentification))
+            .map((link, index) => (
+              <IconButton key={index} as="a" tooltip={t(link.title)} href={link.href}>
+                <CustomIcon as={ButtonIcon} content={link.icon} />
+              </IconButton>
+            ))}
+        </Fragment>
+      ))
+  );
+};
+
+const CollapsedSections = () => {
+  const configuration = useConfiguration();
+  const userInfo = useUserInfo();
+  const t = useTranslation();
+  return (
+    configuration &&
+    configuration.sections
+      .filter(section => (userInfo ? section : !section.requiresAuthentification))
+      .map((section, index) => (
+        <Fragment key={index}>
+          <NavHeading>{t(section.title)}</NavHeading>
+          {section.links
+            .filter(application => (userInfo ? application : !application.requiresAuthentification))
+            .map((link, index) => (
+              <Button key={index} as="a" href={link.href}>
+                <CustomIcon as={ButtonIcon} content={link.icon} />
+                <ButtonText>{t(link.title)}</ButtonText>
+              </Button>
+            ))}
+        </Fragment>
+      ))
+  );
+};
 
 const VerticalNavigation = ({
-  userInfo,
-  notifications,
-  footerLinks,
-  backofficeUrl,
-  myshowcaseUrl,
-  logInUrl
+  getToken,
+  loginUrl,
+  configurationUrl,
+  preferredLanguage,
+  footerLinks
 }) => {
+  if (!configurationUrl || !getToken || !loginUrl) {
+    throw new Error(
+      `Global Navigation requires the \`configurationUrl\`, \`loginUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
+    );
+  }
+
   const t = useTranslation();
   const {
     isOpen: notificationIsOpen,
@@ -116,181 +159,85 @@ const VerticalNavigation = ({
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <Fragment>
-      <Backdrop isVisible={isOpen} onClick={onClose} />
+    <ConfigurationProvider url={configurationUrl}>
+      <TranslationProvider value={preferredLanguage}>
+        <ThemeProvider getToken={getToken}>
+          <UserInfoProvider getToken={getToken}>
+            <NotificationsProvider getToken={getToken}>
+              <Backdrop isVisible={isOpen} onClick={onClose} />
 
-      {/* Collapsed container */}
-      <Container variant="collapsed" aria-hidden={isOpen}>
-        <Logo />
+              {/* Collapsed container */}
+              <Container variant="collapsed" aria-hidden={isOpen}>
+                <Logo />
 
-        <Content>
-          {/* Menu button */}
-          <IconButton onClick={onOpen} aria-label={t("Open the menu")}>
-            <FiMenu />
-          </IconButton>
+                <Content>
+                  {/* Menu button */}
+                  <IconButton onClick={onOpen} aria-label={t("Open the menu")}>
+                    <FiMenu />
+                  </IconButton>
 
-          {/* Global links */}
-          <IconButton as="a" tooltip={t("My Showcase")} href={myshowcaseUrl}>
-            <FiHome />
-          </IconButton>
-          <IconButton as="a" tooltip={t("My Shop")} href={"https://myshop.services.michelin.com/"}>
-            <FiGrid />
-          </IconButton>
+                  <ExtendedSections />
+                  <Spacer />
 
-          {/* Application links */}
-          <IconButton
-            as="a"
-            tooltip={"Mobility Platform BO"}
-            href="https://stbomobilityplatform001.z6.web.core.windows.net"
-          >
-            <ButtonIcon>
-              <img
-                src="https://stbomobilityplatform001.z6.web.core.windows.net/logo192.png"
-                alt="Mobility Platform BackOffice logo"
-              />
-            </ButtonIcon>
-          </IconButton>
-          <IconButton
-            as="a"
-            tooltip={"My Inspection"}
-            href="https://myinspection-bo-dev.azurewebsites.net"
-          >
-            <ButtonIcon>
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/effidrive-967c0.appspot.com/o/application-launcher%2F61f8514e339ede3de5229a1a08883a9c.png?alt=media"
-                alt="My Inspection"
-              />
-            </ButtonIcon>
-          </IconButton>
+                  {/* Footer links */}
+                  {footerLinks &&
+                    footerLinks.map(({ label, icon, ...rest }, index) => (
+                      <IconButton as="a" key={index} tooltip={label} {...rest}>
+                        <CustomIcon as={ButtonIcon} content={icon} />
+                      </IconButton>
+                    ))}
 
-          <Spacer />
+                  <CollapsedUserProfile onClick={onOpen} />
+                </Content>
+              </Container>
 
-          {/* Footer links */}
-          {footerLinks &&
-            footerLinks.map(({ label, icon, ...rest }, index) => (
-              <IconButton as="a" key={index} tooltip={label} {...rest}>
-                <CustomIcon as={ButtonIcon} content={icon} />
-              </IconButton>
-            ))}
+              {/* Extended container */}
+              <Container variant="extended" aria-hidden={!isOpen}>
+                <Logo />
 
-          {/* Avatar button */}
-          <IconButton as="button" aria-label={t("Open the menu")} onClick={onOpen}>
-            {userInfo ? (
-              <>
-                <Avatar src={userInfo.picture} size={22} />
-                <NotificationIndicator number={notifications ? notifications.length : null} />
-              </>
-            ) : (
-              <FiUser />
-            )}
-          </IconButton>
-        </Content>
-      </Container>
+                {/* Menu button */}
+                <MenuButtonWrapper>
+                  <IconButton onClick={onClose} aria-label={t("Close the menu")}>
+                    <FiArrowLeft />
+                  </IconButton>
+                </MenuButtonWrapper>
 
-      {/* Extended container */}
-      <Container variant="extended" aria-hidden={!isOpen}>
-        <Logo />
+                {notificationIsOpen ? (
+                  <Notifications />
+                ) : (
+                  <Content style={{ display: notificationIsOpen ? "none" : "flex" }}>
+                    <CollapsedSections />
 
-        {/* Menu button */}
-        <MenuButtonWrapper>
-          <IconButton onClick={onClose} aria-label={t("Close the menu")}>
-            <FiArrowLeft />
-          </IconButton>
-        </MenuButtonWrapper>
+                    <Spacer />
 
-        {notificationIsOpen ? (
-          <Notifications notifications={notifications} onClose={notificationOnClose} />
-        ) : (
-          <Content style={{ display: notificationIsOpen ? "none" : "flex" }}>
-            {/* Global links */}
-            <NavHeading>{t("Global")}</NavHeading>
-            <Button as="a" href={myshowcaseUrl}>
-              <ButtonIcon>
-                <FiHome />
-              </ButtonIcon>
-              <ButtonText>{t("My Showcase")}</ButtonText>
-            </Button>
-            <Button as="a" href={"https://myshop.services.michelin.com/"}>
-              <ButtonIcon>
-                <FiGrid />
-              </ButtonIcon>
-              <ButtonText>{t("My Shop")}</ButtonText>
-            </Button>
+                    {/* Footer links */}
+                    {footerLinks && (
+                      <Fragment>
+                        <NavHeading>{t("Others")}</NavHeading>
+                        {footerLinks.map(({ label, icon, ...rest }, index) => (
+                          <Button as="a" key={index} {...rest}>
+                            <ButtonIcon>
+                              <CustomIcon content={icon} />
+                            </ButtonIcon>
+                            <ButtonText>{label}</ButtonText>
+                          </Button>
+                        ))}
+                      </Fragment>
+                    )}
 
-            {/* Application links */}
-            {userInfo && (
-              <Fragment>
-                <NavHeading>{t("Apps")}</NavHeading>
-                <Button as="a" href="https://stbomobilityplatform001.z6.web.core.windows.net">
-                  <ButtonIcon>
-                    <img
-                      src="https://stbomobilityplatform001.z6.web.core.windows.net/logo192.png"
-                      alt="Mobility Platform back-office logo"
-                    />
-                  </ButtonIcon>
-                  <ButtonText>Mobility Platform BO</ButtonText>
-                </Button>
-                <Button as="a" href="https://myinspection-bo-dev.azurewebsites.net">
-                  <ButtonIcon>
-                    <img
-                      src="https://firebasestorage.googleapis.com/v0/b/effidrive-967c0.appspot.com/o/application-launcher%2F61f8514e339ede3de5229a1a08883a9c.png?alt=media"
-                      alt="My Inspection"
-                    />
-                  </ButtonIcon>
-                  <ButtonText>My Inspection</ButtonText>
-                </Button>
-              </Fragment>
-            )}
-
-            <Spacer />
-
-            {/* Footer links */}
-            {footerLinks && (
-              <Fragment>
-                <NavHeading>{t("Others")}</NavHeading>
-                {footerLinks.map(({ label, icon, ...rest }, index) => (
-                  <Button as="a" key={index} {...rest}>
-                    <ButtonIcon>
-                      <CustomIcon content={icon} />
-                    </ButtonIcon>
-                    <ButtonText>{label}</ButtonText>
-                  </Button>
-                ))}
-              </Fragment>
-            )}
-
-            {!userInfo && (
-              <Button as="a" href={logInUrl}>
-                <ButtonIcon>
-                  <FiUser />
-                </ButtonIcon>
-                <ButtonText>{t("Login")}</ButtonText>
-              </Button>
-            )}
-          </Content>
-        )}
-
-        {/* User profile */}
-        {userInfo && (
-          <UserProfileWrapper>
-            <UserProfile
-              avatar={<Avatar src={userInfo?.picture} size={40} />}
-              name={userInfo?.name}
-              link={`${backofficeUrl}/users/me`}
-            />
-            <div>
-              <IconButton
-                onClick={notificationIsOpen ? notificationOnClose : notificationOnOpen}
-                aria-label={t("Open the notification")}
-              >
-                <FiBell />
-                <NotificationIndicator number={notifications ? notifications.length : null} />
-              </IconButton>
-            </div>
-          </UserProfileWrapper>
-        )}
-      </Container>
-    </Fragment>
+                    <LoginUserProfile loginUrl={loginUrl} />
+                  </Content>
+                )}
+                <ExtendedUserProfile
+                  onClick={notificationIsOpen ? notificationOnClose : notificationOnOpen}
+                  notificationIsOpen={notificationIsOpen}
+                />
+              </Container>
+            </NotificationsProvider>
+          </UserInfoProvider>
+        </ThemeProvider>
+      </TranslationProvider>
+    </ConfigurationProvider>
   );
 };
 
