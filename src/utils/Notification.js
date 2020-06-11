@@ -1,6 +1,6 @@
 import styled from "@emotion/styled-base";
 import { createContext, Fragment, h } from "preact";
-import { useContext, useEffect, useState } from "preact/hooks";
+import { useContext, useEffect, useState, useCallback } from "preact/hooks";
 import { ButtonIcon } from "../components/Button";
 import { Text } from "../components/Text";
 import { useLanguage, useTranslation } from "../utils/i18n";
@@ -98,6 +98,9 @@ const NotificationsWrapper = styled("div")(({ theme }) => ({
 }));
 
 const NotificationWrapper = styled("a")(({ isRead, theme }) => ({
+  border: "none",
+  outline: "inherit",
+  textAlign: "left",
   position: "relative",
   width: "100%",
   textDecoration: "none",
@@ -105,7 +108,7 @@ const NotificationWrapper = styled("a")(({ isRead, theme }) => ({
   boxSizing: "border-box",
   padding: 16,
   fontSize: 14,
-  opacity: isRead ? 0.9 : 1,
+  opacity: isRead ? 0.6 : 1,
   backgroundColor: theme.background,
   borderTop: isLight(theme.background)
     ? "1px solid rgba(0, 0, 0, .1)"
@@ -117,8 +120,8 @@ const NotificationWrapper = styled("a")(({ isRead, theme }) => ({
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: isRead ? "transparent" : theme.primary,
-    opacity: 0.1
+    // backgroundColor: isRead ? "transparent" : theme.primary,
+    opacity: 0.05
   },
   "&:hover, &:focus": {
     cursor: "pointer",
@@ -129,17 +132,23 @@ const NotificationWrapper = styled("a")(({ isRead, theme }) => ({
   }
 }));
 
-const NotificationTitle = styled(Text)({
+const NotificationTitle = styled(Text)(({ isRead }) => ({
   boxSizing: "border-box",
   border: 0,
   boxShadow: "none",
   fontSize: 12,
   background: "none",
-  opacity: 1
-});
+  opacity: 1,
+  fontWeight: isRead ? "400" : "700"
+}));
 
-const NotificationBody = styled(Text)({
-  fontSize: "14px"
+const NotificationBody = styled("p")({
+  fontSize: "14px",
+  margin: 0,
+  padding: 0,
+  maxHeight: 60,
+  overflow: "hidden",
+  "-webkit-line-clamp": 3
 });
 
 const EmptyState = styled("div")({
@@ -161,9 +170,33 @@ const EmptyState = styled("div")({
   }
 });
 
-const Notification = ({ notification }) => {
+const patchNotifications = (getToken, configuration, notifications) => {
+  return getToken().then(token =>
+    Promise.all(
+      notifications
+        .filter(notifications => !notifications.isRead)
+        .map(notification =>
+          fetch(`${configuration.notificationsApiUrl}/${notification._id}`, {
+            headers: { Authorization: `Bearer ${token}`, "content-type": "application/json" },
+            method: "PATCH",
+            body: JSON.stringify({ isRead: true })
+          })
+        )
+    )
+  );
+};
+
+const Notification = ({ getToken, configuration, notification }) => {
+  const notificationsRefetch = useNotificationsRefetch();
   return (
-    <NotificationWrapper isRead={notification.isRead}>
+    <NotificationWrapper
+      onClick={() => {
+        patchNotifications(getToken, configuration, [notification]).then(notificationsRefetch);
+      }}
+      href={notification.target}
+      target="_blank"
+      isRead={notification.isRead}
+    >
       <div
         style={{
           width: "100%",
@@ -175,19 +208,21 @@ const Notification = ({ notification }) => {
         <ButtonIcon>
           <img src={notification.icon} alt={notification.title} />
         </ButtonIcon>
-        <NotificationTitle>{notification.title}</NotificationTitle>
+        <NotificationTitle isRead={notification.isRead}>{notification.title}</NotificationTitle>
       </div>
       <NotificationBody>{notification.body}</NotificationBody>
     </NotificationWrapper>
   );
 };
 
-export const Notifications = () => {
+export const Notifications = ({ getToken }) => {
   const t = useTranslation();
   const notifications = useNotifications();
+  const notificationsRefetch = useNotificationsRefetch();
+  const configuration = useConfiguration();
   return (
     <Content>
-      {notifications && notifications?.length > 0 ? (
+      {configuration && notifications && notifications?.length > 0 ? (
         <Fragment>
           <div
             style={{
@@ -199,11 +234,25 @@ export const Notifications = () => {
             }}
           >
             <Title>{t("Notifications")}</Title>
-            <Action as="button">{t("Mark all as read")}</Action>
+            <Action
+              as="button"
+              onClick={() => {
+                patchNotifications(getToken, configuration, notifications).then(
+                  notificationsRefetch
+                );
+              }}
+            >
+              {t("Mark all as read")}
+            </Action>
           </div>
           <NotificationsWrapper>
             {notifications.map((notification, index) => (
-              <Notification key={index} notification={notification} />
+              <Notification
+                key={index}
+                notification={notification}
+                getToken={getToken}
+                configuration={configuration}
+              />
             ))}
           </NotificationsWrapper>
         </Fragment>
@@ -222,19 +271,28 @@ const NotificationsContext = createContext();
 export const NotificationsProvider = ({ getToken, children }) => {
   const configuration = useConfiguration();
   const language = useLanguage();
-  const notifications = useFetchNotifications(getToken, configuration, language);
+  const notificationState = useFetchNotifications(getToken, configuration, language);
   return (
-    <NotificationsContext.Provider value={notifications}>{children}</NotificationsContext.Provider>
+    <NotificationsContext.Provider value={notificationState}>
+      {children}
+    </NotificationsContext.Provider>
   );
 };
 
 export const useNotifications = () => {
-  return useContext(NotificationsContext);
+  const { notifications } = useContext(NotificationsContext);
+  return notifications;
+};
+
+export const useNotificationsRefetch = () => {
+  const { refetch } = useContext(NotificationsContext);
+  return refetch;
 };
 
 const useFetchNotifications = (getToken, configuration, language) => {
   const [state, setState] = useState(null);
-  useEffect(() => {
+
+  const refetch = useCallback(() => {
     if (configuration && language) {
       getToken()
         .then(token =>
@@ -245,6 +303,11 @@ const useFetchNotifications = (getToken, configuration, language) => {
         .then(response => response.json())
         .then(setState);
     }
-  }, [getToken, configuration, language]);
-  return state;
+  }, [configuration, getToken, language]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  return { notifications: state, refetch };
 };

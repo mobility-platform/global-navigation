@@ -203,7 +203,7 @@ const VerticalNavigation = ({
                 </MenuButtonWrapper>
 
                 {notificationIsOpen ? (
-                  <Notifications />
+                  <Notifications getToken={getToken} />
                 ) : (
                   <Content style={{ display: notificationIsOpen ? "none" : "flex" }}>
                     <CollapsedSections />
