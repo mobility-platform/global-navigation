@@ -7,6 +7,7 @@ import { useLanguage, useTranslation } from "../utils/i18n";
 import { isLight } from "./color";
 import { useConfiguration } from "./Configuration";
 import { FiInbox } from "./SVG";
+import { timeSince } from "./timesince";
 
 export const NotificationIndicatorWrapper = styled("div")(({ number }) => ({
   position: "absolute",
@@ -132,15 +133,32 @@ const NotificationWrapper = styled("a")(({ isRead, theme }) => ({
   }
 }));
 
-const NotificationTitle = styled(Text)(({ isRead }) => ({
+const NotificationHeader = styled("div")(({ isRead }) => ({
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  marginBottom: 6,
+  fontWeight: isRead ? "400" : "700"
+}));
+
+const NotificationTitle = styled(Text)({
+  boxSizing: "border-box",
+  border: 0,
+  boxShadow: "none",
+  fontSize: 12,
+  background: "none",
+  opacity: 1
+});
+
+const NotificationTime = styled(Text)({
   boxSizing: "border-box",
   border: 0,
   boxShadow: "none",
   fontSize: 12,
   background: "none",
   opacity: 1,
-  fontWeight: isRead ? "400" : "700"
-}));
+  paddingLeft: 6
+});
 
 const NotificationBody = styled("p")({
   fontSize: "14px",
@@ -197,19 +215,13 @@ const Notification = ({ getToken, configuration, notification }) => {
       target="_blank"
       isRead={notification.isRead}
     >
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          marginBottom: 6
-        }}
-      >
+      <NotificationHeader isRead={notification.isRead}>
         <ButtonIcon>
           <img src={notification.icon} alt={notification.title} />
         </ButtonIcon>
-        <NotificationTitle isRead={notification.isRead}>{notification.title}</NotificationTitle>
-      </div>
+        <NotificationTitle>{notification.title}</NotificationTitle>{" "}
+        <NotificationTime>{timeSince(notification.createdAt)}</NotificationTime>
+      </NotificationHeader>
       <NotificationBody>{notification.body}</NotificationBody>
     </NotificationWrapper>
   );
