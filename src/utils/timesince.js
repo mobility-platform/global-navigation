@@ -1,6 +1,5 @@
 export const timeSince = date => {
   let seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
-  console.log(seconds);
   let interval = Math.floor(seconds / 31536000);
 
   if (interval > 1) return interval + "y";
