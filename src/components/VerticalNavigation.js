@@ -148,9 +148,9 @@ const VerticalNavigation = ({
   preferredLanguage,
   footerLinks,
 }) => {
-  if (!configurationUrl || !getToken || !loginUrl) {
+  if (!configurationUrl || !getToken) {
     throw new Error(
-      `Global Navigation requires the \`configurationUrl\`, \`loginUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
+      `Global Navigation requires the \`configurationUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
     );
   }
 
@@ -241,7 +241,7 @@ const VerticalNavigation = ({
                       </Fragment>
                     )}
 
-                    <LoginUserProfile loginUrl={loginUrl} />
+                    {loginUrl && <LoginUserProfile loginUrl={loginUrl} />}
                   </Content>
                 )}
                 <ExtendedUserProfile
