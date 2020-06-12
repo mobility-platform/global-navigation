@@ -16,7 +16,7 @@ import { Notifications, NotificationsProvider } from "../utils/Notification";
 import { CollapsedUserProfile, ExtendedUserProfile, LoginUserProfile } from "./UserProfile";
 
 const Spacer = styled("div")({
-  flex: 1
+  flex: 1,
 });
 
 const Container = styled("nav")(
@@ -33,15 +33,15 @@ const Container = styled("nav")(
     fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
     transition: "transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1), visibility 200ms",
     "&[aria-hidden=true]": {
-      visibility: "hidden"
-    }
+      visibility: "hidden",
+    },
   },
   ({ variant, theme }) =>
     variant === "collapsed" && {
       alignItems: "center",
       maxWidth: 60,
       background: theme.primary,
-      color: getContrastColor(theme.primary)
+      color: getContrastColor(theme.primary),
     },
   ({ variant, theme }) =>
     variant === "extended" && {
@@ -49,8 +49,8 @@ const Container = styled("nav")(
       background: theme.background,
       color: getContrastColor(theme.background),
       "&[aria-hidden=true]": {
-        transform: "translateX(-100%)"
-      }
+        transform: "translateX(-100%)",
+      },
     }
 );
 
@@ -64,12 +64,12 @@ const Backdrop = styled("div")(
     backgroundColor: "rgba(0, 0, 0, .15)",
     transition: "opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)",
     opacity: 0,
-    pointerEvents: "none"
+    pointerEvents: "none",
   },
   ({ isVisible }) =>
     isVisible && {
       opacity: 1,
-      pointerEvents: "auto"
+      pointerEvents: "auto",
     }
 );
 
@@ -80,7 +80,7 @@ const MenuButtonWrapper = styled("div")(({ theme }) => ({
     : "1px solid rgba(255, 255, 255, .1)",
   borderBottom: isLight(theme.background)
     ? "1px solid rgba(0, 0, 0, .1)"
-    : "1px solid rgba(255, 255, 255, .1)"
+    : "1px solid rgba(255, 255, 255, .1)",
 }));
 
 const Content = styled("div")({
@@ -88,7 +88,7 @@ const Content = styled("div")({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: 10
+  padding: 10,
 });
 
 const ExtendedSections = () => {
@@ -98,11 +98,13 @@ const ExtendedSections = () => {
   return (
     configuration &&
     configuration.sections
-      .filter(section => (userInfo ? section : !section.requiresAuthentification))
+      .filter((section) => (userInfo ? section : !section.requiresAuthentification))
       .map((section, index) => (
         <Fragment key={index}>
           {section.links
-            .filter(application => (userInfo ? application : !application.requiresAuthentification))
+            .filter((application) =>
+              userInfo ? application : !application.requiresAuthentification
+            )
             .map((link, index) => (
               <IconButton key={index} as="a" tooltip={t(link.title)} href={link.href}>
                 <CustomIcon as={ButtonIcon} content={link.icon} />
@@ -120,12 +122,14 @@ const CollapsedSections = () => {
   return (
     configuration &&
     configuration.sections
-      .filter(section => (userInfo ? section : !section.requiresAuthentification))
+      .filter((section) => (userInfo ? section : !section.requiresAuthentification))
       .map((section, index) => (
         <Fragment key={index}>
           <NavHeading>{t(section.title)}</NavHeading>
           {section.links
-            .filter(application => (userInfo ? application : !application.requiresAuthentification))
+            .filter((application) =>
+              userInfo ? application : !application.requiresAuthentification
+            )
             .map((link, index) => (
               <Button key={index} as="a" href={link.href}>
                 <CustomIcon as={ButtonIcon} content={link.icon} />
@@ -142,7 +146,7 @@ const VerticalNavigation = ({
   loginUrl,
   configurationUrl,
   preferredLanguage,
-  footerLinks
+  footerLinks,
 }) => {
   if (!configurationUrl || !getToken || !loginUrl) {
     throw new Error(
@@ -154,7 +158,7 @@ const VerticalNavigation = ({
   const {
     isOpen: notificationIsOpen,
     onClose: notificationOnClose,
-    onOpen: notificationOnOpen
+    onOpen: notificationOnOpen,
   } = useDisclosure();
   const { isOpen, onClose, onOpen } = useDisclosure();
 

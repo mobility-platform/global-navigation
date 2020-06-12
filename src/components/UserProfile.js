@@ -13,7 +13,7 @@ import { Button, ButtonIcon, ButtonText } from "./Button";
 import { isLight } from "../utils/color";
 
 const UserProfileWrapper = styled("div")({
-  display: "flex"
+  display: "flex",
 });
 
 const ExtendedUserProfileWrapper = styled("div")(({ theme }) => ({
@@ -23,7 +23,7 @@ const ExtendedUserProfileWrapper = styled("div")(({ theme }) => ({
   padding: 10,
   borderTop: isLight(theme.background)
     ? "1px solid rgba(0, 0, 0, .1)"
-    : "1px solid rgba(255, 255, 255, .1)"
+    : "1px solid rgba(255, 255, 255, .1)",
 }));
 
 const UserInformation = styled("div")({
@@ -33,7 +33,7 @@ const UserInformation = styled("div")({
   alignItems: "flex-start",
   marginLeft: 10,
   overflow: "hidden",
-  width: "100%"
+  width: "100%",
 });
 
 const UserName = styled(Text)({
@@ -42,11 +42,11 @@ const UserName = styled(Text)({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   fontWeight: "600",
-  color: "currentColor"
+  color: "currentColor",
 });
 
 const UserProfileLink = styled(Link)({
-  opacity: 0.8
+  opacity: 0.8,
 });
 
 const UserProfile = ({ avatar, name, link }) => {

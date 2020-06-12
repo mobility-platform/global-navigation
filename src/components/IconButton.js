@@ -27,7 +27,7 @@ const IconButton = styled("button")(({ tooltip }) => ({
     height: "100%",
     borderRadius: "50%",
     backgroundColor: "currentColor",
-    opacity: 0
+    opacity: 0,
   },
   "&::after": {
     content: tooltip ? `"${tooltip}"` : "none",
@@ -47,25 +47,25 @@ const IconButton = styled("button")(({ tooltip }) => ({
     pointerEvents: "none",
     overflowWrap: "normal",
     whiteSpace: "nowrap",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   "&:hover, &:focus": {
     outline: "none",
     "&::before": {
-      opacity: "0.15"
+      opacity: "0.15",
     },
     "&::after": {
-      opacity: "1"
-    }
+      opacity: "1",
+    },
   },
   "svg, i": {
     width: 22,
-    height: 22
-  }
+    height: 22,
+  },
 }));
 
 IconButton.defaultProps = {
-  rel: "noopener nofollow"
+  rel: "noopener nofollow",
 };
 
 export default IconButton;

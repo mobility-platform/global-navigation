@@ -20,15 +20,15 @@ const useFetchUserInfo = (getToken, configuration) => {
   useEffect(() => {
     if (configuration) {
       getToken()
-        .then(token => JwtDecode(token))
-        .then(decodedToken =>
+        .then((token) => JwtDecode(token))
+        .then((decodedToken) =>
           getToken()
-            .then(token =>
+            .then((token) =>
               fetch(`${configuration.userApiUrl}/${decodedToken.sub}?select=id,name,picture`, {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` },
               })
             )
-            .then(response => response.json())
+            .then((response) => response.json())
         )
         .then(setState);
     }

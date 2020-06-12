@@ -12,8 +12,8 @@ const translations = {
     "Open the menu": "Ouvrir le menu",
     "Close the menu": "Fermer le menu",
     "You currently have no notifications": "Vous n'avez pas de notifications",
-    Login: "Se connecter"
-  }
+    Login: "Se connecter",
+  },
 };
 
 /** @type {() => string} */
@@ -22,7 +22,7 @@ const useDefaultLanguage = () => {
 };
 
 /** @type {(language: string) => string} */
-const normalizeLanguage = language => {
+const normalizeLanguage = (language) => {
   return language.substr(0, 2);
 };
 
@@ -35,7 +35,7 @@ export const useLanguage = () => {
   const defaultLanguage = useDefaultLanguage();
   const language = useMemo(() => normalizeLanguage(contextLanguage || defaultLanguage), [
     contextLanguage,
-    defaultLanguage
+    defaultLanguage,
   ]);
   return language;
 };
@@ -51,7 +51,7 @@ export const useTranslation = () => {
   const defaultLanguage = useDefaultLanguage();
   const language = useMemo(() => normalizeLanguage(contextLanguage || defaultLanguage), [
     contextLanguage,
-    defaultLanguage
+    defaultLanguage,
   ]);
-  return useCallback(key => t(key, language), [language]);
+  return useCallback((key) => t(key, language), [language]);
 };
