@@ -164,7 +164,13 @@ const VerticalNavigation = ({
         <ThemeProvider getToken={getToken}>
           <UserInfoProvider getToken={getToken}>
             <NotificationsProvider getToken={getToken}>
-              <Backdrop isVisible={isOpen} onClick={onClose} />
+              <Backdrop
+                isVisible={isOpen}
+                onClick={() => {
+                  onClose();
+                  notificationOnClose();
+                }}
+              />
 
               {/* Collapsed container */}
               <Container variant="collapsed" aria-hidden={isOpen}>
@@ -197,7 +203,13 @@ const VerticalNavigation = ({
 
                 {/* Menu button */}
                 <MenuButtonWrapper>
-                  <IconButton onClick={onClose} aria-label={t("Close the menu")}>
+                  <IconButton
+                    onClick={() => {
+                      onClose();
+                      notificationOnClose();
+                    }}
+                    aria-label={t("Close the menu")}
+                  >
                     <FiArrowLeft />
                   </IconButton>
                 </MenuButtonWrapper>
