@@ -166,7 +166,7 @@ const NotificationBody = styled("p")({
   padding: 0,
   maxHeight: 60,
   overflow: "hidden",
-  "-webkit-line-clamp": 3
+  WebkitLineClamp: 3
 });
 
 const EmptyState = styled("div")({
