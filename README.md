@@ -49,6 +49,10 @@ verticalNavigation.render({
     // In this case, a login button can be added to the Global Navigation
     loginUrl: "https://my-app.com/login",
 
+    // (Optional) `preferredLanguage` a 2-letters language ISO code for Global Navigation translations.
+    // This will fallback to the navigator language.
+    preferredLanguage: "fr",
+
     // (Optional) `footerLinks`, custom links that can be added at the bottom of the Global Navigation
     footerLinks: [
       {
