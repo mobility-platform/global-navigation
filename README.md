@@ -36,8 +36,7 @@ import { verticalNavigation } from "@mobility-platform/global-navigation";
 verticalNavigation.render({
   selector: '[data-widget-host="what-you-want"]', //DOM Element selector
   defaultProps: {
-    // `getToken` is a function returning a Promise resolving with an authentication token
-    // TODO: what should `getToken` return if the user is not authenticated?
+    // `getToken` is a function returning a Promise resolving with an authentication token or rejecting if the user is not authenticated
     getToken,
 
     // The Global Navigation `configurationUrl`. You may want to change this depending on the application environment (e.g.: staging or production)
