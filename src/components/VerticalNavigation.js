@@ -46,6 +46,7 @@ const Container = styled("nav")(
   ({ variant, theme }) =>
     variant === "extended" && {
       maxWidth: 320,
+      width: "100vw",
       background: theme.background,
       color: getContrastColor(theme.background),
       "&[aria-hidden=true]": {
