@@ -1,6 +1,6 @@
 {
   "name": "@mobility-platform/global-navigation",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "main": "dist/main.js",
   "license": "CC-BY-ND-4.0",
   "repository": "mobility-platform/global-navigation",
