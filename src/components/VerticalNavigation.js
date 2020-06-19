@@ -194,7 +194,7 @@ const VerticalNavigation = ({
                       </IconButton>
                     ))}
 
-                  <CollapsedUserProfile onClick={onOpen} />
+                  <CollapsedUserProfile loginUrl={loginUrl} onClick={onOpen} />
                 </Content>
               </Container>
 

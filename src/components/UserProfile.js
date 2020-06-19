@@ -64,21 +64,25 @@ const UserProfile = ({ avatar, name, link }) => {
   );
 };
 
-export const CollapsedUserProfile = ({ onClick }) => {
+export const CollapsedUserProfile = ({ onClick, loginUrl }) => {
   const userInfo = useUserInfo();
   const t = useTranslation();
-  return (
-    <IconButton as="button" aria-label={t("Open the menu")} onClick={onClick}>
-      {userInfo ? (
-        <Fragment>
-          <Avatar src={userInfo.picture} size={22} />
-          <NotificationIndicator />
-        </Fragment>
-      ) : (
-        <FiUser />
-      )}
-    </IconButton>
-  );
+  if (userInfo) {
+    return (
+      <IconButton as="button" aria-label={t("Open the menu")} onClick={onClick}>
+        <Avatar src={userInfo.picture} size={22} />
+        <NotificationIndicator />
+      </IconButton>
+    );
+  } else {
+    return (
+      loginUrl && (
+        <IconButton as="button" aria-label={t("Open the menu")} onClick={onClick}>
+          <FiUser />
+        </IconButton>
+      )
+    );
+  }
 };
 
 export const ExtendedUserProfile = ({ onClick, notificationIsOpen }) => {
