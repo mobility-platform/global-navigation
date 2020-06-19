@@ -13,8 +13,8 @@ const Wrapper = styled("div")(({ theme }) => ({
   backgroundColor: theme.background,
   padding: 6,
   svg: {
-    height: "100%",
-  },
+    height: "100%"
+  }
 }));
 
 const Logo = () => {

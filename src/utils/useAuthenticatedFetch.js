@@ -5,8 +5,8 @@ import { useEffect, useState } from "preact/hooks";
 /** @type {<T>(getToken: TokenResolver, url: string) => Promise<T>} */
 export const authenticatedFetch = (getToken, url) =>
   getToken()
-    .then((token) => fetch(url, { headers: { Authorization: `Bearer ${token}` } }))
-    .then((response) => response.json());
+    .then(token => fetch(url, { headers: { Authorization: `Bearer ${token}` } }))
+    .then(response => response.json());
 
 /** @type {<S>(getToken: TokenResolver, url: string, initialState: S | (() => S)): S | undefined} */
 export const useAuthenticatedFetch = (getToken, url, initialState) => {

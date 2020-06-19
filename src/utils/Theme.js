@@ -5,7 +5,7 @@ import { useEffect, useState } from "preact/hooks";
 
 const defaultTheme = {
   primary: "#27509b",
-  background: "#FFFFFF",
+  background: "#FFFFFF"
 };
 
 export const ThemeProvider = ({ getToken, children }) => {
@@ -21,10 +21,10 @@ const useFetchTheme = (getToken, configuration) => {
   useEffect(() => {
     if (configuration) {
       getToken()
-        .then((token) =>
+        .then(token =>
           fetch(configuration.themeApiUrl, { headers: { Authorization: `Bearer ${token}` } })
         )
-        .then((response) => response.json())
+        .then(response => response.json())
         .then(setState);
     }
   }, [getToken, configuration]);

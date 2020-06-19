@@ -8,8 +8,8 @@ const AvatarWrapper = styled("div")(({ size }) => ({
   borderRadius: "50%",
   overflow: "hidden",
   img: {
-    width: "100%",
-  },
+    width: "100%"
+  }
 }));
 
 const Avatar = ({ src, size }) => {

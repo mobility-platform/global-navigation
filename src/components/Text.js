@@ -7,5 +7,5 @@ export const Text = styled("span")({
   fontWeight: "normal",
   color: "currentColor",
   WebkitFontSmoothing: "antialiased",
-  MosOsxFontSmoothing: "grayscale",
+  MosOsxFontSmoothing: "grayscale"
 });

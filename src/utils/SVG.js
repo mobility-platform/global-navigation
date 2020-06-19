@@ -91,7 +91,7 @@ export const FiArrowLeft = () => {
   );
 };
 
-export const MichelinLogo = (props) => {
+export const MichelinLogo = props => {
   return (
     <svg fill="none" viewBox="0 0 198 105" {...props}>
       <path
