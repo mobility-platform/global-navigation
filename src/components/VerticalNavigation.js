@@ -14,6 +14,9 @@ import Logo from "./Logo";
 import NavHeading from "./NavHeading";
 import { Notifications, NotificationsProvider } from "../utils/Notification";
 import { CollapsedUserProfile, ExtendedUserProfile, LoginUserProfile } from "./UserProfile";
+import { CacheProvider } from "@emotion/core";
+import createCache from "@emotion/cache";
+import extraScopePlugin from "stylis-plugin-extra-scope";
 
 const Spacer = styled("div")({
   flex: 1,
@@ -142,6 +145,10 @@ const CollapsedSections = () => {
   );
 };
 
+const cache = createCache({
+  stylisPlugins: [extraScopePlugin(".mpgn")],
+});
+
 const VerticalNavigation = ({
   getToken,
   loginUrl,
@@ -164,97 +171,101 @@ const VerticalNavigation = ({
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <ConfigurationProvider url={configurationUrl}>
-      <TranslationProvider value={preferredLanguage}>
-        <ThemeProvider getToken={getToken}>
-          <UserInfoProvider getToken={getToken}>
-            <NotificationsProvider getToken={getToken}>
-              <Backdrop
-                isVisible={isOpen}
-                onClick={() => {
-                  onClose();
-                  notificationOnClose();
-                }}
-              />
-
-              {/* Collapsed container */}
-              <Container variant="collapsed" aria-hidden={isOpen}>
-                <Logo />
-
-                <Content>
-                  {/* Menu button */}
-                  <IconButton onClick={onOpen} aria-label={t("Open the menu")}>
-                    <FiMenu />
-                  </IconButton>
-
-                  <ExtendedSections />
-                  <Spacer />
-
-                  {/* Footer links */}
-                  {footerLinks &&
-                    footerLinks.map(({ label, icon, ...rest }, index) => (
-                      <IconButton as="a" key={index} tooltip={label} {...rest}>
-                        <CustomIcon as={ButtonIcon} content={icon} />
-                      </IconButton>
-                    ))}
-
-                  <CollapsedUserProfile loginUrl={loginUrl} onClick={onOpen} />
-                </Content>
-              </Container>
-
-              {/* Extended container */}
-              <Container variant="extended" aria-hidden={!isOpen}>
-                <Logo />
-
-                {/* Menu button */}
-                <MenuButtonWrapper>
-                  <IconButton
+    <div className="mpgn">
+      <CacheProvider value={cache}>
+        <ConfigurationProvider url={configurationUrl}>
+          <TranslationProvider value={preferredLanguage}>
+            <ThemeProvider getToken={getToken}>
+              <UserInfoProvider getToken={getToken}>
+                <NotificationsProvider getToken={getToken}>
+                  <Backdrop
+                    isVisible={isOpen}
                     onClick={() => {
                       onClose();
                       notificationOnClose();
                     }}
-                    aria-label={t("Close the menu")}
-                  >
-                    <FiArrowLeft />
-                  </IconButton>
-                </MenuButtonWrapper>
+                  />
 
-                {notificationIsOpen ? (
-                  <Notifications getToken={getToken} />
-                ) : (
-                  <Content style={{ display: notificationIsOpen ? "none" : "flex" }}>
-                    <CollapsedSections />
+                  {/* Collapsed container */}
+                  <Container variant="collapsed" aria-hidden={isOpen}>
+                    <Logo />
 
-                    <Spacer />
+                    <Content>
+                      {/* Menu button */}
+                      <IconButton onClick={onOpen} aria-label={t("Open the menu")}>
+                        <FiMenu />
+                      </IconButton>
 
-                    {/* Footer links */}
-                    {footerLinks && (
-                      <Fragment>
-                        <NavHeading>{t("Others")}</NavHeading>
-                        {footerLinks.map(({ label, icon, ...rest }, index) => (
-                          <Button as="a" key={index} {...rest}>
-                            <ButtonIcon>
-                              <CustomIcon content={icon} />
-                            </ButtonIcon>
-                            <ButtonText>{label}</ButtonText>
-                          </Button>
+                      <ExtendedSections />
+                      <Spacer />
+
+                      {/* Footer links */}
+                      {footerLinks &&
+                        footerLinks.map(({ label, icon, ...rest }, index) => (
+                          <IconButton as="a" key={index} tooltip={label} {...rest}>
+                            <CustomIcon as={ButtonIcon} content={icon} />
+                          </IconButton>
                         ))}
-                      </Fragment>
-                    )}
 
-                    {loginUrl && <LoginUserProfile loginUrl={loginUrl} />}
-                  </Content>
-                )}
-                <ExtendedUserProfile
-                  onClick={notificationIsOpen ? notificationOnClose : notificationOnOpen}
-                  notificationIsOpen={notificationIsOpen}
-                />
-              </Container>
-            </NotificationsProvider>
-          </UserInfoProvider>
-        </ThemeProvider>
-      </TranslationProvider>
-    </ConfigurationProvider>
+                      <CollapsedUserProfile loginUrl={loginUrl} onClick={onOpen} />
+                    </Content>
+                  </Container>
+
+                  {/* Extended container */}
+                  <Container variant="extended" aria-hidden={!isOpen}>
+                    <Logo />
+
+                    {/* Menu button */}
+                    <MenuButtonWrapper>
+                      <IconButton
+                        onClick={() => {
+                          onClose();
+                          notificationOnClose();
+                        }}
+                        aria-label={t("Close the menu")}
+                      >
+                        <FiArrowLeft />
+                      </IconButton>
+                    </MenuButtonWrapper>
+
+                    {notificationIsOpen ? (
+                      <Notifications getToken={getToken} />
+                    ) : (
+                      <Content style={{ display: notificationIsOpen ? "none" : "flex" }}>
+                        <CollapsedSections />
+
+                        <Spacer />
+
+                        {/* Footer links */}
+                        {footerLinks && (
+                          <Fragment>
+                            <NavHeading>{t("Others")}</NavHeading>
+                            {footerLinks.map(({ label, icon, ...rest }, index) => (
+                              <Button as="a" key={index} {...rest}>
+                                <ButtonIcon>
+                                  <CustomIcon content={icon} />
+                                </ButtonIcon>
+                                <ButtonText>{label}</ButtonText>
+                              </Button>
+                            ))}
+                          </Fragment>
+                        )}
+
+                        {loginUrl && <LoginUserProfile loginUrl={loginUrl} />}
+                      </Content>
+                    )}
+                    <ExtendedUserProfile
+                      onClick={notificationIsOpen ? notificationOnClose : notificationOnOpen}
+                      notificationIsOpen={notificationIsOpen}
+                    />
+                  </Container>
+                </NotificationsProvider>
+              </UserInfoProvider>
+            </ThemeProvider>
+          </TranslationProvider>
+        </ConfigurationProvider>
+      </CacheProvider>
+    </div>
   );
 };
 

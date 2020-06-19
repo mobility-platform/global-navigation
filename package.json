@@ -14,11 +14,13 @@
     "format": "prettier --write \"src/**/*.+(js|jsx|json)\""
   },
   "dependencies": {
+    "@emotion/cache": "^10.0.29",
     "@emotion/core": "^10.0.28",
     "@emotion/styled-base": "^10.0.31",
     "jwt-decode": "^2.2.0",
     "preact": "^10.4.4",
-    "preact-habitat": "^3.3.0"
+    "preact-habitat": "^3.3.0",
+    "stylis-plugin-extra-scope": "^0.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
