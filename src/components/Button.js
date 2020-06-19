@@ -4,11 +4,11 @@ import { Text } from "./Text";
 
 const fadeIn = keyframes({
   "0%": {
-    opacity: 0
+    opacity: 0,
   },
   "100%": {
-    opacity: 1
-  }
+    opacity: 1,
+  },
 });
 
 export const Button = styled("button")(({ theme }) => ({
@@ -32,24 +32,24 @@ export const Button = styled("button")(({ theme }) => ({
     height: "100%",
     borderRadius: 5,
     backgroundColor: theme.primary,
-    opacity: 0
+    opacity: 0,
   },
   "&:hover, &:focus": {
     outline: "none",
     color: "currentColor",
     textDecoration: "none",
     "&::before": {
-      opacity: 0.05
-    }
-  }
+      opacity: 0.05,
+    },
+  },
 }));
 
 Button.defaultProps = {
-  rel: "noopener nofollow"
+  rel: "noopener nofollow",
 };
 
 export const ButtonText = styled(Text)({
-  fontSize: 14
+  fontSize: 14,
 });
 
 export const ButtonIcon = styled("div")({
@@ -66,17 +66,17 @@ export const ButtonIcon = styled("div")({
   boxSizing: "border-box",
   marginRight: 12,
   "&:last-child": {
-    marginRight: 0
+    marginRight: 0,
   },
   "svg, img": {
     position: "relative",
     width: 22,
-    height: 22
+    height: 22,
   },
   img: {
     borderRadius: "50%",
     animationName: fadeIn,
     animationDuration: "225ms",
-    animationTimingFunction: "cubic-bezier(0.4, 0.0, 0.2, 1)"
-  }
+    animationTimingFunction: "cubic-bezier(0.4, 0.0, 0.2, 1)",
+  },
 });

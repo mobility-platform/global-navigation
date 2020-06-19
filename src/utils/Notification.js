@@ -28,8 +28,8 @@ export const NotificationIndicatorWrapper = styled("div")(({ number }) => ({
     textAlign: "center",
     lineHeight: "16px",
     backgroundColor: "#fd7b6f",
-    color: "#ffffff"
-  }
+    color: "#ffffff",
+  },
 }));
 
 export const NotificationIndicator = () => {
@@ -37,7 +37,7 @@ export const NotificationIndicator = () => {
   return (
     <NotificationIndicatorWrapper
       number={
-        notifications ? notifications.filter(notification => !notification.isRead).length : null
+        notifications ? notifications.filter((notification) => !notification.isRead).length : null
       }
     />
   );
@@ -47,7 +47,7 @@ const Content = styled("div")({
   flex: 1,
   display: "flex",
   flexDirection: "column",
-  alignItems: "center"
+  alignItems: "center",
 });
 
 const Title = styled(Text)({
@@ -63,7 +63,7 @@ const Title = styled(Text)({
   letterSpacing: "0.08em",
   overflow: "hidden",
   whiteSpace: "nowrap",
-  opacity: 0.6
+  opacity: 0.6,
 });
 
 const Action = styled(Text)(({ theme }) => ({
@@ -81,8 +81,8 @@ const Action = styled(Text)(({ theme }) => ({
   opacity: 0.7,
   ":hover": {
     cursor: "pointer",
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }));
 
 const NotificationsWrapper = styled("div")(({ theme }) => ({
@@ -93,9 +93,9 @@ const NotificationsWrapper = styled("div")(({ theme }) => ({
   backgroundColor: isLight(theme.background) ? "rgba(0, 0, 0, .1)" : "rgba(255, 255, 255, .1)",
   "&:last-child": {
     "&:after": {
-      content: "none"
-    }
-  }
+      content: "none",
+    },
+  },
 }));
 
 const NotificationWrapper = styled("a")(({ isRead, theme }) => ({
@@ -122,15 +122,15 @@ const NotificationWrapper = styled("a")(({ isRead, theme }) => ({
     width: "100%",
     height: "100%",
     // backgroundColor: isRead ? "transparent" : theme.primary,
-    opacity: 0.05
+    opacity: 0.05,
   },
   "&:hover, &:focus": {
     cursor: "pointer",
     outline: "none",
     color: "currentColor",
     textDecoration: "none",
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }));
 
 const NotificationHeader = styled("div")(({ isRead }) => ({
@@ -138,7 +138,7 @@ const NotificationHeader = styled("div")(({ isRead }) => ({
   display: "flex",
   alignItems: "center",
   marginBottom: 6,
-  fontWeight: isRead ? "400" : "700"
+  fontWeight: isRead ? "400" : "700",
 }));
 
 const NotificationTitle = styled(Text)({
@@ -147,7 +147,7 @@ const NotificationTitle = styled(Text)({
   boxShadow: "none",
   fontSize: 12,
   background: "none",
-  opacity: 1
+  opacity: 1,
 });
 
 const NotificationTime = styled(Text)({
@@ -157,7 +157,7 @@ const NotificationTime = styled(Text)({
   fontSize: 12,
   background: "none",
   opacity: 1,
-  paddingLeft: 6
+  paddingLeft: 6,
 });
 
 const NotificationBody = styled("p")({
@@ -166,7 +166,7 @@ const NotificationBody = styled("p")({
   padding: 0,
   maxHeight: 60,
   overflow: "hidden",
-  WebkitLineClamp: 3
+  WebkitLineClamp: 3,
 });
 
 const EmptyState = styled("div")({
@@ -184,20 +184,20 @@ const EmptyState = styled("div")({
     width: "80px",
     height: "80px",
     strokeWidth: "1px",
-    opacity: "0.8"
-  }
+    opacity: "0.8",
+  },
 });
 
 const patchNotifications = (getToken, configuration, notifications) => {
-  return getToken().then(token =>
+  return getToken().then((token) =>
     Promise.all(
       notifications
-        .filter(notifications => !notifications.isRead)
-        .map(notification =>
+        .filter((notifications) => !notifications.isRead)
+        .map((notification) =>
           fetch(`${configuration.notificationsApiUrl}/${notification._id}`, {
             headers: { Authorization: `Bearer ${token}`, "content-type": "application/json" },
             method: "PATCH",
-            body: JSON.stringify({ isRead: true })
+            body: JSON.stringify({ isRead: true }),
           })
         )
     )
@@ -242,7 +242,7 @@ export const Notifications = ({ getToken }) => {
               display: "flex",
               justifyContent: "space-between",
               marginTop: 10,
-              marginBottom: 10
+              marginBottom: 10,
             }}
           >
             <Title>{t("Notifications")}</Title>
@@ -307,12 +307,12 @@ const useFetchNotifications = (getToken, configuration, language) => {
   const refetch = useCallback(() => {
     if (configuration && language) {
       getToken()
-        .then(token =>
+        .then((token) =>
           fetch(`${configuration.notificationsApiUrl}?language=${language}`, {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
           })
         )
-        .then(response => response.json())
+        .then((response) => response.json())
         .then(setState);
     }
   }, [configuration, getToken, language]);

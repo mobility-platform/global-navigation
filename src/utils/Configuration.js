@@ -14,11 +14,11 @@ export const useConfiguration = () => {
   return useContext(ConfigurationContext);
 };
 
-const useFetchConfiguration = url => {
+const useFetchConfiguration = (url) => {
   const [state, setState] = useState();
   useEffect(() => {
     fetch(url)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(setState);
   }, [url]);
   return state;

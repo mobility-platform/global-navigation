@@ -4,14 +4,14 @@ import { isLight } from "../utils/color";
 
 const skeletonAnimation = keyframes({
   "0%": {
-    opacity: 0.25
+    opacity: 0.25,
   },
   "50%": {
-    opacity: 0.05
+    opacity: 0.05,
   },
   "100%": {
-    opacity: 0.25
-  }
+    opacity: 0.25,
+  },
 });
 
 const ImageSkeleton = styled("span")(({ theme }) => ({
@@ -28,8 +28,8 @@ const ImageSkeleton = styled("span")(({ theme }) => ({
   width: 22,
   backgroundColor: isLight(theme.primary) ? "#000" : "#fff",
   "@media (prefers-reduced-motion: reduce)": {
-    animation: "none"
-  }
+    animation: "none",
+  },
 }));
 
 export default ImageSkeleton;

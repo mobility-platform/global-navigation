@@ -19,8 +19,8 @@ const NavHeading = styled(Text)({
   opacity: 0.6,
 
   "&:first-child": {
-    marginTop: 6
-  }
+    marginTop: 6,
+  },
 });
 
 export default NavHeading;

@@ -9,7 +9,7 @@ export default function useDisclosure(initialState) {
     setIsOpen(false);
   }, []);
   const onToggle = useCallback(() => {
-    setIsOpen(isOpen => !isOpen);
+    setIsOpen((isOpen) => !isOpen);
   }, []);
   return { isOpen, onOpen, onClose, onToggle };
 }

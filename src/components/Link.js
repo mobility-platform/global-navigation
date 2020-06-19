@@ -8,13 +8,13 @@ const Link = styled(Text)({
   fontSize: 12,
   "&:hover, &:focus": {
     outline: "none",
-    textDecoration: "underline"
-  }
+    textDecoration: "underline",
+  },
 });
 
 Link.defaultProps = {
   as: "a",
-  rel: "noopener nofollow"
+  rel: "noopener nofollow",
 };
 
 export default Link;
