@@ -9,7 +9,7 @@
     "start": "webpack-dev-server",
     "prepublishOnly": "yarn build",
     "postversion": "git push --all && git push --tag",
-    "test": "is-ci && jest --ci || jest --watch",
+    "test": "is-ci && jest --ci --passWithNoTests || jest --watchAll --passWithNoTests",
     "lint": "eslint \"src/**/*.+(js|jsx|json)\"",
     "format": "prettier --write \"src/**/*.+(js|jsx|json)\""
   },
