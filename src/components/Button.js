@@ -44,10 +44,6 @@ export const Button = styled("button")(({ theme }) => ({
   },
 }));
 
-Button.defaultProps = {
-  rel: "noopener nofollow",
-};
-
 export const ButtonText = styled(Text)({
   fontSize: 14,
 });

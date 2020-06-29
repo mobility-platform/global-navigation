@@ -1,8 +1,12 @@
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/core";
 import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
+import extraScopePlugin from "stylis-plugin-extra-scope";
 import { getContrastColor, isLight } from "../utils/color";
 import { ConfigurationProvider, useConfiguration } from "../utils/Configuration";
 import { TranslationProvider, useTranslation } from "../utils/i18n";
+import { Notifications, NotificationsProvider } from "../utils/Notification";
 import { FiArrowLeft, FiMenu } from "../utils/SVG";
 import { ThemeProvider } from "../utils/Theme";
 import useDisclosure from "../utils/useDisclosure";
@@ -12,11 +16,7 @@ import CustomIcon from "./CustomIcon";
 import IconButton from "./IconButton";
 import Logo from "./Logo";
 import NavHeading from "./NavHeading";
-import { Notifications, NotificationsProvider } from "../utils/Notification";
 import { CollapsedUserProfile, ExtendedUserProfile, LoginUserProfile } from "./UserProfile";
-import { CacheProvider } from "@emotion/core";
-import createCache from "@emotion/cache";
-import extraScopePlugin from "stylis-plugin-extra-scope";
 
 const Spacer = styled("div")({
   flex: 1,
@@ -110,7 +110,14 @@ const ExtendedSections = () => {
               userInfo ? application : !application.requiresAuthentification
             )
             .map((link, index) => (
-              <IconButton key={index} as="a" tooltip={t(link.title)} href={link.href}>
+              <IconButton
+                key={index}
+                as="a"
+                rel="noopener nofollow"
+                target="_blank"
+                tooltip={t(link.title)}
+                href={link.href}
+              >
                 <CustomIcon as={ButtonIcon} content={link.icon} />
               </IconButton>
             ))}
@@ -135,7 +142,7 @@ const CollapsedSections = () => {
               userInfo ? application : !application.requiresAuthentification
             )
             .map((link, index) => (
-              <Button key={index} as="a" href={link.href}>
+              <Button key={index} as="a" rel="noopener nofollow" target="_blank" href={link.href}>
                 <CustomIcon as={ButtonIcon} content={link.icon} />
                 <ButtonText>{t(link.title)}</ButtonText>
               </Button>
@@ -202,7 +209,13 @@ const VerticalNavigation = ({
                       {/* Footer links */}
                       {footerLinks &&
                         footerLinks.map(({ label, icon, ...rest }, index) => (
-                          <IconButton as="a" key={index} tooltip={label} {...rest}>
+                          <IconButton
+                            key={index}
+                            as="a"
+                            rel="noopener nofollow"
+                            tooltip={label}
+                            {...rest}
+                          >
                             <CustomIcon as={ButtonIcon} content={icon} />
                           </IconButton>
                         ))}
@@ -241,7 +254,7 @@ const VerticalNavigation = ({
                           <Fragment>
                             <NavHeading>{t("Others")}</NavHeading>
                             {footerLinks.map(({ label, icon, ...rest }, index) => (
-                              <Button as="a" key={index} {...rest}>
+                              <Button key={index} as="a" rel="noopener nofollow" {...rest}>
                                 <ButtonIcon>
                                   <CustomIcon content={icon} />
                                 </ButtonIcon>

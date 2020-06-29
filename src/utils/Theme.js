@@ -1,7 +1,7 @@
-import { h } from "preact";
-import { useConfiguration } from "./Configuration";
 import { ThemeContext } from "@emotion/core";
+import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import { useConfiguration } from "./Configuration";
 
 const defaultTheme = {
   primary: "#27509b",

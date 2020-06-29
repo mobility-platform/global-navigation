@@ -9,7 +9,6 @@ import { useUserInfo } from "../utils/UserInfo";
 import Avatar from "./Avatar";
 import { Button, ButtonIcon, ButtonText } from "./Button";
 import IconButton from "./IconButton";
-import Link from "./Link";
 import { Text } from "./Text";
 
 const UserProfileWrapper = styled("div")({
@@ -45,8 +44,16 @@ const UserName = styled(Text)({
   color: "currentColor",
 });
 
-const UserProfileLink = styled(Link)({
+const UserProfileLink = styled(Text)({
+  display: "inline",
+  textDecoration: "none",
+  color: "currentColor",
+  fontSize: 12,
   opacity: 0.8,
+  "&:hover, &:focus": {
+    outline: "none",
+    textDecoration: "underline",
+  },
 });
 
 const UserProfile = ({ avatar, name, link }) => {
@@ -56,7 +63,7 @@ const UserProfile = ({ avatar, name, link }) => {
       {avatar}
       <UserInformation>
         <UserName>{name}</UserName>
-        <UserProfileLink href={link} rel="noopener nofollow">
+        <UserProfileLink as="a" href={link} rel="noopener nofollow" target="_blank">
           {t("View my profile")}
         </UserProfileLink>
       </UserInformation>
@@ -69,7 +76,7 @@ export const CollapsedUserProfile = ({ onClick, loginUrl }) => {
   const t = useTranslation();
   if (userInfo) {
     return (
-      <IconButton as="button" aria-label={t("Open the menu")} onClick={onClick}>
+      <IconButton aria-label={t("Open the menu")} onClick={onClick}>
         <Avatar src={userInfo.picture} size={22} />
         <NotificationIndicator />
       </IconButton>
@@ -77,7 +84,7 @@ export const CollapsedUserProfile = ({ onClick, loginUrl }) => {
   } else {
     return (
       loginUrl && (
-        <IconButton as="button" aria-label={t("Open the menu")} onClick={onClick}>
+        <IconButton aria-label={t("Open the menu")} onClick={onClick}>
           <FiUser />
         </IconButton>
       )
@@ -113,7 +120,7 @@ export const LoginUserProfile = ({ loginUrl }) => {
   const t = useTranslation();
   return (
     !userInfo && (
-      <Button as="a" href={loginUrl}>
+      <Button as="a" rel="noopener nofollow" href={loginUrl} target="_blank">
         <ButtonIcon>
           <FiUser />
         </ButtonIcon>

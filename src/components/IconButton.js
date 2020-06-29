@@ -64,8 +64,4 @@ const IconButton = styled("button")(({ tooltip }) => ({
   },
 }));
 
-IconButton.defaultProps = {
-  rel: "noopener nofollow",
-};
-
 export default IconButton;

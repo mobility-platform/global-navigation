@@ -1,4 +1,4 @@
-import { useState, useCallback } from "preact/hooks";
+import { useCallback, useState } from "preact/hooks";
 
 export default function useDisclosure(initialState) {
   const [isOpen, setIsOpen] = useState(initialState);
