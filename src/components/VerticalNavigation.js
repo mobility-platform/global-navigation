@@ -191,10 +191,15 @@ const VerticalNavigation = ({
                       onClose();
                       notificationOnClose();
                     }}
+                    data-testid="backdrop"
                   />
 
                   {/* Collapsed container */}
-                  <Container variant="collapsed" aria-hidden={isOpen}>
+                  <Container
+                    variant="collapsed"
+                    aria-hidden={isOpen ? "true" : "false"}
+                    aria-label={t("Collapsed global navigation")}
+                  >
                     <Logo />
 
                     <Content>
@@ -225,7 +230,11 @@ const VerticalNavigation = ({
                   </Container>
 
                   {/* Extended container */}
-                  <Container variant="extended" aria-hidden={!isOpen}>
+                  <Container
+                    variant="extended"
+                    aria-hidden={isOpen ? "false" : "true"}
+                    aria-label={t("Extended global navigation")}
+                  >
                     <Logo />
 
                     {/* Menu button */}

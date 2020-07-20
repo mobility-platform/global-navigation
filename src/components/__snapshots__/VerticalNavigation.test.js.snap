@@ -7,8 +7,11 @@ exports[`VerticalNavigation should render without crashing 1`] = `
   >
     <div
       class="css-e60rta"
+      data-testid="backdrop"
     />
     <nav
+      aria-hidden="false"
+      aria-label="Collapsed global navigation"
       class="css-nthzkb"
     >
       <div
@@ -124,6 +127,7 @@ exports[`VerticalNavigation should render without crashing 1`] = `
     </nav>
     <nav
       aria-hidden="true"
+      aria-label="Extended global navigation"
       class="css-13j5th7"
     >
       <div
