@@ -9,7 +9,7 @@
     "start": "webpack-dev-server",
     "prepublishOnly": "yarn build",
     "postversion": "git push --all && git push --tag",
-    "test": "is-ci && jest --ci --passWithNoTests || jest --watchAll --passWithNoTests",
+    "test": "is-ci && jest --ci || jest --watch",
     "lint": "eslint \"src/**/*.+(js|jsx|json)\"",
     "format": "prettier --write \"src/**/*.+(js|jsx|json)\""
   },
@@ -33,6 +33,7 @@
     "dotenv-webpack": "^2.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-preact-pure": "^2.2.1",
+    "enzyme-to-json": "^3.5.0",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
@@ -53,7 +54,7 @@
     "IE >= 11"
   ],
   "jest": {
-    "setupFiles": [
+    "setupFilesAfterEnv": [
       "./src/setupTests.js"
     ],
     "moduleNameMapper": {
