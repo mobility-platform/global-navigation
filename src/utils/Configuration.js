@@ -32,7 +32,6 @@ const ConfigurationContext = createContext();
  * expose it to child component with the `useConfiguration` hook.
  */
 export const ConfigurationProvider = ({ url, children }) => {
-  console.log("ConfigurationProvider");
   const configuration = useFetchConfiguration(url);
   return (
     <ConfigurationContext.Provider value={configuration}>{children}</ConfigurationContext.Provider>
