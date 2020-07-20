@@ -10,23 +10,21 @@ const defaultTheme = {
 
 export const ThemeProvider = ({ getToken, children }) => {
   const configuration = useConfiguration();
-  const theme = useFetchTheme(getToken, configuration);
+  const theme = useFetchTheme(getToken, configuration?.themeApiUrl);
   return (
     <ThemeContext.Provider value={theme ? theme : defaultTheme}>{children}</ThemeContext.Provider>
   );
 };
 
-const useFetchTheme = (getToken, configuration) => {
+const useFetchTheme = (getToken, url) => {
   const [state, setState] = useState();
   useEffect(() => {
-    if (configuration) {
+    if (url) {
       getToken()
-        .then((token) =>
-          fetch(configuration.themeApiUrl, { headers: { Authorization: `Bearer ${token}` } })
-        )
+        .then((token) => fetch(url, { headers: { Authorization: `Bearer ${token}` } }))
         .then((response) => response.json())
         .then(setState);
     }
-  }, [getToken, configuration]);
+  }, [getToken, url]);
   return state;
 };
