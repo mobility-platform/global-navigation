@@ -1,0 +1,41 @@
+{
+  "themeApiUrl": "https://myapi.services.michelin.com/themes/current",
+  "userApiUrl": "https://myapi.services.michelin.com/users",
+  "profileUrl": "https://mymobility.services.michelin.com/users/me",
+  "notificationsApiUrl": "https://mobility-platform-notifications.azurewebsites.net/v1/notifications",
+  "sections": [
+    {
+      "title": "Global",
+      "links": [
+        {
+          "title": "MyShowcase",
+          "href": "http://myportal.services.michelin.com/",
+          "icon": "<svg stroke='currentColor' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' height='1em' width='1em'><path d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/></svg>"
+        },
+        {
+          "title": "MyShop",
+          "href": "https://myshop.services.michelin.com/",
+          "icon": "<svg stroke='currentColor' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' height='1em' width='1em'><path d='M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z'/></svg>"
+        }
+      ]
+    },
+    {
+      "title": "Apps",
+      "requiresAuthentification": true,
+      "links": [
+        {
+          "title": "Mobility Platform",
+          "href": "https://mymobility.services.michelin.com",
+          "icon": "https://mymobility.services.michelin.com/logo192.png",
+          "requiresAuthentification": true
+        },
+        {
+          "title": "MyInspection",
+          "href": "https://myinspection.services.michelin.com",
+          "icon": "https://myportal.services.michelin.com/wp-content/uploads/2020/07/App-Icon-180x180-1.png",
+          "requiresAuthentification": true
+        }
+      ]
+    }
+  ]
+}
