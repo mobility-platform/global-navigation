@@ -1,4 +1,4 @@
-import { mount } from "enzyme";
+import { render } from "@testing-library/preact";
 import { h } from "preact";
 import { useFetchConfiguration } from "../utils/Configuration";
 import productionConfiguration from "../utils/__fixtures__/production.config.json";
@@ -11,19 +11,19 @@ describe("VerticalNavigation", () => {
   });
 
   it("should render without crashing", () => {
-    const wrapper = mount(
+    const wrapper = render(
       <VerticalNavigation
         configurationUrl="https://unpkg.com/@mobility-platform/global-navigation-configuration@latest/production.config.json"
         getToken={() => Promise.reject()}
       />
     );
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find("div").hasClass("mpgn")).toBe(true);
+    expect(wrapper.asFragment()).toMatchSnapshot();
+    expect(wrapper.asFragment().firstElementChild.className).toBe("mpgn");
   });
 
   it("should throw an error if configurationUrl or getToken are not passed to the component", () => {
     expect(() => {
-      mount(<VerticalNavigation />);
+      render(<VerticalNavigation />);
     }).toThrow(
       `Global Navigation requires the \`configurationUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
     );

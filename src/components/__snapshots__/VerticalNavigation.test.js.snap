@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VerticalNavigation should render without crashing 1`] = `
-Array [
+<DocumentFragment>
   <div
-    className="mpgn"
-  >
-    Array [
-      Array [],
-    ]
-  </div>,
-]
+    class="mpgn"
+  />
+</DocumentFragment>
 `;
