@@ -3,12 +3,12 @@ import { h } from "preact";
 import { isLight } from "../utils/color";
 import { useConfiguration } from "../utils/Configuration";
 import { useTranslation } from "../utils/i18n";
-import { NotificationIndicator } from "../utils/Notification";
 import { FiBell, FiUser } from "../utils/SVG";
 import { useUserInfo } from "../utils/UserInfo";
 import Avatar from "./Avatar";
 import { Button, ButtonIcon, ButtonText } from "./Button";
 import IconButton from "./IconButton";
+import { NotificationIndicator } from "./Notification";
 import { Text } from "./Text";
 
 const UserProfileWrapper = styled("div")({

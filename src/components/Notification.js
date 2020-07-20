@@ -1,13 +1,13 @@
 import styled from "@emotion/styled-base";
 import { createContext, Fragment, h } from "preact";
 import { useCallback, useContext, useEffect, useState } from "preact/hooks";
-import { ButtonIcon } from "../components/Button";
-import { Text } from "../components/Text";
+import { isLight } from "../utils/color";
+import { useConfiguration } from "../utils/Configuration";
 import { useLanguage, useTranslation } from "../utils/i18n";
-import { isLight } from "./color";
-import { useConfiguration } from "./Configuration";
-import { FiInbox } from "./SVG";
-import { timeSince } from "./timesince";
+import { FiInbox } from "../utils/SVG";
+import { timeSince } from "../utils/timesince";
+import { ButtonIcon } from "./Button";
+import { Text } from "./Text";
 
 export const NotificationIndicatorWrapper = styled("div")(({ number }) => ({
   position: "absolute",
@@ -283,7 +283,11 @@ const NotificationsContext = createContext();
 export const NotificationsProvider = ({ getToken, children }) => {
   const configuration = useConfiguration();
   const language = useLanguage();
-  const notificationState = useFetchNotifications(getToken, configuration, language);
+  const notificationState = useFetchNotifications(
+    getToken,
+    configuration?.notificationsApiUrl,
+    language
+  );
   return (
     <NotificationsContext.Provider value={notificationState}>
       {children}
@@ -291,35 +295,35 @@ export const NotificationsProvider = ({ getToken, children }) => {
   );
 };
 
-export const useNotifications = () => {
+const useNotifications = () => {
   const { notifications } = useContext(NotificationsContext);
   return notifications;
 };
 
-export const useNotificationsRefetch = () => {
+const useNotificationsRefetch = () => {
   const { refetch } = useContext(NotificationsContext);
   return refetch;
 };
 
-const useFetchNotifications = (getToken, configuration, language) => {
-  const [state, setState] = useState(null);
+const useFetchNotifications = (getToken, url, language) => {
+  const [notifications, setNotifications] = useState(null);
 
   const refetch = useCallback(() => {
-    if (configuration && language) {
+    if (url) {
       getToken()
         .then((token) =>
-          fetch(`${configuration.notificationsApiUrl}?language=${language}`, {
+          fetch(`${url}?language=${language}`, {
             headers: { Authorization: `Bearer ${token}` },
           })
         )
         .then((response) => response.json())
-        .then(setState);
+        .then(setNotifications);
     }
-  }, [configuration, getToken, language]);
+  }, [getToken, language, url]);
 
   useEffect(() => {
     refetch();
   }, [refetch]);
 
-  return { notifications: state, refetch };
+  return { notifications, refetch };
 };

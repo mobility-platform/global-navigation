@@ -6,7 +6,6 @@ import extraScopePlugin from "stylis-plugin-extra-scope";
 import { getContrastColor, isLight } from "../utils/color";
 import { ConfigurationProvider, useConfiguration } from "../utils/Configuration";
 import { TranslationProvider, useTranslation } from "../utils/i18n";
-import { Notifications, NotificationsProvider } from "../utils/Notification";
 import { FiArrowLeft, FiMenu } from "../utils/SVG";
 import { ThemeProvider } from "../utils/Theme";
 import useDisclosure from "../utils/useDisclosure";
@@ -16,6 +15,7 @@ import CustomIcon from "./CustomIcon";
 import IconButton from "./IconButton";
 import Logo from "./Logo";
 import NavHeading from "./NavHeading";
+import { Notifications, NotificationsProvider } from "./Notification";
 import { CollapsedUserProfile, ExtendedUserProfile, LoginUserProfile } from "./UserProfile";
 
 const Spacer = styled("div")({
