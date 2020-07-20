@@ -1,15 +1,8 @@
 import { render } from "@testing-library/preact";
 import { h } from "preact";
-import { useFetchConfiguration } from "../utils/Configuration";
-import productionConfiguration from "../utils/__fixtures__/production.config.json";
 import VerticalNavigation from "./VerticalNavigation";
-jest.mock("../utils/Configuration");
 
 describe("VerticalNavigation", () => {
-  beforeAll(() => {
-    useFetchConfiguration.mockReturnValue(productionConfiguration);
-  });
-
   it("should render without crashing", () => {
     const wrapper = render(
       <VerticalNavigation
