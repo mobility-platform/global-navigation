@@ -2,6 +2,7 @@ import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/core";
 import styled from "@emotion/styled-base";
 import { Fragment, h } from "preact";
+import { useCallback } from "preact/hooks";
 import extraScopePlugin from "stylis-plugin-extra-scope";
 import { getContrastColor, isLight } from "../utils/color";
 import { ConfigurationProvider, useConfiguration } from "../utils/Configuration";
@@ -95,7 +96,7 @@ const Content = styled("div")({
   padding: 10,
 });
 
-const ExtendedSections = () => {
+const CollapsedSections = () => {
   const configuration = useConfiguration();
   const userInfo = useUserInfo();
   const t = useTranslation();
@@ -126,7 +127,7 @@ const ExtendedSections = () => {
   );
 };
 
-const CollapsedSections = () => {
+const ExtendedSections = () => {
   const configuration = useConfiguration();
   const userInfo = useUserInfo();
   const t = useTranslation();
@@ -152,17 +153,42 @@ const CollapsedSections = () => {
   );
 };
 
+const CollapsedFooterLinks = () => {
+  const configuration = useConfiguration();
+  const footerLinks = configuration?.footerLinks;
+  return footerLinks
+    ? footerLinks.map(({ label, icon, ...rest }, index) => (
+        <IconButton key={index} as="a" rel="noopener nofollow" tooltip={label} {...rest}>
+          <CustomIcon as={ButtonIcon} content={icon} />
+        </IconButton>
+      ))
+    : null;
+};
+
+const ExtendedFooterLinks = () => {
+  const t = useTranslation();
+  const configuration = useConfiguration();
+  const footerLinks = configuration?.footerLinks;
+  return footerLinks ? (
+    <Fragment>
+      <NavHeading>{t("Others")}</NavHeading>
+      {footerLinks.map(({ label, icon, ...rest }, index) => (
+        <Button key={index} as="a" rel="noopener nofollow" {...rest}>
+          <ButtonIcon>
+            <CustomIcon content={icon} />
+          </ButtonIcon>
+          <ButtonText>{label}</ButtonText>
+        </Button>
+      ))}
+    </Fragment>
+  ) : null;
+};
+
 const cache = createCache({
   stylisPlugins: [extraScopePlugin(".mpgn")],
 });
 
-const VerticalNavigation = ({
-  getToken,
-  loginUrl,
-  configurationUrl,
-  preferredLanguage,
-  footerLinks,
-}) => {
+const VerticalNavigation = ({ getToken, loginUrl, configurationUrl, preferredLanguage }) => {
   if (!configurationUrl || !getToken) {
     throw new Error(
       `Global Navigation requires the \`configurationUrl\` and \`getToken\` props. See https://mobility-platform-docs.netlify.com/`
@@ -173,9 +199,14 @@ const VerticalNavigation = ({
   const {
     isOpen: notificationIsOpen,
     onClose: notificationOnClose,
-    onOpen: notificationOnOpen,
+    onToggle: notificationOnToggle,
   } = useDisclosure();
   const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const close = useCallback(() => {
+    onClose();
+    notificationOnClose();
+  }, [onClose, notificationOnClose]);
 
   return (
     <div className="mpgn">
@@ -185,14 +216,7 @@ const VerticalNavigation = ({
             <ThemeProvider getToken={getToken}>
               <UserInfoProvider getToken={getToken}>
                 <NotificationsProvider getToken={getToken}>
-                  <Backdrop
-                    isVisible={isOpen}
-                    onClick={() => {
-                      onClose();
-                      notificationOnClose();
-                    }}
-                    data-testid="backdrop"
-                  />
+                  <Backdrop isVisible={isOpen} onClick={close} data-testid="backdrop" />
 
                   {/* Collapsed container */}
                   <Container
@@ -208,23 +232,12 @@ const VerticalNavigation = ({
                         <FiMenu />
                       </IconButton>
 
-                      <ExtendedSections />
+                      {/* Main content */}
+                      <CollapsedSections />
                       <Spacer />
+                      <CollapsedFooterLinks />
 
-                      {/* Footer links */}
-                      {footerLinks &&
-                        footerLinks.map(({ label, icon, ...rest }, index) => (
-                          <IconButton
-                            key={index}
-                            as="a"
-                            rel="noopener nofollow"
-                            tooltip={label}
-                            {...rest}
-                          >
-                            <CustomIcon as={ButtonIcon} content={icon} />
-                          </IconButton>
-                        ))}
-
+                      {/* User profiles */}
                       <CollapsedUserProfile loginUrl={loginUrl} onClick={onOpen} />
                     </Content>
                   </Container>
@@ -239,47 +252,25 @@ const VerticalNavigation = ({
 
                     {/* Menu button */}
                     <MenuButtonWrapper>
-                      <IconButton
-                        onClick={() => {
-                          onClose();
-                          notificationOnClose();
-                        }}
-                        aria-label={t("Close the menu")}
-                      >
+                      <IconButton onClick={close} aria-label={t("Close the menu")}>
                         <FiArrowLeft />
                       </IconButton>
                     </MenuButtonWrapper>
 
+                    {/* Main content of the sidenav, toggles between links and notifications */}
                     {notificationIsOpen ? (
                       <Notifications getToken={getToken} />
                     ) : (
                       <Content style={{ display: notificationIsOpen ? "none" : "flex" }}>
-                        <CollapsedSections />
-
+                        <ExtendedSections />
                         <Spacer />
-
-                        {/* Footer links */}
-                        {footerLinks && (
-                          <Fragment>
-                            <NavHeading>{t("Others")}</NavHeading>
-                            {footerLinks.map(({ label, icon, ...rest }, index) => (
-                              <Button key={index} as="a" rel="noopener nofollow" {...rest}>
-                                <ButtonIcon>
-                                  <CustomIcon content={icon} />
-                                </ButtonIcon>
-                                <ButtonText>{label}</ButtonText>
-                              </Button>
-                            ))}
-                          </Fragment>
-                        )}
-
+                        <ExtendedFooterLinks />
                         {loginUrl && <LoginUserProfile loginUrl={loginUrl} />}
                       </Content>
                     )}
-                    <ExtendedUserProfile
-                      onClick={notificationIsOpen ? notificationOnClose : notificationOnOpen}
-                      notificationIsOpen={notificationIsOpen}
-                    />
+
+                    {/* User profile */}
+                    <ExtendedUserProfile onClick={notificationOnToggle} />
                   </Container>
                 </NotificationsProvider>
               </UserInfoProvider>

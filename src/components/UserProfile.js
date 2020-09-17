@@ -92,7 +92,7 @@ export const CollapsedUserProfile = ({ onClick, loginUrl }) => {
   }
 };
 
-export const ExtendedUserProfile = ({ onClick, notificationIsOpen }) => {
+export const ExtendedUserProfile = ({ onClick }) => {
   const userInfo = useUserInfo();
   const configuration = useConfiguration();
   const t = useTranslation();
@@ -106,7 +106,7 @@ export const ExtendedUserProfile = ({ onClick, notificationIsOpen }) => {
         />
         <div>
           <IconButton onClick={onClick} aria-label={t("Open the notification")}>
-            <FiBell style={{ fill: notificationIsOpen ? "currentColor" : "none" }} />
+            <FiBell />
             <NotificationIndicator />
           </IconButton>
         </div>
