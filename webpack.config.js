@@ -10,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
     library: "globalnavigation",
-    libraryTarget: "umd"
+    libraryTarget: "umd",
   },
   module: {
     rules: [
@@ -18,23 +18,23 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: "babel-loader"
-        }
-      }
-    ]
+          loader: "babel-loader",
+        },
+      },
+    ],
   },
   resolve: {
     alias: {
       react: "preact/compat",
       "react-dom": "preact/compat",
       "create-react-class": "preact/compat/lib/create-react-class",
-      "react-dom-factories": "preact/compat/lib/react-dom-factories"
-    }
+      "react-dom-factories": "preact/compat/lib/react-dom-factories",
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.ejs"
+      template: "./src/index.ejs",
     }),
-    new Dotenv()
-  ]
+    new Dotenv(),
+  ],
 };
