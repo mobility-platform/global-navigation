@@ -13,7 +13,22 @@ const translations = {
     "Close the menu": "Fermer le menu",
     "You currently have no notifications": "Vous n'avez pas de notifications",
     "Mark all as read": "Tout marquer comme lu",
+    Support: "Assistance",
     Login: "Se connecter",
+  },
+  de: {
+    MyShowcase: "MyShowcase",
+    MyShop: "MyShop",
+    Global: "Global",
+    Apps: "Anwendung",
+    Others: "Andere",
+    "View my profile": "Profil anzeigen",
+    "Open the menu": "Menü öffnen",
+    "Close the menu": "Menü schließen",
+    "You currently have no notifications": "Sie haben keine Benachrichtigungen",
+    "Mark all as read": "Markiere alle als gelesen",
+    Support: "Unterstützung",
+    Login: "Einloggen",
   },
 };
 
