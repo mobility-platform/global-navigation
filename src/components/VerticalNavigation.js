@@ -154,11 +154,12 @@ const ExtendedSections = () => {
 };
 
 const CollapsedFooterLinks = () => {
+  const t = useTranslation();
   const configuration = useConfiguration();
   const footerLinks = configuration?.footerLinks;
   return footerLinks
     ? footerLinks.map(({ label, icon, ...rest }, index) => (
-        <IconButton key={index} as="a" rel="noopener nofollow" tooltip={label} {...rest}>
+        <IconButton key={index} as="a" rel="noopener nofollow" tooltip={t(label)} {...rest}>
           <CustomIcon as={ButtonIcon} content={icon} />
         </IconButton>
       ))
@@ -177,7 +178,7 @@ const ExtendedFooterLinks = () => {
           <ButtonIcon>
             <CustomIcon content={icon} />
           </ButtonIcon>
-          <ButtonText>{label}</ButtonText>
+          <ButtonText>{t(label)}</ButtonText>
         </Button>
       ))}
     </Fragment>
