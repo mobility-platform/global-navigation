@@ -73,9 +73,13 @@ More information about the Mobility Platform can be find here : https://mobility
 
 ## Examples
 
-##### Vertical Navigation with React
+### Vertical Navigation with React
 
-https://codesandbox.io/s/mobility-platformglobal-navigationreact-verticalnavigation-9y9j9
+https://codesandbox.io/s/mobility-platformglobal-navigation-react-9y9j9
+
+### Vertical Navigation in Vanilla JS
+
+https://codesandbox.io/s/mobility-platformglobal-navigation-vanilla-js-wywym
 
 ## License
 
